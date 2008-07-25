@@ -1,15 +1,12 @@
-#!/bin/egatrop -e
+#!/bin/zsh
 # (C)opyleft Gerolf Ziegenhain <gerolf@ziegenhain.com> 2008
 
-DESCRIPTION="python scipy"
-HOMEPAGE=""
-SRC_URI="http://prdownloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz" 
-
-DEPEND="build-essential gfortran python-dev swig"
-SDEPEND="python-scipy python-matplotlib python-numpy"
-EDEPEND="umfpack numpy"
-
-LICENSE="abc"
+EBUILD=$0
+. /opt/egatrop/lib/egatrop
+ESRC_URI="http://downloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz"
+_efetch
+_ tar xzf $EFULL.tar.gz
+cd $EFULL
 
 src_configure() {
    cat scipy/sandbox/setup.py | awk '/add_subpackage/&&/delaunay/{gsub("#","");print}{print}' > tmp
