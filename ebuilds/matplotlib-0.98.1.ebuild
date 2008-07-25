@@ -7,6 +7,8 @@ ESRC_URI="http://downloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz "
 _efetch
 _ tar xzf $EFULL.tar.gz
 cd $EFULL
+export PYTHON_LIB=$EBIN_DIR/lib/python2.5/site-packages 
+export PYTHONPATH=$EBIN_DIR/lib/python2.5/site-packages
 _ python setup.py config --compiler=unix build
 _esu python setup.py config --compiler=unix install --prefix=$EBIN_DIR
 
