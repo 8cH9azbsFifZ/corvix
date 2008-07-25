@@ -8,18 +8,11 @@ _efetch
 _ tar xzf $EFULL.tar.gz
 cd $EFULL
 
-src_configure() {
-   cat scipy/sandbox/setup.py | awk '/add_subpackage/&&/delaunay/{gsub("#","");print}{print}' > tmp
-   mv tmp scipy/sandbox/setup.py
-}
+cat scipy/sandbox/setup.py | awk '/add_subpackage/&&/delaunay/{gsub("#","");print}{print}' > tmp
+mv tmp scipy/sandbox/setup.py
+_ python setup.py config --compiler=unix --fcompiler=gnu95 build 
+_esu python setup.py config --compiler=unix --fcompiler=gnu95 install --prefix=$EBIN_DIR
 
-src_compile() {
-   cd $EFULL
-   epython setup.py config --compiler=unix --fcompiler=gnu95 build 
-}
+PAUSE "Adjust your PYTHONPATH=/opt/egatrop/lib/python2.5/site-packages"
 
-src_install() {
-   cd $EFULL
-   epython setup.py config --compiler=unix --fcompiler=gnu95 install 
-}
 
