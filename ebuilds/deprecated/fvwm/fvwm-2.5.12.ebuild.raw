@@ -1,0 +1,37 @@
+#!/bin/egatrop -e
+# (C)opyleft Gerolf Ziegenhain <gerolf@ziegenhain.com> 2008
+
+DESCRIPTION="fvwm"
+HOMEPAGE="http://www.fvwm.org"
+SRC_URI="ftp://ftp.fvwm.org/pub/$ENAME/version-2/$ENAME-$EVERS.tar.bz2"
+
+DEPEND="aterm gmrun trayer habak conky gsetroot vim-vimoutliner rxvt-unicode rxvt xterm unclutter ipython picasa thunar k3b pidgin kphone"
+SDEPEND="fvwm"
+
+LICENSE="abc"
+
+PREFIX=/tmp
+
+src_unpack() {
+}
+
+src_configure() {
+   #epatch ../fvwm-translucency.diff 
+   #rr autoconf
+   #rr aclocal
+   #rr automake
+   #econfigure --disable-bidi
+}
+
+src_compile() {
+   #emake -j 4
+}
+
+src_install() {
+#   einstall
+}  
+
+post_inst() {
+   elog "Installing Theme..."
+}
+
