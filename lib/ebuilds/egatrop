@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+. common.shell
+
+EBUILD=$1
+ESRC_DIR=/opt/corvix/src/
+EBIN_DIR=/opt/corvix/
+
+_ename() {
+   EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
+   ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
+   EVERS=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$2}')
+   EREL=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$3}')
+}   
+
+_logo() {
+   LOG "Egatrop: installing ebuild $EFULL"
+   LOG "   using: esrc=$ESRC_DIR ebin=$EBIN_DIR"
+}
+
+_efetch() {
+   local uri=$1
+   local file=${uri##*/} 
+   LOG "   downloading $file"
+   [[ -e $ESRC_DIR/$file ]] || _ wget $uri
+}
+
+_ename
+_logo
+
+cd $ESRC_DIR
