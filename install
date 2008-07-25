@@ -6,6 +6,7 @@ for d in lib ebuilds; do
    [[ -d /opt/egatrop/$d ]] || mkdir -p /opt/egatrop/$d
    cp -r $d /opt/egatrop/
 done
+[[ -d /opt/egatrop/src ]] || mkdir -p /opt/egatrop/src
 chmod -R aog+rx /opt/egatrop
 
 #echo "PATH=$PATH:/opt/egatrop/lib"
