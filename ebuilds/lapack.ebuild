@@ -6,24 +6,33 @@ EBUILD=$0
 ESRC_URI="http://www.netlib.org/blas/blas.tgz http://www.netlib.org/lapack/lapack.tgz"
 _efetch
 
+BLAS=$EBIN_DIR/lib/libfblas.a
+
 make_blas() {
    LOG "   Make blas"
-   BLAS=/lib/libfblas.a
    [[ -e $BLAS ]] && return 0
    _ tar xzf blas.tgz
    cd BLAS
    _ gfortran -c *.f
    _ ar r libfblas.a *.o
    _ ranlib libfblas.a
-   _esu install --mode=aog+rx libfblas.a /lib
+   _esu install --mode=aog+rx libfblas.a $EBIN_DIR/lib
+   cd ..
+}
+
+patch_lapack() {
+   LOG "   patching lapack for gfortran (EXTERNAL ETIME bug)"
+   cat INSTALL/dsecnd_EXT_ETIME.f | grep -v EXTERNAL ETIME >/tmp/123
+   mv /tmp/123 INSTALL/dsecnd_EXT_ETIME.f
+   cat INSTALL/second_EXT_ETIME.f | grep -v EXTERNAL ETIME >/tmp/123
+   mv /tmp/123 INSTALL/second_EXT_ETIME.f
 }
 
 make_lapack() {
    LOG "    Make lapack"
+   _ tar xzf lapack.tgz
+   cd lapack-3.1.1
    cp INSTALL/make.inc.LINUX make.inc 
-      # Edit make.inc as follows:
-      PLAT = _Linux
-      OPTS = -O2
    _ make lapacklib
    _ make clean
    cp lapack_LINUX.a libflapack.a                 # on LINUX
@@ -31,4 +40,5 @@ make_lapack() {
    #NOTE: scipy may not find the libf* names.  You may have to make a symbolic link from these files to libblas.a and liblapack.a  Numpy does not seem to have this problem.
 }
 
-
+make_blas
+make_lapack

@@ -1,25 +1,21 @@
-#!/bin/egatrop -e
+#!/bin/zsh
 # (C)opyleft Gerolf Ziegenhain <gerolf@ziegenhain.com> 2008
 
-DESCRIPTION="Unsymmetric multifrontal sparse LU factorization library (umfpack / amd/ ufconfig)"
-HOMEPAGE="http://www.cise.ufl.edu/research/sparse/umfpack"
+EBUILD=$0
+. /opt/egatrop/lib/egatrop
 SRC_URI="http://www.cise.ufl.edu/research/sparse/umfpack/current/UMFPACK.tar.gz http://www.cise.ufl.edu/research/sparse/UFconfig/current/UFconfig.tar.gz http://www.cise.ufl.edu/research/sparse/amd/current/AMD.tar.gz"
+_efetch
 
-#DEPEND="blas"
-#SDEPEND="blas"
-
-LICENSE="GPL-2 / LGPL-2.1 / LGPL-2"
-
-PREFIX=/usr
 
 src_configure() {
    esu install --mode=oag+rx UFconfig/UFconfig.h $PREFIX/include
 }
 
 compile_amd() {
-   elog "Compile AMD"
+   LOG "   Compile AMD"
+   _ tar xzf AMD.tar.gz
    cd AMD
-   emake
+   _ make
    cd ..
 }
 
@@ -28,11 +24,6 @@ compile_umfpack() {
    cd UMFPACK
    emake
    cd ..
-}
-
-src_compile() {
-   compile_amd
-   compile_umfpack
 }
 
 install_amd() {
