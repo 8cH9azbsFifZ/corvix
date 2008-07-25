@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+. common.shell
+
+ESRC_DIR=/opt/egatrop/src/
+EBIN_DIR=/opt/egatrop/
+
+_ename() {
+   EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
+   ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
+   EVERS=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$2}')
+   EREL=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$3}')
+}   
+
+_logo() {
+   LOG "Egatrop: installing ebuild $EFULL"
+   LOG "   using: esrc=$ESRC_DIR ebin=$EBIN_DIR"
+}
+
+_efetch() {
+   LOG "   uris: $ESRC_URI"
+   for uri in $(echo $ESRC_URI); do
+      file=${uri##*/}
+      LOG "   downloading $file"
+      [[ -e $ESRC_DIR/$file ]] || _ wget $uri
+   done
+}
+
+_esu() {
+   _ sudo "$@"
+}
+
+_ename
+_logo
+
+cd $ESRC_DIR
