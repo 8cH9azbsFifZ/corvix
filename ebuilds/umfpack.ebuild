@@ -3,41 +3,38 @@
 
 EBUILD=$0
 . /opt/egatrop/lib/egatrop
-SRC_URI="http://www.cise.ufl.edu/research/sparse/umfpack/current/UMFPACK.tar.gz http://www.cise.ufl.edu/research/sparse/UFconfig/current/UFconfig.tar.gz http://www.cise.ufl.edu/research/sparse/amd/current/AMD.tar.gz"
+ESRC_URI="http://www.cise.ufl.edu/research/sparse/umfpack/current/UMFPACK.tar.gz http://www.cise.ufl.edu/research/sparse/UFconfig/current/UFconfig.tar.gz http://www.cise.ufl.edu/research/sparse/amd/current/AMD.tar.gz"
 _efetch
 
+prepare() {
+   [[ -d umfpack ]] || mkdir umfpack
+   cd umfpack
 
-src_configure() {
-   esu install --mode=oag+rx UFconfig/UFconfig.h $PREFIX/include
+   _ tar xzf ../UFconfig.tar.gz
+   _esu install --mode=oag+rx UFconfig/UFconfig.h $EBIN_DIR/include
 }
 
-compile_amd() {
+make_amd() {
    LOG "   Compile AMD"
-   _ tar xzf AMD.tar.gz
+   _ tar xzf ../AMD.tar.gz
    cd AMD
    _ make
    cd ..
+   _esu install --mode=oag+rx AMD/Lib/libamd.a $EBIN_DIR/lib
+   _esu install --mode=oag+rx AMD/Include/amd.h $EBIN_DIR/include
 }
 
-compile_umfpack() {
-   elog "Compile umfpack"
+make_umfpack() {
+   LOG "Compile umfpack"
    cd UMFPACK
-   emake
+   _ tar xzf ../UMFPACK.tar.gz
+   _ make
    cd ..
+   _esu install --mode=oag+rx UMFPACK/Lib/libumfpack.a $EBIN_DIR/lib
+   _esu install --mode=oag+rx UMFPACK/Include/*.h $EBIN_DIR/include
 }
 
-install_amd() {
-   esu install --mode=oag+rx AMD/Lib/libamd.a $PREFIX/lib
-   esu install --mode=oag+rx AMD/Include/amd.h $PREFIX/include
-}
 
-install_umfpack() {
-   esu install --mode=oag+rx UMFPACK/Lib/libumfpack.a $PREFIX/lib
-   esu install --mode=oag+rx UMFPACK/Include/*.h $PREFIX/include
-   EDIRS=$ETMP/UMFPACK
-}
-
-src_install() {
-   install_amd
-   install_umfpack
-}
+prepare
+make_amd
+make_umfpack

@@ -22,9 +22,9 @@ make_blas() {
 
 patch_lapack() {
    LOG "   patching lapack for gfortran (EXTERNAL ETIME bug)"
-   cat INSTALL/dsecnd_EXT_ETIME.f | grep -v EXTERNAL ETIME >/tmp/123
+   cat INSTALL/dsecnd_EXT_ETIME.f | awk  'NR!=23' >/tmp/123
    mv /tmp/123 INSTALL/dsecnd_EXT_ETIME.f
-   cat INSTALL/second_EXT_ETIME.f | grep -v EXTERNAL ETIME >/tmp/123
+   cat INSTALL/second_EXT_ETIME.f | awk  'NR!=23' >/tmp/123
    mv /tmp/123 INSTALL/second_EXT_ETIME.f
 }
 
@@ -33,6 +33,11 @@ make_lapack() {
    _ tar xzf lapack.tgz
    cd lapack-3.1.1
    cp INSTALL/make.inc.LINUX make.inc 
+   cat make.inc | sed 's/g77/gfortran/g' > /tmp/123
+   mv /tmp/123 make.inc
+   _ make lapacklib
+   LOG "This one had to fail :/"
+   patch_lapack
    _ make lapacklib
    _ make clean
    cp lapack_LINUX.a libflapack.a                 # on LINUX

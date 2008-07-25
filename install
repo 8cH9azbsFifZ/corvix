@@ -8,9 +8,10 @@ for d in lib ebuilds doc; do
    [[ -d /opt/egatrop/$d ]] || mkdir -p /opt/egatrop/$d
    cp -r $d /opt/egatrop/
 done
+for f in src include; do 
+   [[ -d /opt/egatrop/$f ]] || mkdir -p /opt/egatrop/$f
+done   
 chmod -R aog+rx /opt/egatrop
-
-[[ -d /opt/egatrop/src ]] || mkdir -p /opt/egatrop/src
 chmod -R aog+rwx /opt/egatrop/src
 
 #echo "PATH=$PATH:/opt/egatrop/lib"
