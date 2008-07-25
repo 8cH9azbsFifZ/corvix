@@ -1,2 +1,11 @@
 #!/bin/zsh
+. common.shell
 
+LOG "Installing egatrop to /opt/egatrop"
+for d in lib ebuilds; do
+   [[ -d /opt/egatrop/$d ]] || mkdir -p /opt/egatrop/$d
+   cp -r $d /opt/egatrop/
+done
+chmod -R aog+rx /opt/egatrop
+
+#echo "PATH=$PATH:/opt/egatrop/lib"
