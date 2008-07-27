@@ -57,9 +57,25 @@ _epython() {
 
 _einstall() {
    LOG "Installing"
-   _esu make install > $TMP
-   cat $TMP | grep "/usr/bin/install" | awk '{print $NF}' >> $ILOG 
-   rm -f $TMP
+   if [[ -z $1 ]]; then
+      if [[ _is_automake ]]; then
+         _esu make install > $TMP
+         cat $TMP | grep "/usr/bin/install" | awk '{print $NF}' >> $ILOG 
+         rm -f $TMP
+      elif [[ _is_python ]]; then
+         _epython install
+      else
+         DIE "Not supported."
+      fi
+   else
+      if [[ _is_python ]]; then
+         _epython install
+      else
+         _esu install $@
+         local target_file=$#
+         echo $target_file >> $ILOG
+      fi
+   done
 }
 
 
@@ -83,7 +99,7 @@ _is_python() {
    return $(test -e setup.py )
 }
 
-_has_configure() {
+_is_automake() {
    return $(test -e configure )
 }
 
