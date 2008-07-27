@@ -2,6 +2,24 @@ environment support
 	make temp environemnt for builds
 		phythonpath
 		ldconf 
+		PATH=/usr/openwin/bin:/usr/dt/bin:$PATH
+			LD_PATH=/usr/openwin/lib:/usr/dt/lib:$LD_PATH
+				LD_RUN_PATH=/usr/openwin/lib:/usr/dt/lib:$LD_RUN_PATH
+					LD_LIBRARY_PATH=/usr/openwin/lib:/usr/dt/lib:$LD_LIBRARY_PATH
+						MANPATH=/usr/openwin/man:/usr/dt/man:$MANPATH
+							INCPATH=/usr/openwin/include:/usr/dt/include:$INCPATH
+								export PATH LD_PATH LD_RUN_PATH LD_LIBRARY_PATH MANPATH INCPATH
+									;;
+									   gnome)
+									   	GNOMEDIR=${GNOMEDIR:-/opt/gnome-1999-09-10}
+											export GNOMEDIR
+												PATH=$GNOMEDIR/bin:$PATH
+													LD_PATH=$GNOMEDIR/lib:$LD_PATH
+														LD_RUN_PATH=$GNOMEDIR/lib:$LD_RUN_PATH
+															LD_LIBRARY_PATH=$GNOMEDIR/lib:$LD_LIBRARY_PATH
+																MANPATH=$GNOMEDIR/man:$MANPATH
+																	INCPATH=$GNOMEDIR/include:$INCPATH
+
 	user-based environment
 	
 features
