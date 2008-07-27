@@ -13,7 +13,7 @@ _ename() {
    ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
    EVERS=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$2}')
    EREL=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$3}')
-   ILOG=$BASE/log/$ENAME.installed
+   ILOG=$EBASE/log/$ENAME.installed
 }   
 
 _logo() {
@@ -66,7 +66,7 @@ _einstall() {
 _euninstall() {
    LOG "Uninstalling"
    for f in $(cat $ILOG); do
-      rm -f $f
+      _esu rm -f $EBASE/$f
    done
    rm -f $ILOG
 }

@@ -12,6 +12,6 @@ for f in src include log; do
    [[ -d /opt/egatrop/$f ]] || mkdir -p /opt/egatrop/$f
 done   
 chmod -R aog+rx /opt/egatrop
-chmod -R aog+rwx /opt/egatrop/src
+chmod -R aog+rwx /opt/egatrop/src /opt/egatrop/log
 
 #echo "PATH=$PATH:/opt/egatrop/lib"

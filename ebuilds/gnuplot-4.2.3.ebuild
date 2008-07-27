@@ -11,4 +11,5 @@ _ tar xzf $ENAME-$EVERS.tar.gz
 cd $ENAME-$EVERS
 _ ./configure --prefix=$EBIN_DIR --with-readline=gnu
 _ make -j 2
-_esu make install
+#_esu make install
+_einstall
