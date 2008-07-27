@@ -6,7 +6,7 @@
 [[ -z $EBASE ]] && EBASE=/opt/egatrop
 [[ -z $LOGFLE ]] && LOGFILE=$EBASE/log/egatrop
 [[ -z $ESRC_DIR ]] && ESRC_DIR=$EBASE/src/
-[[ -e $EBIN_DIR ]] && EBIN_DIR=$EBASE
+[[ -z $EBIN_DIR ]] && EBIN_DIR=$EBASE
 
 _ename() {
    EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
@@ -65,7 +65,7 @@ _einstall() {
 _euninstall() {
    LOG "Uninstalling"
    for f in $(cat $ILOG); do
-      _esu rm -f $EBASE/$f
+      _esu rm -f $f
    done
    rm -f $ILOG
 }
