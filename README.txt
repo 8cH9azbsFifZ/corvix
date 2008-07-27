@@ -21,9 +21,11 @@ _ename:
    set variables from EBUILD_NAME
 _esu:
    sudo wrapper
-_epython:
-   python wrapper - includes tracking of installed files for simple uninstalls
 _einstall:
+   wrapper for
+   (a) python install 
+   (b) automake install
+   (c) manual install, last argument has to be installed file(!)
    wrapper for "make install" will write installed files to ILOG
 
 Variables in ebuilds:
