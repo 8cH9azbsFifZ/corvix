@@ -3,6 +3,7 @@
 . common.shell
 
 MIRROR="" #mirror.corvix.eu
+LOGFILE=/opt/egatrop/logfile
 ESRC_DIR=/opt/egatrop/src/
 EBIN_DIR=/opt/egatrop/
 
