@@ -4,7 +4,12 @@
 EBUILD=$0
 . /opt/egatrop/lib/egatrop
 ESRC_URI="http://www.netlib.org/blas/blas.tgz http://www.netlib.org/lapack/lapack.tgz"
+EMD5="
+7e6af7022440d8688d16be86d55fb358  blas.tgz
+00b21551a899bcfbaa7b8443e1faeef9  lapack.tgz
+"
 _efetch
+_emd5check
 
 BLAS=$EBIN_DIR/lib/libfblas.a
 

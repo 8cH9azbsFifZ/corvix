@@ -26,8 +26,10 @@ _efetch() {
    for uri in $(echo $ESRC_URI); do
       file=${uri##*/}
       [[ -n $MIRROR ]] && uri=$MIRROR/$file
-      LOG "downloading $file from $uri"
-      [[ -e $ESRC_DIR/$file ]] || _ wget $uri
+      if [[ ! -e $ESRC_DIR/$file ]]; then 
+         LOG "downloading $file from $uri"
+         _ wget $uri
+      fi
    done
 }
 
@@ -36,10 +38,13 @@ _ecalc_md5sums() {
    for uri in $(echo $ESRC_URI); do
       file=${uri##*/}
       [[ -n $MIRROR ]] && uri=$MIRROR/$file
-      LOG "downloading $file from $uri"
-      [[ -e $ESRC_DIR/$file ]] || _ wget $uri
       md5sum $file
    done
+}
+
+_emd5check() {
+   LOG "checking md5sums"
+   echo "$EMD5" | md5sum -c || DIE "Wrong md5sum"
 }
 
 _esu() {
