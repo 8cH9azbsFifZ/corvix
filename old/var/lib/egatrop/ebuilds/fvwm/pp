@@ -1,2 +1,0 @@
-cp fvwm-2.5.12.ebuild.raw fvwm-2.5.12.ebuild
-egatrop -p fvwm-translucency.diff http://www.abdn.ac.uk/~u15dm4/fvwm >> fvwm-2.5.12.ebuild

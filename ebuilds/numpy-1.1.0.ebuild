@@ -10,4 +10,4 @@ _emd5check
 _ tar xzf $EFULL.tar.gz
 cd $EFULL
 _ python setup.py config --compiler=unix --fcompiler=gnu95 build
-_esu python setup.py config --compiler=unix --fcompiler=gnu95 install --prefix=$EBIN_DIR
+_epython setup.py config --compiler=unix --fcompiler=gnu95 install --prefix=$EBIN_DIR
