@@ -7,7 +7,6 @@ environment support
 egatrop
 	mirror support
 	local config support
-	md5 check support for packages / mirror
 
 ebuilds
 	included gerolfs good-scripts
