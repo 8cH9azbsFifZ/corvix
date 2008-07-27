@@ -8,6 +8,7 @@ EMD5="
 7e6af7022440d8688d16be86d55fb358  blas.tgz
 00b21551a899bcfbaa7b8443e1faeef9  lapack.tgz
 "
+MIRROR=http://mirror.corvix.eu
 _efetch
 _emd5check
 
@@ -22,6 +23,7 @@ make_blas() {
    _ ar r libfblas.a *.o
    _ ranlib libfblas.a
    _esu install --mode=aog+rx libfblas.a $EBIN_DIR/lib
+   echo $EBIN_DIR/lib/libfblas.a >> $ILOG
    cd ..
 }
 

@@ -51,8 +51,7 @@ _emd5check() {
 
 _epython() {
    LOG "pyhton wrapper"
-   cmd=${@/install/install $_PREFIX --force --record=$ECTRL_DIR/$EFULL/lick_my_python.txt}
-   _edebug "Lick my python:" $cmd
+   cmd=${@/install/install $_PREFIX --force --record=$ILOG}
    _esu python $(echo $cmd)
 }
 

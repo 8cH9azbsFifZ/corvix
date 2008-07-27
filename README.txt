@@ -11,8 +11,8 @@ Mirror support:
 Simply set a mirror variable:
 MIRROR=mirror.corvix.eu
 
-Syntax of the ebuilds:
-======================
+Functions in ebuilds:
+=====================
 _efetch: 
    if needed, download the ESRC_URI files
 _emd5check:
@@ -23,3 +23,11 @@ _esu:
    sudo wrapper
 _epython:
    python wrapper - includes tracking of installed files for simple uninstalls
+_einstall:
+   wrapper for "make install" will write installed files to ILOG
+
+Variables in ebuilds:
+=====================
+ILOG:
+   logfile of installed files
+   
