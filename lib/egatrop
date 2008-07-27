@@ -74,7 +74,77 @@ _esu() {
    _ sudo "$@"
 }
 
+_is_installed() {
+   return $(test -e $ILOG)
+}
+
+_is_python() {
+   return $(test -e setup.py )
+}
+
+_has_configure() {
+   return $(test -e configure )
+}
+
+
+
+_eunpack() {
+   DIE "Not working"
+   for uri in $(echo $ESRC_URI); do
+      local file=${uri##*/}
+
+      LOG "Unpack:" $file
+      cd $ETMP
+
+      f=$EARCH_DIR/$file
+      ff=${f%.*}
+      fff=${ff##*.}
+      ffff=${f##*.}
+
+      case $ffff in
+         tar) _rr tar xof $f ;;
+         tgz) _rr tar xozf $f ;;
+         tbz|tbz2)
+            _rr bzip2 -dc $f | tar xof -
+            ;;
+         ZIP|zip|jar)
+            _rr unzip -qo $f 
+            ;;
+         gz|Z|z)
+            if [[ "${fff}" == "tar" ]]; then
+               _rr tar zoxf $f 
+            else
+               _rr gzip -dc $f > ${ff} 
+            fi
+            ;;
+         bz2|bz)
+            if [[ "${fff}" == "tar" ]]; then
+               _rr bzip2 -dc $f | tar xof - 
+            else
+               _rr bzip2 -dc $f > $ff 
+            fi
+            ;;
+         RAR|rar) _rr unrar x -idq -o+ $f ;;
+         LHa|LHA|lha|lzh) _rr lha xfq $f ;;
+         a|deb) _rr ar x $f ;;
+         lzma)
+            if [ $fff == "tar" ]; then
+               _rr lzma -dc $f | tar xof - 
+            else
+               _rr lzma -dc $f > $ff || die 1 "err"
+            fi
+            ;;
+         *)
+            die 1 "unpack $f: file format not recognized. Ignoring."
+            ;;
+      esac
+   done    
+   _find_edirs
+   src_unpack
+}
+
 _ename
 _logo
+_is_installed && DIE "Already installed: $ILOG exists."
 
 cd $ESRC_DIR
