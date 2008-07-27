@@ -3,7 +3,7 @@
 . common.shell
 
 [[ -z $MIRROR ]] && MIRROR="" #mirror.corvix.eu
-[[ -z $LOGIFLE ]] && LOGFILE=/opt/egatrop/logfile
+[[ -z $LOGIFLE ]] && LOGFILE=/opt/egatrop/log/egatrop
 [[ -z $ESRC_DIR ]] && ESRC_DIR=/opt/egatrop/src/
 [[ -e $EBIN_DIR ]] && EBIN_DIR=/opt/egatrop/
 

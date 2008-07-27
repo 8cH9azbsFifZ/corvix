@@ -8,7 +8,7 @@ for d in lib ebuilds doc; do
    [[ -d /opt/egatrop/$d ]] || mkdir -p /opt/egatrop/$d
    cp -r $d /opt/egatrop/
 done
-for f in src include; do 
+for f in src include log; do 
    [[ -d /opt/egatrop/$f ]] || mkdir -p /opt/egatrop/$f
 done   
 chmod -R aog+rx /opt/egatrop
