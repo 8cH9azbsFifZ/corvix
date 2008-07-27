@@ -31,6 +31,17 @@ _efetch() {
    done
 }
 
+_ecalc_md5sums() {
+   LOG "calculating md5sums"
+   for uri in $(echo $ESRC_URI); do
+      file=${uri##*/}
+      [[ -n $MIRROR ]] && uri=$MIRROR/$file
+      LOG "downloading $file from $uri"
+      [[ -e $ESRC_DIR/$file ]] || _ wget $uri
+      md5sum $file
+   done
+}
+
 _esu() {
    _ sudo "$@"
 }
