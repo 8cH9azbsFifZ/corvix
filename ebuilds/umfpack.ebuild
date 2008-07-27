@@ -18,6 +18,7 @@ prepare() {
 
    _ tar xzf ../UFconfig.tar.gz
    _esu install --mode=oag+rx UFconfig/UFconfig.h $EBIN_DIR/include
+   echo $EBIN_DIR/include/UFconfig.h >>$ILOG
 }
 
 make_amd() {
@@ -28,6 +29,8 @@ make_amd() {
    cd ..
    _esu install --mode=oag+rx AMD/Lib/libamd.a $EBIN_DIR/lib
    _esu install --mode=oag+rx AMD/Include/amd.h $EBIN_DIR/include
+   echo $EBIN_DIR/liblibamd.a >> $ILOG
+   echo $EBIN_DIR/include/amd.h >> $ILOG
 }
 
 make_umfpack() {
@@ -38,6 +41,8 @@ make_umfpack() {
    cd ..
    _esu install --mode=oag+rx UMFPACK/Lib/libumfpack.a $EBIN_DIR/lib
    _esu install --mode=oag+rx UMFPACK/Include/*.h $EBIN_DIR/include
+   echo $EBIN_DIR/lib/libumfpack.a>> $ILOG 
+   for f in UMFPACK/Include/*.h; do echo $EBIN_DIR/include/$(basename $f) >> $ILOG;done
 }
 
 
