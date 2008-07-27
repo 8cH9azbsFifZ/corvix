@@ -1,0 +1,9 @@
+#!/bin/sh
+EBASE_DIR=/var/lib/egatrop
+
+apt-get -y --force-yes install zsh build-essential g77 gfortran python-dev sharutils
+
+install --mode=oag+rwx -d $EBASE_DIR $EBASE_DIR/archive $EBASE_DIR/work $EBASE_DIR/ebuilds $EBASE_DIR/control
+for d in ./bin ./var; do
+    find $d -mindepth 1 -type f -name "*" -exec install --mode=oag+rx {} /{} \;
+done
