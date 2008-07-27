@@ -32,8 +32,8 @@ make_amd() {
 
 make_umfpack() {
    LOG "Compile umfpack"
+   _ tar xzf UMFPACK.tar.gz
    cd UMFPACK
-   _ tar xzf ../UMFPACK.tar.gz
    _ make
    cd ..
    _esu install --mode=oag+rx UMFPACK/Lib/libumfpack.a $EBIN_DIR/lib

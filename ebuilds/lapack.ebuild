@@ -48,6 +48,9 @@ make_lapack() {
    _ make lapacklib
    _ make clean
    cp lapack_LINUX.a libflapack.a                 # on LINUX
+   cp libflapack.a $EBIN_DIR/lib
+   chmod aog+rx $EBIN_DIR/lib/libflapack.a
+   echo $EBIN_DIR/lib/libflapack.a >> $ILOG
    LAPACK=~/src/LAPACK/libflapack.a
    #NOTE: scipy may not find the libf* names.  You may have to make a symbolic link from these files to libblas.a and liblapack.a  Numpy does not seem to have this problem.
 }
