@@ -27,9 +27,9 @@ LOG () {
    [[ -z $logfile ]] && logfile="/dev/null"
 
    if [[ $loglevel == 2 ]]; then
-      lstr="\t\t${brown}$@$none"
+      lstr="      ${brown}$@$none"
    elif [[ $loglevel == 1 ]]; then
-      lstr="\t\t${brown}$@$none"
+      lstr="   ${brown}$@$none"
    else
       lstr="${brown}$@$none"
    fi
