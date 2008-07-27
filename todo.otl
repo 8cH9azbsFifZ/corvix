@@ -3,7 +3,15 @@ environment support
 		phythonpath
 		ldconf 
 	user-based environment
-				  
+	
+features
+	uninstall
+	tracke also auch autoconf files
+
+python
+	epython wieder rein
+	filetracker
+
 egatrop
 	local config support
 

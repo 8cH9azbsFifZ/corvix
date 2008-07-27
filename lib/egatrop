@@ -3,15 +3,17 @@
 . common.shell
 
 [[ -z $MIRROR ]] && MIRROR="" #mirror.corvix.eu
-[[ -z $LOGIFLE ]] && LOGFILE=/opt/egatrop/log/egatrop
-[[ -z $ESRC_DIR ]] && ESRC_DIR=/opt/egatrop/src/
-[[ -e $EBIN_DIR ]] && EBIN_DIR=/opt/egatrop/
+[[ -z $EBASE ]] && EBASE=/opt/egatrop
+[[ -z $LOGFLE ]] && LOGFILE=$EBASE/log/egatrop
+[[ -z $ESRC_DIR ]] && ESRC_DIR=$EBASE/src/
+[[ -e $EBIN_DIR ]] && EBIN_DIR=$EBASE
 
 _ename() {
    EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
    ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
    EVERS=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$2}')
    EREL=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$3}')
+   ILOG=$BASE/log/$ENAME.installed
 }   
 
 _logo() {
@@ -54,6 +56,20 @@ _epython() {
    _esu python $(echo $cmd)
 }
 
+_einstall() {
+   LOG "Installing"
+   _esu make install > $TMP
+   cat $TMP | grep "/usr/bin/install" | awk '{print $NF}' >> $ILOG 
+   rm -f $TMP
+}
+
+_euninstall() {
+   LOG "Uninstalling"
+   for f in $(cat $ILOG); do
+      rm -f $f
+   done
+   rm -f $ILOG
+}
 
 _esu() {
    _ sudo "$@"
