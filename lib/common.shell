@@ -34,8 +34,9 @@ LOG () {
       lstr="${brown}$@$none"
    fi
 
+   DATE=`date +"%Y.%m.%d-%H:%M.%S"`
    echo "$lstr">&2
-   echo "$@">$logfile
+   echo "$DATE   $@">>$logfile
 }
 
 
