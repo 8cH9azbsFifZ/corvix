@@ -2,10 +2,10 @@
 
 . common.shell
 
-MIRROR="" #mirror.corvix.eu
-LOGFILE=/opt/egatrop/logfile
-ESRC_DIR=/opt/egatrop/src/
-EBIN_DIR=/opt/egatrop/
+[[ -z $MIRROR ]] && MIRROR="" #mirror.corvix.eu
+[[ -z $LOGIFLE ]] && LOGFILE=/opt/egatrop/logfile
+[[ -z $ESRC_DIR ]] && ESRC_DIR=/opt/egatrop/src/
+[[ -e $EBIN_DIR ]] && EBIN_DIR=/opt/egatrop/
 
 _ename() {
    EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
@@ -15,16 +15,18 @@ _ename() {
 }   
 
 _logo() {
+   LOGLEVEL=`expr $LOGLEVEL+1`
    LOG "Egatrop: installing ebuild $EFULL"
-   LOG "   using: esrc=$ESRC_DIR ebin=$EBIN_DIR"
+   LOGLEVEL=`expr $LOGLEVEL+1`
+   LOG "using: esrc=$ESRC_DIR ebin=$EBIN_DIR"
 }
 
 _efetch() {
-   LOG "   uris: $ESRC_URI"
+   LOG "uris: $ESRC_URI"
    for uri in $(echo $ESRC_URI); do
       file=${uri##*/}
       [[ -n $MIRROR ]] && uri=$MIRROR/$file
-      LOG "   downloading $file from $uri"
+      LOG "downloading $file from $uri"
       [[ -e $ESRC_DIR/$file ]] || _ wget $uri
    done
 }

@@ -26,9 +26,9 @@ WARN () { echo "$@" >&2 ; }
 LOG () {
    [[ -z $logfile ]] && logfile="/dev/null"
 
-   if [[ $loglevel == 2 ]]; then
+   if [[ $loglevel == 3 ]]; then
       lstr="      ${brown}$@$none"
-   elif [[ $loglevel == 1 ]]; then
+   elif [[ $loglevel == 2 ]]; then
       lstr="   ${brown}$@$none"
    else
       lstr="${brown}$@$none"
