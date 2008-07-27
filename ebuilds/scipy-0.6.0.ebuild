@@ -4,7 +4,9 @@
 EBUILD=$0
 . /opt/egatrop/lib/egatrop
 ESRC_URI="http://downloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz"
+EMD5="417adf3bfe03f4c23c9fb265018e545c  scipy-0.6.0.tar.gz"
 _efetch
+_emd5check
 _ tar xzf $EFULL.tar.gz
 cd $EFULL
 

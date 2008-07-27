@@ -4,7 +4,9 @@
 EBUILD=$0
 . /opt/egatrop/lib/egatrop
 ESRC_URI="http://downloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz "
+EMD5="1f673f82eb4f7422c1e45545f8e083d4  matplotlib-0.98.1.tar.gz"
 _efetch
+_emd5check
 _ tar xzf $EFULL.tar.gz
 cd $EFULL
 export PYTHON_LIB=$EBIN_DIR/lib/python2.5/site-packages 
