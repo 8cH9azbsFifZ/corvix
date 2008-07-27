@@ -2,10 +2,22 @@ common.shell
 	nur sh
 	log - levels
 	log -> logggen
-				 
+
+environment support
+	make temp environemnt for builds
+		phythonpath
+		ldconf 
+	user-based environment
 				  
 egatrop
 	mirror support
 	local config support
-							  
+	md5 check support for packages / mirror
 
+ebuilds
+	included gerolfs good-scripts
+
+
+Later
+	make independent on distro 
+		-> include dependency support again
