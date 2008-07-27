@@ -17,8 +17,9 @@ export PYTHONPATH=$EBIN_DIR/lib/python2.5/site-packages
 export LAPACK=$EBIN_DIR/lib/libfblas.a
 export BLAS=$EBIN_DIR/lib/libfblas.a
 export INCPATH=$EBIN_DIR/include
+[[ -e $BLAS ]] || DIE "Missing BLAS: $BLAS"
 _ python setup.py config --compiler=unix --fcompiler=gnu95 build 
 _epython setup.py config --compiler=unix --fcompiler=gnu95 install --prefix=$EBIN_DIR
 
-PAUSE "Adjust your PYTHONPATH=/opt/egatrop/lib/python2.5/site-packages"
+#PAUSE "Adjust your PYTHONPATH=/opt/egatrop/lib/python2.5/site-packages"
 

@@ -9,5 +9,10 @@ _efetch
 _emd5check
 _ tar xzf $EFULL.tar.gz
 cd $EFULL
+export PYTHON_LIB=$EBIN_DIR/lib/python2.5/site-packages 
+export PYTHONPATH=$EBIN_DIR/lib/python2.5/site-packages
+export LAPACK=$EBIN_DIR/lib/libfblas.a
+export BLAS=$EBIN_DIR/lib/libfblas.a
+export INCPATH=$EBIN_DIR/include
 _ python setup.py config --compiler=unix --fcompiler=gnu95 build
 _epython setup.py config --compiler=unix --fcompiler=gnu95 install --prefix=$EBIN_DIR
