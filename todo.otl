@@ -18,9 +18,16 @@ features
 egatrop
 	local config support
 	ports ansehen
+	dependencies
+	size
+	edoc-uri
+	tar wrappen
+	cd wrappen
+	use-flags
 
 ebuilds
 	included gerolfs good-scripts
+
 
 
 Later
