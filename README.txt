@@ -21,6 +21,12 @@ _ename:
    set variables from EBUILD_NAME
 _esu:
    sudo wrapper
+_eautomake:
+   ./configure... ; make 
+_epython:
+   python setup.py ...
+_eunpack:
+   unpacking of archive ...
 _einstall:
    wrapper for
    (a) python install 

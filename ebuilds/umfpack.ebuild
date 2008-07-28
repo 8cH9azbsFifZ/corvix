@@ -9,20 +9,16 @@ f81fcae945de82864035b03ee20a8d2b  AMD.tar.gz
 331ec33d1df77fb7d9ee359a7f2d6ee3  UFconfig.tar.gz
 8ad2d68c7c49dfcdd8321e806e6c611c  UMFPACK.tar.gz
 "
-_efetch
-_emd5check
+EWORK_DIR=$ESRC_DIR
 
 prepare() {
    [[ -d umfpack ]] || mkdir umfpack
    cd umfpack
-
-   _ tar xzf ../UFconfig.tar.gz
    _einstall --mode=oag+rx UFconfig/UFconfig.h $EBIN_DIR/include/UFconfig.h
 }
 
 make_amd() {
    LOG "   Compile AMD"
-   _ tar xzf ../AMD.tar.gz
    cd AMD
    _ make
    cd ..
@@ -32,7 +28,6 @@ make_amd() {
 
 make_umfpack() {
    LOG "Compile umfpack"
-   _ tar xzf UMFPACK.tar.gz
    cd UMFPACK
    _ make
    cd ..
@@ -42,7 +37,7 @@ make_umfpack() {
    done
 }
 
-
+_emerge
 prepare
 make_amd
 make_umfpack
