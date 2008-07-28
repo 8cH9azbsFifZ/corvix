@@ -63,6 +63,11 @@ _epython() {
    _esu python $(echo $cmd)
 }
 
+_epython_install() {
+   _epython setup.py install
+   _esu chmod -R aog+rx $EBASE/lib/python*
+}
+
 _einstall() {
    LOG "Installing$none $@"
    if [[ -z $1 ]]; then
@@ -71,13 +76,13 @@ _einstall() {
          cat $TMP | grep "/usr/bin/install" | awk '{print $NF}' >> $ILOG 
          rm -f $TMP
       elif [[ -e setup.py ]]; then
-         _epython setup.py install
+         _epython_install
       else
          DIE "Not supported."
       fi
    else
       if [[ -e setup.py ]]; then
-         _epython setup.py install
+         _epython_install
       else
          _esu install --mode=oag+rx $@
          local target_file=$(echo $@|awk '{print $NF}')
