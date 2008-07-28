@@ -8,9 +8,6 @@
 [[ -z $ESRC_DIR ]] && ESRC_DIR=$EBASE/src/
 [[ -z $EBIN_DIR ]] && EBIN_DIR=$EBASE
 
-[[ -z $EWORK_DIR ]] && EWORK_DIR=$ESRC_DIR/$EBUILD
-[[ -d $EWORK_DIR ]] || mkdir -p $EWORK_DIR
-
 _ename() {
    EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
    ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
@@ -159,7 +156,7 @@ _echdir() {
    if [[ -z $EWORK_DIR ]]; then
       EWORK_DIR=$(find $ESRC_DIR -maxdepth 1 -name "$ENAME*" -type d)
    fi
-   LOG "go to ework dir: $EWORK_DIR"
+   LOG "go to ework dir:$none $EWORK_DIR"
    cd $EWORK_DIR
 }
 
@@ -175,4 +172,9 @@ _emerge() {
    _echdir
 }
 
-_emerge
+_eautomake() {
+   LOG "Automake"
+   _ ./configure --prefix=$EBIN_DIR $@
+   _ make -j 2
+}
+
