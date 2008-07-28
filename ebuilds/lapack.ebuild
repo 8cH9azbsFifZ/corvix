@@ -22,8 +22,7 @@ make_blas() {
    _ gfortran -c *.f
    _ ar r libfblas.a *.o
    _ ranlib libfblas.a
-   _esu install --mode=aog+rx libfblas.a $EBIN_DIR/lib
-   echo $EBIN_DIR/lib/libfblas.a >> $ILOG
+   _einstall --mode=aog+rx libfblas.a $EBIN_DIR/lib/libfblas.a
    cd ..
 }
 
@@ -46,12 +45,8 @@ make_lapack() {
    LOG "This one had to fail :/"
    patch_lapack
    _ make lapacklib
-   _ make clean
    cp lapack_LINUX.a libflapack.a                 # on LINUX
-   cp libflapack.a $EBIN_DIR/lib
-   chmod aog+rx $EBIN_DIR/lib/libflapack.a
-   echo $EBIN_DIR/lib/libflapack.a >> $ILOG
-   LAPACK=~/src/LAPACK/libflapack.a
+   _einstall --mode=aog+rx libflapack.a $EBIN_DIR/lib/libflapack.a
    #NOTE: scipy may not find the libf* names.  You may have to make a symbolic link from these files to libblas.a and liblapack.a  Numpy does not seem to have this problem.
 }
 
