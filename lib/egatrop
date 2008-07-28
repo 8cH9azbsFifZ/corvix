@@ -161,8 +161,10 @@ _echdir() {
    cd $EWORK_DIR
 }
 
-_ename
-_logo
+_einit() {
+   _ename
+   _logo
+}
 
 _emerge() {
    _is_installed && DIE "Already installed: $ILOG exists."
