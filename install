@@ -4,7 +4,7 @@
 [[ $(id -u) == 0 ]] || DIE "No root..."
 
 LOG "Installing egatrop to /opt/egatrop"
-for d in lib ebuilds doc; do
+for d in lib ebuilds doc bin; do
    [[ -d /opt/egatrop/$d ]] || mkdir -p /opt/egatrop/$d
    cp -r $d /opt/egatrop/
 done
