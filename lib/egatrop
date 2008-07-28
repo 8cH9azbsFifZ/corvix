@@ -8,6 +8,9 @@
 [[ -z $ESRC_DIR ]] && ESRC_DIR=$EBASE/src/
 [[ -z $EBIN_DIR ]] && EBIN_DIR=$EBASE
 
+[[ -z $EWORK_DIR ]] && EWORK_DIR=$ESRC_DIR/$EBUILD
+[[ -d $EWORK_DIR ]] || mkdir -p $EWORK_DIR
+
 _ename() {
    EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
    ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
@@ -46,7 +49,13 @@ _ecalc_md5sums() {
 
 _emd5check() {
    LOG "checking md5sums"
-   echo "$EMD5" | md5sum -c || DIE "Wrong md5sum"
+   if [[ -z $EMD5 ]]; then
+      LOGLEVEL=`expr $LOGLEVEL+1`
+      LOG "warning: no md5sum given"
+      LOGLEVEL=`expr $LOGLEVEL-1`
+   else
+      echo "$EMD5" | md5sum -c || DIE "Wrong md5sum"
+   fi
 }
 
 _epython() {
@@ -152,6 +161,12 @@ _eunpack() {
 
 _ename
 _logo
-_is_installed && DIE "Already installed: $ILOG exists."
 
-cd $ESRC_DIR
+_emerge() {
+   _is_installed && DIE "Already installed: $ILOG exists."
+   cd $ESRC_DIR
+   _efetch
+   _emd5check
+}
+
+
