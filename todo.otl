@@ -1,11 +1,7 @@
-features
-	doc download & install
-
 egatrop
 	local config support
 	dependencies
 	size
-	edoc-uri
 	use-flags
 
 ebuilds

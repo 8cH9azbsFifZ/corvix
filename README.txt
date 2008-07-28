@@ -40,3 +40,7 @@ ILOG:
    logfile of installed files
 EDOC_URI:
    additional documentation files; will be installed automatically
+EDEP:
+   dependencies (resolved by egatrop)
+EDEP_DEB:
+   dependencies (resolved by debian)

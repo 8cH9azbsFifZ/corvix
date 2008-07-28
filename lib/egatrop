@@ -180,6 +180,7 @@ _einit() {
 
 _emerge() {
    _is_installed && DIE "Already installed: $ILOG exists."
+   _edepend
    cd $ESRC_DIR
    _efetch
    _emd5check
@@ -192,6 +193,18 @@ _eautomake() {
    LOG "Automake"
    _ ./configure --prefix=$EBIN_DIR $@
    _ make -j $NCPU
+}
+
+_edepend() {
+   LOG "Installing dependencies"
+   for f in $EDEP; do 
+      $EBASE/bin/emerge $f
+   done
+}
+
+_edepend_debian() {
+   LOG "Installing dependencies using debian"
+   _esu apt-get -y --force-yes build-dep $EDEP_DEB
 }
 
 _einit
