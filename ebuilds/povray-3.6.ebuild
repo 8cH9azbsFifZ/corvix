@@ -5,10 +5,8 @@ EBUILD=$0
 . /opt/egatrop/lib/egatrop
 ESRC_URI="http://www.povray.org/redirect/www.povray.org/ftp/pub/povray/Official/Unix/povray-$EVERS.tar.bz2"
 EMD5="b5789bb7eeaed0809c5c82d0efda571d  povray-3.6.tar.bz2"
-_efetch
-_emd5check
-_ tar xjf povray-$EVERS.tar.bz2
-cd povray-$EVERS.1
-_ ./configure COMPILED_BY="egatrop" --disable-io-restrictions -without-x -without-svga --prefix=$EBIN_DIR
-_ make -j 4
+EWORK_DIR=povray-$EVERS.1
+_emerge
+
+_eautomake COMPILED_BY="egatrop" --disable-io-restrictions -without-x -without-svga 
 _einstall

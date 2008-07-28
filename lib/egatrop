@@ -69,13 +69,13 @@ _einstall() {
          cat $TMP | grep "/usr/bin/install" | awk '{print $NF}' >> $ILOG 
          rm -f $TMP
       elif [[ -e setup.py ]]; then
-         _epython install
+         _epython setup.py install
       else
          DIE "Not supported."
       fi
    else
       if [[ -e setup.py ]]; then
-         _epython install
+         _epython setup.py install
       else
          _esu install --mode=oag+rx $@
          local target_file=$(echo $@|awk '{print $NF}')

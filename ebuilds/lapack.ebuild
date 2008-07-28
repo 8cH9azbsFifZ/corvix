@@ -9,8 +9,8 @@ EMD5="
 00b21551a899bcfbaa7b8443e1faeef9  lapack.tgz
 "
 MIRROR=http://mirror.corvix.eu
-_efetch
-_emd5check
+EWORK_DIR=$ESRC_DIR
+
 
 BLAS=$EBIN_DIR/lib/libfblas.a
 
@@ -49,6 +49,8 @@ make_lapack() {
    _einstall --mode=aog+rx libflapack.a $EBIN_DIR/lib/libflapack.a
    #NOTE: scipy may not find the libf* names.  You may have to make a symbolic link from these files to libblas.a and liblapack.a  Numpy does not seem to have this problem.
 }
+
+_emerge
 
 make_blas
 make_lapack
