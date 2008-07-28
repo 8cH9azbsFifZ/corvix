@@ -6,6 +6,7 @@ EBUILD=$0
 ver_maui=3.2.6p19
 ver_torque=2.1.6
 ESRC_URI="http://www.clusterresources.com/downloads/torque/torque-$ver_torque.tar.gz http://www.clusterresources.com/downloads/maui/maui-$ver_maui.tar.gz"
+EDOC_URI="http://www.clusterresources.com/products/maui/docs/mauiadmin.pdf"
 EMD5="
 abfeb1a3a5aa53f725f975c2b5d98e1e  torque-$ver_torque.tar.gz
 ec66489f57f8ee9e6943c0910b4631d4  maui-$ver_maui.tar.gz

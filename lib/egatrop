@@ -7,6 +7,7 @@
 [[ -z $LOGFLE ]] && LOGFILE=$EBASE/log/egatrop
 [[ -z $ESRC_DIR ]] && ESRC_DIR=$EBASE/src/
 [[ -z $EBIN_DIR ]] && EBIN_DIR=$EBASE
+[[ -z $EDOC_DIR ]] && EDOC_DIR=$EBASE/doc/
 [[ -z $NCPU ]] && NCPU=2
 
 _ename() {
@@ -25,8 +26,8 @@ _logo() {
 }
 
 _efetch() {
-   LOG "uris: $ESRC_URI"
-   for uri in $(echo $ESRC_URI); do
+   LOG "uris: $ESRC_URI $EDOC_URI"
+   for uri in $(echo $ESRC_URI $EDOC_URI); do
       file=${uri##*/}
       [[ -n $MIRROR ]] && uri=$MIRROR/$file
       if [[ ! -e $ESRC_DIR/$file ]]; then 
@@ -102,6 +103,17 @@ _is_installed() {
    return $(test -e $ILOG)
 }
 
+_einstall_doc() {
+   [[ -z $EDOC_URI ]] && return 0
+   EDOC_DIR=$EDOC_DIR/$ENAME
+   LOG "Installing docs to:$none $EDOC_DIR"
+   [[ -d $EDOC_DIR ]] || _esu mkdir -p $EDOC_DIR
+   for uri in $(echo $EDOC_URI);do 
+      local file=${uri##*/}
+      _einstall $file $EDOC_DIR/$file
+   done
+}
+
 _eunpack() {
    for uri in $(echo $ESRC_URI); do
       local file=${uri##*/}
@@ -171,6 +183,7 @@ _emerge() {
    cd $ESRC_DIR
    _efetch
    _emd5check
+   _einstall_doc
    _eunpack
    _echdir
 }

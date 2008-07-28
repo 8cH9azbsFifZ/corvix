@@ -1,18 +1,4 @@
-environment support
-	make temp environemnt for builds
-		phythonpath
-		ldconf 
-		PATH=/usr/openwin/bin:/usr/dt/bin:$PATH
-		LD_PATH=/usr/openwin/lib:/usr/dt/lib:$LD_PATH
-		LD_RUN_PATH=/usr/openwin/lib:/usr/dt/lib:$LD_RUN_PATH
-		LD_LIBRARY_PATH=/usr/openwin/lib:/usr/dt/lib:$LD_LIBRARY_PATH
-		MANPATH=/usr/openwin/man:/usr/dt/man:$MANPATH
-		INCPATH=/usr/openwin/include:/usr/dt/include:$INCPATH
-		export PATH LD_PATH LD_RUN_PATH LD_LIBRARY_PATH MANPATH INCPATH
-	user-based environment
-	
 features
-	uninstall
 	doc download & install
 
 egatrop

@@ -38,4 +38,5 @@ Variables in ebuilds:
 =====================
 ILOG:
    logfile of installed files
-   
+EDOC_URI:
+   additional documentation files; will be installed automatically
