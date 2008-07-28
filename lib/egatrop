@@ -105,58 +105,62 @@ _is_installed() {
 }
 
 _eunpack() {
-   DIE "Not working"
    for uri in $(echo $ESRC_URI); do
       local file=${uri##*/}
 
       LOG "Unpack:" $file
-      cd $ETMP
 
-      f=$EARCH_DIR/$file
+      f=$ESRC_DIR/$file
       ff=${f%.*}
       fff=${ff##*.}
       ffff=${f##*.}
 
       case $ffff in
-         tar) _rr tar xof $f ;;
-         tgz) _rr tar xozf $f ;;
+         tar) _ tar xof $f ;;
+         tgz) _ tar xozf $f ;;
          tbz|tbz2)
-            _rr bzip2 -dc $f | tar xof -
+            _ bzip2 -dc $f | tar xof -
             ;;
          ZIP|zip|jar)
-            _rr unzip -qo $f 
+            _ unzip -qo $f 
             ;;
          gz|Z|z)
             if [[ "${fff}" == "tar" ]]; then
-               _rr tar zoxf $f 
+               _ tar zoxf $f 
             else
-               _rr gzip -dc $f > ${ff} 
+               _ gzip -dc $f > ${ff} 
             fi
             ;;
          bz2|bz)
             if [[ "${fff}" == "tar" ]]; then
-               _rr bzip2 -dc $f | tar xof - 
+               _ bzip2 -dc $f | tar xof - 
             else
-               _rr bzip2 -dc $f > $ff 
+               _ bzip2 -dc $f > $ff 
             fi
             ;;
-         RAR|rar) _rr unrar x -idq -o+ $f ;;
-         LHa|LHA|lha|lzh) _rr lha xfq $f ;;
-         a|deb) _rr ar x $f ;;
+         RAR|rar) _ unrar x -idq -o+ $f ;;
+         LHa|LHA|lha|lzh) _ lha xfq $f ;;
+         a|deb) _ ar x $f ;;
          lzma)
             if [ $fff == "tar" ]; then
-               _rr lzma -dc $f | tar xof - 
+               _ lzma -dc $f | tar xof - 
             else
-               _rr lzma -dc $f > $ff || die 1 "err"
+               _ lzma -dc $f > $ff || DIE 1 "err"
             fi
             ;;
          *)
-            die 1 "unpack $f: file format not recognized. Ignoring."
+            DIE "unpack $f: file format not recognized. Ignoring."
             ;;
       esac
    done    
-   _find_edirs
-   src_unpack
+}
+
+_echdir() {
+   if [[ -z $EWORK_DIR ]]; then
+      EWORK_DIR=$(find $ESRC_DIR -maxdepth 1 -name "$ENAME*" -type d)
+   fi
+   LOG "go to ework dir: $EWORK_DIR"
+   cd $EWORK_DIR
 }
 
 _ename
@@ -167,6 +171,8 @@ _emerge() {
    cd $ESRC_DIR
    _efetch
    _emd5check
+   _eunpack
+   _echdir
 }
 
-
+_emerge
