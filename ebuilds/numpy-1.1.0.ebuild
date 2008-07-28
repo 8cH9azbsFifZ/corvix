@@ -5,6 +5,8 @@ EBUILD=$0
 . /opt/egatrop/lib/egatrop
 ESRC_URI="http://downloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz"
 EMD5="bf176b9857c4c588a63e414df84a1826  numpy-1.1.0.tar.gz"
+EDEP="umfpack lapack"
+
 export PYTHON_LIB=$EBIN_DIR/lib/python2.5/site-packages 
 export PYTHONPATH=$EBIN_DIR/lib/python2.5/site-packages
 export LAPACK=$EBIN_DIR/lib/libfblas.a

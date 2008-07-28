@@ -4,11 +4,8 @@
 EBUILD=$0
 . /opt/egatrop/lib/egatrop
 ESRC_URI="http://downloads.sourceforge.net/$ENAME/$ENAME-$EVERS.tar.gz"
-EMD5="417adf3bfe03f4c23c9fb265018e545c  scipy-0.6.0.tar.gz"
-_efetch
-_emd5check
-_ tar xzf $EFULL.tar.gz
-cd $EFULL
+EMD5="417adf3bfe03f4c23c9fb265018e545c  $ENAME-$EVERS.tar.gz"
+EDEP="numpy"
 
 cat scipy/sandbox/setup.py | awk '/add_subpackage/&&/delaunay/{gsub("#","");print}{print}' > tmp
 mv tmp scipy/sandbox/setup.py
@@ -18,8 +15,10 @@ export LAPACK=$EBIN_DIR/lib/libfblas.a
 export BLAS=$EBIN_DIR/lib/libfblas.a
 export INCPATH=$EBIN_DIR/include
 [[ -e $BLAS ]] || DIE "Missing BLAS: $BLAS"
-_ python setup.py config --compiler=unix --fcompiler=gnu95 build 
-_epython setup.py config --compiler=unix --fcompiler=gnu95 install --prefix=$EBIN_DIR
+
+_emerge
+_epython setup.py config --compiler=unix --fcompiler=gnu95 build 
+_einstall
 
 #PAUSE "Adjust your PYTHONPATH=/opt/egatrop/lib/python2.5/site-packages"
 
