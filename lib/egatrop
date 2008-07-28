@@ -71,7 +71,7 @@ _einstall() {
       if [[ -e setup.py ]]; then
          _epython install
       else
-         _esu install $@
+         _esu install --mode=oag+rx $@
          local target_file=$(echo $@|awk '{print $NF}')
          echo $target_file >> $ILOG
       fi
