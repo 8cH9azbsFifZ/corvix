@@ -13,6 +13,7 @@ environment support
 	
 features
 	uninstall
+	doc download & install
 
 egatrop
 	local config support
