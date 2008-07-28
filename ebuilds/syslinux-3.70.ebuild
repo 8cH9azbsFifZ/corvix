@@ -9,5 +9,5 @@ EWORK_DIR=
 MIRROR=
 
 _emerge
-_eautomake
-_einstall
+#_eautomake
+#_einstall
