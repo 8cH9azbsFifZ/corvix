@@ -91,7 +91,7 @@ _euninstall() {
    for f in $(cat $ILOG); do
       _esu rm -f $f
    done
-   rm -f $ILOG
+   _ rm -f $ILOG
 }
 
 _esu() {
@@ -180,4 +180,6 @@ _eautomake() {
    _ ./configure --prefix=$EBIN_DIR $@
    _ make -j $NCPU
 }
+
+_einit
 
