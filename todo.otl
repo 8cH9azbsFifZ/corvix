@@ -17,6 +17,7 @@ features
 
 egatrop
 	local config support
+	ports ansehen
 
 ebuilds
 	included gerolfs good-scripts
