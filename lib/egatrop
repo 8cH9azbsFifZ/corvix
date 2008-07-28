@@ -200,11 +200,16 @@ _edepend() {
    for f in $EDEP; do 
       $EBASE/bin/emerge $f
    done
+   _edepend_debian
 }
 
 _edepend_debian() {
+   [[ -z $EDEP_DEB ]] && return 0
    LOG "Installing dependencies using debian"
-   _esu apt-get -y --force-yes build-dep $EDEP_DEB
+   for f in $EDEP_DEB; do
+      _esu apt-get -y --force-yes install $f
+      _esu apt-get -y --force-yes build-dep $f
+   done
 }
 
 _einit
