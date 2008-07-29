@@ -1,0 +1,86 @@
+#! /usr/bin/perl
+###############################################################################
+# Description: Script to remove processes gone astray and daemons. 
+#              To be called by pbs_mom epilogue.  
+# Author: David Groep
+# Institute: Nikhef
+# Created: 14 March 2007
+# Licence: EGEE (http://public.eu-egee.org/license/license.html)
+# $Id$
+###############################################################################
+use Getopt::Long;
+use Sys::Syslog;
+
+$opt_u=1000;
+$opt_a=0;
+$opt_k=0;
+$opt_n=0;
+$opt_s=0;
+&GetOptions(qw(u:i a n s k|kill=i));
+
+my $MOMCTL = '/usr/local/sbin/momctl';
+my $PBSMOM = '/usr/local/sbin/pbs_mom';
+
+@lines=`ps -efl`;
+$opt_a and do {
+  open MOMCTL,"$MOMCTL -h localhost -d 0 |" or die "Cannot run momctl: $!\n";
+  while(<MOMCTL>) { 
+    chomp; 
+    /sidlist=/  and do { split(/=/); push @ARGV,$_[$#_]; };
+  }
+  close MOMCTL;
+};
+
+foreach ( @lines ) {
+  /PPID/ && /UID/ && next;
+  chomp; split(/\s+/,$_,15);
+  $opt_n and ($_[12] =~ /(tty|pts)/) and next;
+  ( $_[14] eq "$PBSMOM" ) and $mompid=$_[3];
+  $children{$_[4]}.=" $_[3]";
+  $name{$_[3]} = $_[14];
+  $owner{$_[3]} = (getpwnam($_[2]))[2];
+}
+
+@ARGV[0] or push @ARGV,$mompid;
+
+sub prunebranch($) {
+  my ($pid) = @_;
+  foreach ( split(/\s+/,$children{$pid}) ) {
+    ($_ =~ /\d+/ ) and &prunebranch($_);
+  }
+  $name{$pid}=undef if $owner{$pid};
+  return;
+}
+
+sub removebranch($) {
+  my ($pid) = @_;
+  foreach ( split /\s+/, $children{$pid} ) {
+    ($_ ne "") and &removebranch($_);
+  }
+  $children{$pid} = undef;
+  $owner{$pid} = undef;
+  $name{$pid} = undef;
+}
+
+foreach ( @ARGV ) { &prunebranch($_); }
+
+# option -s also forces removal of branches starting at an sshd
+if (! $opt_s) {
+  foreach ( keys %name ) {
+    if ($name{$_} =~ /sshd: \w+\@pts/) {
+      &removebranch($_);
+    }
+  }
+}
+
+openlog("prune_userprocs", 'pid', 'user') or
+    warn "Sys::Sylog:openlog failed\n";
+    
+foreach ( keys %name ) {
+  ($owner{$_} > $opt_u) and $name{$_} and do {
+    syslog('notice', "killing pid=%d uid=%s cmd=%s\n", $_, $owner{$_}, $name{$_});
+    if($opt_k) { kill $opt_k,$_; }
+  };
+}
+
+closelog();

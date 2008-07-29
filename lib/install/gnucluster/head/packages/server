@@ -1,0 +1,10 @@
+syslinux 
+dhcp
+tftp-hpa
+arping 
+mtools
+gmond
+portmap
+nfs-common
+nfs-kernel-server
+apt-mirror

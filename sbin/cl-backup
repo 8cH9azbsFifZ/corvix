@@ -1,0 +1,13 @@
+#!/bin/zsh
+. /opt/cluster/lib/common.shell
+
+LOG "Backing up"
+for trg in /mnt/nas3/cluster/ desiato.physik.uni-kl.de:/mnt/vol1/cluster/; do
+   LOG "Backup to $trg"
+   rsync -zavP \
+      --exclude /mnt --exclude /sys --exclude /dev --exclude /proc --exclude /home \
+      /. $trg/head/.
+   rsync -zavP \
+      --exclude /mnt --exclude /sys --exclude /dev --exclude /proc --exclude /home \
+      /mnt/golden-node/. $trg/node/.
+done

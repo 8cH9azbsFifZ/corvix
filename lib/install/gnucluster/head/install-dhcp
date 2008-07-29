@@ -1,0 +1,9 @@
+#!/bin/zsh
+. common.shell
+
+LOG "Installing dhcp"
+_install_pkg dhcpd
+PAUSE "Critical: edit interfaces in /etc/default/dhcp."
+cat << eof > /etc/default/dhcp
+INTERFACES="eth0 eth1"
+eof

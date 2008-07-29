@@ -1,0 +1,3 @@
+$pbsserver head
+$logevent 255 
+$max_load 1

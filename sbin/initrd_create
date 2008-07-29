@@ -1,0 +1,25 @@
+#!/bin/zsh
+. common.shell
+cat << eof
+--- $0 --- Create initrd
+   arg1: src_dir
+   arg2: output_name
+eof
+ONM=$2
+
+[[ -d $1 ]] || DIE "Missing src_dir: $1"
+[[ -z $ONM ]] && ONM=$PWD/new-initrd
+[[ -z $2 ]] && DIE "Missing name for initrd"
+
+cd $1
+for i in `find . -name '*~'`; do rm $i; done
+
+TM=/tmp/tmp-$$
+fakeroot << endf
+find .|cpio -H newc -o |gzip > $TM
+endf
+cd - > /dev/null 2>&1
+
+mv $TM $ONM
+
+echo "   done."

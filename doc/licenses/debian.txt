@@ -1,0 +1,2 @@
+Browse to:
+http://www.debian.org/legal/licenses

@@ -1,0 +1,4 @@
+#!/bin/zsh
+reservation=$(showres|grep fast|head -n 1|awk '{print$1}')
+qsub -I -W x="QOS:fast;FLAGS:ADVRES:$reservation" -l nodes=1:ppn=4 -N quickshot
+

@@ -1,0 +1,7 @@
+#!/bin/zsh
+. common.shell
+
+LOG "Installing ganglia"
+_install_pkg  ganglia-monitor gmetad 
+
+PAUSE "NB: /opt/cluster/etc/ganglia /opt/cluster/www/ganglia"

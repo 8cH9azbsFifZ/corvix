@@ -1,0 +1,41 @@
+#!/bin/zsh
+. common.shell
+
+LOG "Syslinux..."
+
+_fetch_sources() {
+   LOG "   Prepating isolinux..."
+   ESRC_URI=http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-$vers.tar.gz
+   [[ -d tmp ]] || mkdir tmp
+   [[ -e tmp/syslinux-$vers.tar.gz ]] && return 0
+   _ wget $ESRC_URI -O tmp/syslinux-$vers.tar.gz
+   #_ sudo apt-get -y --force-yes build-dep syslinux
+   cd tmp
+   _ tar xzf syslinux-$vers.tar.gz
+#   cd syslinux-$vers 
+#   _ make
+#   cd ../..
+}
+
+_make_image() {
+   LOG "   Make isolinux image"
+   [[ -d $target ]] || mkdir -p $target
+   cp tmp/syslinux-$vers/core/isolinux.bin $target
+   cp patches/* $target
+   _splash
+}
+
+_splash() {
+   LOG "   Splash image"
+   cd splash
+   pngtopnm splash.png | gzip -9 > splash.ppm.gz
+   gzip -cd splash.ppm.gz | ppmtolss16 \#000000=0 \#d0d0d0=7 \#f6f6f6=15 > splash.lss
+   cp splash.lss $target
+   cd ..
+}
+
+vers=3.70
+target=../tmp/isoimage/isolinux
+[[ ! -e $target ]] && mkdir -p $target
+_fetch_sources
+_make_image

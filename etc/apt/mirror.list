@@ -1,0 +1,33 @@
+# apt-mirror configuration file
+
+##
+## The default configuration options (uncomment and change to override)
+##
+#
+# set base_path	   /var/spool/apt-mirror
+# set mirror_path  $base_path/mirror
+# set skel_path	   $base_path/skel
+# set var_path     $base_path/var
+#
+# set defaultarch  <running host architecture>
+# set nthreads     20
+#
+set _tilde 0 
+
+##
+## Example sources
+##
+deb http://ftp.uni-kl.de/debian/ etch main contrib non-free
+deb-src http://ftp.uni-kl.de/debian/ etch main contrib non-free
+
+deb http://security.debian.org/ etch/updates main contrib non-free
+deb-src http://security.debian.org/ etch/updates main contrib non-free
+
+deb ftp://debian.netcologne.de/debian-multimedia.org etch main
+deb-src ftp://debian.netcologne.de/debian-multimedia.org etch main
+
+deb http://ftp.uni-kl.de/debian-local etch-unikl main unikl
+
+deb http://lmello.virt-br.org/debian ./
+deb-src http://lmello.virt-br.org/debian ./
+

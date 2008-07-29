@@ -1,0 +1,21 @@
+#!/bin/zsh
+. common.shell
+
+LOG "Installing nis"
+
+_config_client() {
+cat << eof >> $target/etc/group
++:::
+eof
+
+cat << eof >> $target/etc/passwd
++::::::
+eof
+
+update-rc.d -f nis remove
+update-rc.d nis defaults 98
+}
+
+#_install_pkg nis
+#_config_client
+PAUSE "DISABLED"

@@ -1,0 +1,17 @@
+create 1st working cd
+
+postinstall scripts
+	profiles
+		make complete (debian) packagae lists for different scenarios
+	include better egatrop support
+	include md5 sum checking of everything
+
+boot image
+	create independently from debian
+		kernel compilation
+		busybox compilation
+		make initrd image from scratch
+	insert boot splash image
+
+bootstrap
+	provide egatrop  compiled bootstraps

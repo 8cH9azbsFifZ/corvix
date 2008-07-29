@@ -1,0 +1,20 @@
+Booting scheme is defined config file. put in boot option, e.g:
+
+config=http://10.0.2.2/bootstrap/bootone
+
+and the content of bootone is as follow:
+
+###################################
+TARGET=auto
+IP=dhcp
+ARCH=i686
+SOURCE=http://10.0.2.2/bootstrap/bootstrap.tgz
+INITSCR=http://10.0.2.2/bootstrap/inithead
+
+## possible options
+#SOURCE=cdrom
+#INITSCR=server-scripts
+
+#SOURCE=~tftp ....
+#SOURCE=^http://server.somewhere.com/script-to-run
+####################################

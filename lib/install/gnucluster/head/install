@@ -1,0 +1,48 @@
+#!/bin/zsh
+. /opt/cluster/lib/common.shell
+
+LOG "Let's play Münchhausen...."
+PATH=$PATH:/opt/cluster/bin:/opt/cluster/sbin:/opt/cluster/lib
+export PATH
+
+_configure_zsh() {
+   chsh -s /bin/zsh root
+   echo -ne ". /etc/profile" > /root/.zshrc
+   echo -ne "PATH=$PATH" >> /etc/profile
+   . /root/.zshrc
+}
+
+_configure_debian() {
+   LOG "   Configuring DEBIAN..."   
+cat << eof > $root/etc/apt/sources.list
+deb http://ftp.uni-kl.de/debian/ etch main contrib non-free
+deb-src http://ftp.uni-kl.de/debian/ etch main contrib non-free
+
+deb http://security.debian.org/ etch/updates main contrib
+deb-src http://security.debian.org/ etch/updates main contrib
+
+deb ftp://ftp.uni-kl.de/debian-multimedia etch main
+deb-src ftp://ftp.uni-kl.de/debian-multimedia etch main
+eof
+
+   apt-get update
+   apt-get -y --force-yes install debian-multimedia-keyring
+   apt-get update
+}
+
+
+_configure_zsh
+_configure_debian
+
+
+LOG "Installing additional packages"
+for list in $(find ./packages/ -name "*" -type f); do
+   for pkg in $(cat $list); do
+      _install_pkg $pkg
+   done
+done
+
+LOG "Processing installation scripts"
+for script in $(find . -name "install-*" | sort); do
+   _ $script
+done

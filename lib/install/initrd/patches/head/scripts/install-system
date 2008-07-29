@@ -1,0 +1,251 @@
+#!/bin/sh
+
+echo "<<<<< Installing HEAD node >>>>>"
+
+echo "Configuration: $CFGFILE"
+echo
+
+export firsthd=$TARGET
+export srcdisk=$SOURCE
+
+. /scripts/functions
+
+# searching harddisks
+search_disks() {
+    for hd in /sys/block/hd* /sys/block/sd*; do
+        [ -d $hd ] || continue
+        [ "0" == "$(cat $hd/removable)" ] && echo "/dev/$(basename $hd)" >> /hdlist
+        [ "1" == "$(cat $hd/removable)" ] && echo "/dev/$(basename $hd)" >> /cdlist
+    done    
+    [ -z "$firsthd" -o "$firstcd"="auto" ] && firsthd=$(head -1 /hdlist)
+    [ -z "$srcdisk" -o "$srcdisk"="cdrom" ] && srcdisk=$(head -1 /cdlist)
+}
+
+prepare_setting() {
+    #TODO: use xdialog?
+
+    (echo $CFGFILE | awk '/^http:/{exit}{exit 1}') && 
+    (rm /default.cfg; wget -O /default.cfg $CFGFILE || panic "Cannot load configuration file from $CFGFILE")
+    . /default.cfg
+    search_disks
+    
+cat << eof
+
+####### installation settings #######
+
+config file      = $CFGFILE
+target harddisk  = $firsthd
+bootstrap source = $SOURCE
+ip address       = $IP
+gateway          = $GATE
+dns              = $DNS
+architecture     = $ARCH
+init scripts     = $INITSCR
+
+#####################################
+
+eof
+
+    echo "WARNING: All hardisk space in $firsthd will be used"
+    read -p "Proceed? (Y/n) " OK
+    [ "$OK" == "n" ] && panic "Installation canceled"
+
+}
+
+prepare_parti() {
+    echo "WARNING: deleting all partitions in $firsthd..."
+    NPAR=$(fdisk $firsthd -l|awk '/^\/dev\//{print}'|wc -l)
+    echo "DELETING: $NPAR partitions"
+    parti=1
+    while [ $parti -lt $NPAR ]; do
+    fdisk $firsthd << eof 
+d
+1
+w
+
+eof
+
+    [ $NPAR -ne 0 ] && fdisk $firsthd << eof
+d
+w
+
+eof
+
+parti=$[ $parti + 1 ]
+done
+
+echo "CREATING: partition"
+fdisk $firsthd << eof
+n
+p
+1
+
+
+a
+1
+w
+
+eof
+	ln -s /proc/mounts /etc/mtab
+	echo "FORMATING: ${firsthd}1"
+	mkfs.ext3 ${firsthd}1 || panic "!!!! Formating failed !!!!"
+	mkdir /rootfs 
+	mount -t ext3 ${firsthd}1 /rootfs || panic "!!!! Mounting filesystem failed !!!!"
+}
+
+# bootstrap
+
+take_from_cd() {
+	echo "Exploding bootstrap image from cdrom: $srcdisk:/images/bootstrap-${ARCH}.tgz"
+    mkdir /mnt
+    mount -t iso9660 $srcdisk /mnt
+    cd /rootfs
+    [ -f /mnt/images/bootstrap-${ARCH}.tgz ] || panic "Cannot find bootstrap image for ${ARCH}"
+    tar xzvf /mnt/images/bootstrap-${ARCH}.tgz
+}
+
+take_from_http() {
+	echo "Downloading bootstrap image from $SOURCE"
+	wget -O /rootfs/bootstrap.tgz $SOURCE &&
+	(cd /rootfs; tar xzvf bootstrap.tgz)
+	rm bootstrap.tgz
+}
+
+take_from_cmd() {
+	SOURCE=$(echo $SOURCE | awk '{sub(/^~/,"");print}')
+	echo "Running installation command: $SOURCE"
+	echo "#!/bin/sh" > /runcmd
+	cd /
+	$SOURCE
+}
+
+take_load_run() {
+	SOURCE=$(echo $SOURCE | awk '{sub(/^\^/,"");print}')
+	cd /
+	echo "Loading installation script from: $SOURCE"
+	wget -O runcmd $SOURCE
+	chmod +x runcmd
+	./runcmd
+	# the script must return 255 to stop further processes
+	[ $! = 255 ] && exit
+}
+
+make_bootstrap() {
+	case $SOURCE in 
+	cdrom)
+		take_from_cd
+		;;
+	http:*)
+		take_from_http
+		;;
+	~*)
+		take_from_cmd
+		;;
+	^*)
+		take_load_run
+		;;
+	*)
+		panic "Dont know how to get the bootstrap source"
+		;;
+	esac
+
+    cat > /rootfs/etc/fstab << eof
+proc /proc proc defaults 0 0
+${firsthd}1 / ext3 defaults,errors=remount-ro 0 1
+
+eof
+}
+
+# post install configurations
+
+script_get_from_http() {
+	echo "Downloading first-config script"
+	mkdir /rootfs/etc/server-scripts
+	wget -O /rootfs/etc/server-scripts/first-config $INITSCR
+	chmod +x /rootfs/etc/server-scripts/first-config
+	ln -s ../server-scripts/first-config /rootfs/etc/rc2.d/S99zconfig
+}
+
+#FIXME!
+script_get_from_cd() {
+    cp -r /mnt/$INITSCR /rootfs/etc/
+    chmod +x /rootfs/etc/$INITSCR/first-config
+    ln -s ../$INITSCR/first-config /rootfs/etc/rc2.d/S99zconfig
+}
+
+config_postinstall_script() {
+	case $INITSCR in
+	http:*)
+		script_get_from_http
+		;;
+	*)
+		script_get_from_cd
+		;;
+	esac
+}
+
+#FIXME: manual network configuration. ugly is: udev!
+
+config_network() {
+
+	case $IP in
+
+	dhcp)
+    cat > /rootfs/etc/network/interfaces << eof
+auto lo
+iface lo inet loopback
+
+eof
+
+    for inf in /sys/class/net/eth*; do
+        cat >> /rootfs/etc/network/interfaces << eof
+allow-hotplug $(basename $inf)
+iface $(basename $inf) inet dhcp
+
+eof
+    done
+
+;;
+
+	manual)
+	echo "Edit /etc/network/interface after booting to new operating system!"
+	;;
+
+	esac
+
+    # save main interface address as well
+    cat /sys/class/net/eth0/address > /rootfs/etc/main-eth
+
+}
+
+install_bootloader() {
+	echo "Installing boot loader...."
+	KER=$(ls /rootfs/boot/vmlinuz*|awk '{print $1}'|sed 's/\/rootfs//g')
+	IRD=$(ls /rootfs/boot/initrd*|awk '{print $1}'|sed 's/\/rootfs//g')
+	grub-install --root-directory=/rootfs $firsthd
+	cat > /rootfs/boot/grub/menu.lst << eof
+default 0
+timeout 1
+title Cluster Node
+root (hd0,0)
+kernel $KER root=${firsthd}1 ro
+initrd $IRD
+boot
+eof
+
+}
+
+prepare_setting
+prepare_parti
+make_bootstrap
+config_postinstall_script
+install_bootloader
+config_network
+
+###### FINAL STEP #####
+sync
+umount /rootfs
+
+PS1='TEST$ ' /bin/sh -i </dev/console >/dev/console 2>&1
+
+echo ">>>> Installing base system finished <<<<"

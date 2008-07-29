@@ -1,0 +1,10 @@
+#!/bin/zsh
+. common.shell
+
+[[ ! -e initrd.tmp ]] && mkdir initrd.tmp
+initrd=$1
+[[ ! -e $initrd ]] && DIE "Missing initrd: $initrd"
+cd initrd.tmp
+fakeroot << endf
+zcat ../$initrd | cpio -i --make-directories 
+endf

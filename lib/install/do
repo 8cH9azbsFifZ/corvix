@@ -1,0 +1,11 @@
+cd initrd
+./makeinitrd
+cd ..
+
+cd syslinux
+./makeisolinux
+cd ..
+
+./makebootiso
+
+#rm -rf initrd/tmp syslinux/tmp tmp

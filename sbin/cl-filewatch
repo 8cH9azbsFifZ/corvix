@@ -1,0 +1,36 @@
+#!/bin/zsh
+.  /etc/cluster/common.shell
+
+MAXTIME=60 #days
+MAXSIZE=30 #mb
+
+WD=/var/cluster
+
+find_files() {
+   MNT=$1
+   echo "Looking for old files in $MNT"
+   find /mnt/$MNT -mtime +$MAXTIME -size +${MAXSIZE}M > $WD/evil_files.$MNT
+}
+
+calc_quota() {
+   MNT=$1
+   echo "Users quota in $MNT"
+   rm quota.$MNT
+   USERS=$(cat $WD/evil_files.$MNT | sed 's/\.\///g;s/\// /g' | awk '{print$3}' | sort | awk 'n!=$1{print$1;n=$1}')
+   for u in $(echo $USERS); do 
+      cat $WD/evil_files.$MNT | grep $u 2>/dev/null >$WD/$u.$MNT.files
+      size=0
+      for f in $(cat $WD/$u.$MNT.files); do
+         [[ ! -e  $f ]] && continue
+         size=$(( $size + $(ls -la $f | awk '{print$5/(1024.**3)}') ))
+      done
+      echo $u $size  >> quota.$MNT
+   done
+   cat quota.$MNT
+}
+
+for fs in nas1 nas2 gfs; do
+   find_files $fs
+   calc_quota $fs
+done   
+

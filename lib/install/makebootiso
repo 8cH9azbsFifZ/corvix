@@ -1,0 +1,19 @@
+#!/bin/zsh
+. common.shell
+
+_make_isoimage() {
+   LOG "Make isoimage"
+   old=$PWD
+   cd $target
+   mkisofs -R -V "corvix bootcd" \
+      -o ~/corvix.iso \
+      -b isolinux/isolinux.bin \
+      -c isolinux/boot.cat \
+      -no-emul-boot -boot-load-size 4 \
+      -J -r -q -boot-info-table \
+      ./
+    cd $old
+}
+target=tmp/isoimage
+[[ -d $target ]] || mkdir -p $target
+_make_isoimage

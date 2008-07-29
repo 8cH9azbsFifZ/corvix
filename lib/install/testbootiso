@@ -1,0 +1,3 @@
+#!/bin/zsh
+sudo modprobe kqemu
+qemu -cdrom ~/corvix.iso

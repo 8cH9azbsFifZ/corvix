@@ -1,0 +1,13 @@
+corvix boot:
+============
+
+debian-install    (usual debian/etch)
+debian-expert
+debian-rescue
+
+debian-preseed    (preseeded debian/etch)
+
+corvix            (preseeded debian/etch & egatrop)
+corvix-rescue
+corvix-ch           (cluster head server)
+#corvix-cn            (cluster node)

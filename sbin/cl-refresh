@@ -1,0 +1,33 @@
+#!/bin/zsh
+. /opt/cluster/lib/common.shell
+
+refresh_hosts() {
+   llog "Refresh hosts"
+   cat /etc/dhcpd.conf | awk '
+      /^[[:space:]]*#/{next}
+      /host /{n++;h[n]=$2}
+      /fixed-address/{match($0,/fixed-address[[:space:]]*[[:digit:].]*/,a);split(a[0],b);ip[n]=b[2]}
+      END{for(i=1;i<=n;i++)if(h[i]!~/b$/){print ip[i],h[i]}} '> /etc/hosts
+   echo "127.0.0.1 localhost" >> /etc/hosts
+}
+
+
+refresh_rgang() {
+   llog "Refresh rgang"
+	cat /etc/hosts | awk '{print$2}' | grep node > /opt/cluster/etc/rgang/nodes
+	cat /etc/hosts | awk '{print$2}' | grep nigol > /opt/cluster/etc/rgang/login
+   cat /etc/hosts | awk '{print$2}' > /opt/cluster/etc/rgang/all
+}
+
+refresh_torque() {
+   llog "Refresh torque"
+   cat /etc/hosts | grep node | awk '{print$2" np=4"}' > /opt/cluster/etc/queue/nodes
+   /etc/init.d/torque restart
+   rgang all /etc/init.d/torque restart
+}
+
+refresh_hosts
+refresh_rgang
+refresh_hosts
+refresh_rgang
+refresh_torque

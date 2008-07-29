@@ -1,0 +1,3 @@
+#!/bin/zsh
+qsub ... -W x=FLAGS:ADVRES:______PUT_YOUR_RESERVATION_HERE_________
+
