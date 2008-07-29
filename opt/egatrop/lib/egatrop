@@ -1,0 +1,220 @@
+#!/bin/zsh
+
+. common.shell
+
+[[ -z $MIRROR ]] && MIRROR="" #mirror.corvix.eu
+[[ -z $EBASE ]] && EBASE=/opt/egatrop
+[[ -z $LOGFLE ]] && LOGFILE=$EBASE/log/egatrop
+[[ -z $ESRC_DIR ]] && ESRC_DIR=$EBASE/src/
+[[ -z $EBIN_DIR ]] && EBIN_DIR=$EBASE
+[[ -z $EDOC_DIR ]] && EDOC_DIR=$EBASE/doc/
+[[ -z $NCPU ]] && NCPU=2
+
+_ename() {
+   EFULL=$(basename $EBUILD | sed 's/.ebuild//g')
+   ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
+   EVERS=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$2}')
+   EREL=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$3}')
+   ILOG=$EBASE/log/$ENAME.installed
+}   
+
+_logo() {
+   LOGLEVEL=`expr $LOGLEVEL+1`
+   LOG "Egatrop: installing ebuild $EFULL"
+   LOGLEVEL=`expr $LOGLEVEL+1`
+   LOG "using: esrc=$ESRC_DIR ebin=$EBIN_DIR"
+}
+
+_efetch() {
+   LOG "uris: $ESRC_URI $EDOC_URI"
+   for uri in $(echo $ESRC_URI $EDOC_URI); do
+      file=${uri##*/}
+      [[ -n $MIRROR ]] && uri=$MIRROR/$file
+      if [[ ! -e $ESRC_DIR/$file ]]; then 
+         LOG "downloading $file from $uri"
+         _ wget $uri
+      fi
+   done
+}
+
+_ecalc_md5sums() {
+   LOG "calculating md5sums"
+   for uri in $(echo $ESRC_URI); do
+      file=${uri##*/}
+      [[ -n $MIRROR ]] && uri=$MIRROR/$file
+      md5sum $file
+   done
+}
+
+_emd5check() {
+   LOG "checking md5sums"
+   if [[ -z $EMD5 ]]; then
+      LOGLEVEL=`expr $LOGLEVEL+1`
+      LOG "warning: no md5sum given"
+      LOGLEVEL=`expr $LOGLEVEL-1`
+   else
+      echo "$EMD5" | md5sum -c || DIE "Wrong md5sum"
+   fi
+}
+
+_epython() {
+   LOG "pyhton wrapper"
+   cmd=${@/install/install $_PREFIX --force --record=$ILOG}
+   _esu python $(echo $cmd)
+}
+
+_epython_install() {
+   _epython setup.py install
+   _esu chmod -R aog+rx $EBASE/lib/python*
+}
+
+_einstall() {
+   LOG "Installing$none $@"
+   if [[ -z $1 ]]; then
+      if [[ -e configure ]]; then
+         _esu make install > $TMP
+         cat $TMP | grep "/usr/bin/install" | awk '{print $NF}' >> $ILOG 
+         rm -f $TMP
+      elif [[ -e setup.py ]]; then
+         _epython_install
+      else
+         DIE "Not supported."
+      fi
+   else
+      if [[ -e setup.py ]]; then
+         _epython_install
+      else
+         _esu install --mode=oag+rx $@
+         local target_file=$(echo $@|awk '{print $NF}')
+         echo $target_file >> $ILOG
+      fi
+   fi      
+}
+
+
+_euninstall() {
+   LOG "Uninstalling"
+   for f in $(cat $ILOG); do
+      _esu rm -f $f
+   done
+   _ rm -f $ILOG
+}
+
+_esu() {
+   _ sudo "$@"
+}
+
+_is_installed() {
+   return $(test -e $ILOG)
+}
+
+_einstall_doc() {
+   [[ -z $EDOC_URI ]] && return 0
+   EDOC_DIR=$EDOC_DIR/$ENAME
+   LOG "Installing docs to:$none $EDOC_DIR"
+   [[ -d $EDOC_DIR ]] || _esu mkdir -p $EDOC_DIR
+   for uri in $(echo $EDOC_URI);do 
+      local file=${uri##*/}
+      _einstall $file $EDOC_DIR/$file
+   done
+}
+
+_eunpack() {
+   for uri in $(echo $ESRC_URI); do
+      local file=${uri##*/}
+
+      LOG "Unpack:" $file
+
+      f=$ESRC_DIR/$file
+      ff=${f%.*}
+      fff=${ff##*.}
+      ffff=${f##*.}
+
+      case $ffff in
+         tar) _ tar xof $f ;;
+         tgz) _ tar xozf $f ;;
+         tbz|tbz2)
+            _ bzip2 -dc $f | tar xof -
+            ;;
+         ZIP|zip|jar)
+            _ unzip -qo $f 
+            ;;
+         gz|Z|z)
+            if [[ "${fff}" == "tar" ]]; then
+               _ tar zoxf $f 
+            else
+               _ gzip -dc $f > ${ff} 
+            fi
+            ;;
+         bz2|bz)
+            if [[ "${fff}" == "tar" ]]; then
+               _ bzip2 -dc $f | tar xof - 
+            else
+               _ bzip2 -dc $f > $ff 
+            fi
+            ;;
+         RAR|rar) _ unrar x -idq -o+ $f ;;
+         LHa|LHA|lha|lzh) _ lha xfq $f ;;
+         a|deb) _ ar x $f ;;
+         lzma)
+            if [ $fff == "tar" ]; then
+               _ lzma -dc $f | tar xof - 
+            else
+               _ lzma -dc $f > $ff || DIE 1 "err"
+            fi
+            ;;
+         *)
+            DIE "unpack $f: file format not recognized. Ignoring."
+            ;;
+      esac
+   done    
+}
+
+_echdir() {
+   if [[ -z $EWORK_DIR ]]; then
+      EWORK_DIR=$(find $ESRC_DIR -maxdepth 1 -name "$ENAME*" -type d)
+   fi
+   LOG "go to ework dir:$none $EWORK_DIR"
+   cd $EWORK_DIR
+}
+
+_einit() {
+   _ename
+   _logo
+}
+
+_emerge() {
+   _is_installed && DIE "Already installed: $ILOG exists."
+   _edepend
+   cd $ESRC_DIR
+   _efetch
+   _emd5check
+   _einstall_doc
+   _eunpack
+   _echdir
+}
+
+_eautomake() {
+   LOG "Automake"
+   _ ./configure --prefix=$EBIN_DIR $@
+   _ make -j $NCPU
+}
+
+_edepend() {
+   LOG "Installing dependencies"
+   for f in $EDEP; do 
+      $EBASE/bin/emerge $f
+   done
+   _edepend_debian
+}
+
+_edepend_debian() {
+   [[ -z $EDEP_DEB ]] && return 0
+   LOG "Installing dependencies using debian"
+   for f in $EDEP_DEB; do
+      _esu apt-get -y --force-yes build-dep $f
+   done
+}
+
+_einit
+

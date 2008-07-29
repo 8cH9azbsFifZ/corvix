@@ -1,0 +1,14 @@
+egatrop
+	local config support
+	dependencies
+	size
+	use-flags
+
+ebuilds
+	included gerolfs good-scripts
+	rip off from ports
+
+
+Later
+	make independent on distro 
+		-> include dependency support again

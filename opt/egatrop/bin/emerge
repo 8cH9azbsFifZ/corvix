@@ -1,0 +1,16 @@
+#!/bin/zsh
+. /opt/egatrop/lib/egatrop
+
+if [[ -z $1 ]]; then
+   LOG "Ebuilds installed:"
+   find $EBASE/ebuilds -name "*" -type f
+   exit 0
+fi
+
+EBUILD=$(find $EBASE/ebuilds -name "*$1*" -type f)
+if [[ -e $EBUILD ]]; then
+   LOG "Installing $EBUILD"
+   exec $EBUILD
+else
+   DIE "Ebuild $EBUILD doesn't exist."
+fi

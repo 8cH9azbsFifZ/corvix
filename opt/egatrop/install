@@ -1,0 +1,17 @@
+#!/bin/zsh
+. common.shell
+
+[[ $(id -u) == 0 ]] || DIE "No root..."
+
+LOG "Installing egatrop to /opt/egatrop"
+for d in lib ebuilds doc bin; do
+   [[ -d /opt/egatrop/$d ]] || mkdir -p /opt/egatrop/$d
+   cp -r $d /opt/egatrop/
+done
+for f in src include log; do 
+   [[ -d /opt/egatrop/$f ]] || mkdir -p /opt/egatrop/$f
+done   
+chmod -R aog+rx /opt/egatrop
+chmod -R aog+rwx /opt/egatrop/src /opt/egatrop/log
+
+#echo "PATH=$PATH:/opt/egatrop/lib"

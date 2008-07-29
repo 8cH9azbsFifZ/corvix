@@ -1,0 +1,492 @@
+#!/bin/zsh
+# (C)opyleft Gerolf Ziegenhain <gerolf@ziegenhain.com> 2008
+
+EBUILD_SERVER=http://repository.ziegenhain.com/egatrop/
+EMIRROR=""
+
+EBASE_DIR=/var/lib/egatrop
+EEBUILD_DIR=$EBASE_DIR/ebuilds
+EARCH_DIR=$EBASE_DIR/archive
+EWORK_DIR=$EBASE_DIR/work
+ECTRL_DIR=$EBASE_DIR/control
+
+. $EBASE_DIR/ebuild.template
+
+# Colors
+black="\033[0;30m"
+dark_gray="\033[1;30m"
+blue="\033[0;34m"
+light_blue="\033[1;34m"
+green="\033[0;32m"
+light_green="\033[1;32m"
+cyan="\033[0;36m"
+light_cyan="\033[1;36m"
+red="\033[0;31m"
+light_red="\033[1;31m"
+purple="\033[0;35m"
+light_purple="\033[1;35m"
+brown="\033[0;33m"
+yellow="\033[1;33m"
+light_gray="\033[0;37m"
+white="\033[1;37m"
+none="\033[0m"
+
+logo() { 
+   echo -ne "   ${purple}E${red}g${purple}a${red}t${purple}r${red}o${purple}p$none   $green <--- ${purple}Gentoo${none}&${red}Debian$none\n" >&2
+}  
+
+die() { 
+   error=$1
+   shift
+   if (( $error != 0 )); then
+      elog "$red$@"; 
+      killall -KILL egatrop 2>&1 1>/dev/null
+   #FIXME: exit from within $( function-call )
+   else
+      elog "$brown$@"
+      exit $error; 
+   fi
+}  
+
+elog() { 
+   echo -ne "$cyan$@$none\n">&2
+}  
+
+_elog() {
+   echo -ne "$cyan$1">&2
+   shift
+   echo -ne "$none $@\n">&2
+}
+
+_edebug() {
+   if [[ -n $DEBUG ]]; then
+      echo -ne "$purple$1">&2
+      shift
+      echo -ne "$none $@\n">&2
+   fi
+}
+
+_rr() {
+   _edebug "Running:" $@
+   $@
+   if (( $? != 0 )); then
+      die 1 "${brown}Running: $@ ${red}ERROR!"
+   else
+      _edebug "Running:" "$@ ${green}Ok"
+   fi
+}
+
+esu() {
+   _edebug "Esu:" $@
+   if [[ "`id -u`" != "0" ]]; then
+      _rr sudo "$@"
+   else
+      _rr $@
+   fi
+}
+
+edepend() {
+   if [[ -n $DEPEND ]]; then
+      _elog "Dependency:" $DEPEND
+      esu apt-get -y --force-yes install $(echo $DEPEND)
+   fi
+   if [[ -n $SDEPEND ]]; then
+      _elog "Source dependency:" $DEPEND
+      esu apt-get -y --force-yes build-dep $(echo $SDEPEND)
+   fi
+   if [[ -n $EDEPEND ]]; then
+      _elog "Egatrop dependency:" $EDEPEND
+      for edep in $(echo $EDEPEND); do
+         _rr egatrop $FORCE $DEBUG -e $edep
+      done
+   fi
+}
+
+emake() {
+   make $@
+}
+
+ename() {
+   EFULL=$(basename $1 | sed 's/.ebuild//g')
+   ENAME=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$1}')
+   EVERS=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$2}')
+   EREL=$(echo $EFULL | awk '{gsub("-"," ");gsub(".ebuild","");print$3}')
+}
+
+_init_etmp() {
+   ETMP=$EWORK_DIR/$EFULL
+   _edebug "Temp:" $ETMP
+   [[ ! -e $ETMP ]] && mkdir $ETMP
+}
+
+_clean_etmp() {
+   _elog "Cleaning etmp:" $ETMP
+   [[ -e $ETMP && -z $DEBUG ]] && rm -rf $ETMP
+}
+
+etmp_destroy() {
+   _elog "Deleting:" $ETMP
+   rm -rf $ETMP
+}
+
+einclude() {
+   _elog "Include:" $1
+   [[ ! -e $1 ]] && die -1 "missing $1."
+   ename $1
+   . $1
+   _elog "Description:" "$DESCRIPTION ($HOMEPAGE)"
+   _elog "License:" $LICENSE
+}
+
+efetch() {
+   EFILES=""
+   for uri in $(echo $SRC_URI); do
+      efile=${uri##*/}
+      elog "Fetch:$none $uri -> $EARCH_DIR/$efile"
+      cd $EARCH_DIR
+      FETCH=wget
+      #FIXME: support for other protocols
+      [[ ! -e $efile ]] && _rr $FETCH $uri
+      EFILES=$EFILES" "$efile
+   done      
+}
+
+epreinst() {
+   _elog "Preinstall"
+   _init_etmp
+   _init_prefix
+   eregister
+   src_preinst
+}
+
+_find_edirs() {
+   EDIRS=""
+   EDIRS=$( find $ETMP -type d -mindepth 1 -maxdepth 1 2>/dev/null)
+}
+
+eunpack() {
+   for efile in $(echo $EFILES); do
+      _elog "Unpack:" $efile
+      cd $ETMP
+
+      f=$EARCH_DIR/$efile
+      ff=${f%.*}
+      fff=${ff##*.}
+      ffff=${f##*.}
+
+      case $ffff in
+         tar) _rr tar xof $f ;;
+         tgz) _rr tar xozf $f ;;
+         tbz|tbz2)
+            _rr bzip2 -dc $f | tar xof -
+            ;;
+         ZIP|zip|jar)
+            _rr unzip -qo $f 
+            ;;
+         gz|Z|z)
+            if [[ "${fff}" == "tar" ]]; then
+               _rr tar zoxf $f 
+            else
+               _rr gzip -dc $f > ${ff} 
+            fi
+            ;;
+         bz2|bz)
+            if [[ "${fff}" == "tar" ]]; then
+               _rr bzip2 -dc $f | tar xof - 
+            else
+               _rr bzip2 -dc $f > $ff 
+            fi
+            ;;
+         RAR|rar) _rr unrar x -idq -o+ $f ;;
+         LHa|LHA|lha|lzh) _rr lha xfq $f ;;
+         a|deb) _rr ar x $f ;;
+         lzma)
+            if [ $fff == "tar" ]; then
+               _rr lzma -dc $f | tar xof - 
+            else
+               _rr lzma -dc $f > $ff || die 1 "err"
+            fi
+            ;;
+         *)
+            die 1 "unpack $f: file format not recognized. Ignoring."
+            ;;
+      esac
+   done    
+   _find_edirs
+   src_unpack
+}
+
+ecompile() {
+   _elog "Compile"
+   cd $ETMP
+   src_compile
+}
+
+emake() {
+   _rr make $@
+}
+
+econf() {
+   _elog "Configure:" "prefix:$PREFIX."
+   cd $ETMP
+   src_configure
+}
+
+_init_prefix() {
+   [[ -n $PREFIX ]] && _PREFIX="--prefix=$PREFIX"
+   _edebug "Prefix is:" $PREFIX
+}
+
+_configure_automake() {
+   _rr ./configure $_PREFIX $@
+}
+
+_is_automake() {
+   return $(test -e Makefile )
+}
+
+_is_python() {
+   return $(test -e setup.py )
+}
+
+_has_configure() {
+   return $(test -e configure )
+}
+
+epython() {
+   _edebug "dir:" $PWD
+   cmd=${@/install/install $_PREFIX --force --record=$ECTRL_DIR/$EFULL/lick_my_python.txt}
+   _edebug "Lick my python:" $cmd
+   esu python $(echo $cmd)
+}
+
+econfigure() {
+   cd $EDIRS
+   _has_configure && _configure_automake $@
+}
+
+etest() {
+   _elog "Test"
+   cd $ETMP
+}
+
+euse() {
+   return $(echo $USE | grep $1 2>&1 1>/dev/null)
+}
+
+find_patches() {
+   find $EEBUILD_DIR -name "$EFULL.patch*" | sort
+}
+
+_find_epatches() {
+   EPATCHES=$(cat $EBUILD | awk '/^epatch/' | sed 's/() {//g' | sort)
+}
+
+epatch() {
+   _elog "Patching "
+#   _find_epatches
+#   for patch in $EPATCHES; do
+#      $patch
+#      _rr patch -p0 < 
+#   done
+   #cd $ETMP
+   #_rr patch -p0 < $1
+}
+
+einst() {
+   _elog "Install to prefix:" "$PREFIX."
+   cd $ETMP
+   src_install
+}
+
+einstall() {
+   _rr esu make install
+}
+
+eregister() {
+   _elog "Register:" $EFULL
+   [[ ! -e $ECTRL_DIR/$EFULL ]] && esu mkdir $ECTRL_DIR/$EFULL
+}
+
+eunregister() {
+   _elog "Unregister:" $EFULL
+   esu rm -rf $ECTRL_DIR/$EFULL
+}
+
+einstalled() {
+   if [[ -z $FORCE ]]; then
+      return $( test -e $ECTRL_DIR/$EFULL )
+   else
+      return 1
+   fi
+}
+
+_clean_src() {
+   _elog "Clean source tree:" $EDIRS
+   cd $EDIRS     
+   _is_automake && esu make clean
+}
+
+_uninstall_python() {
+   for file in $(cat $ECTRL_DIR/$EFULL/lick_my_python.txt); do
+      esu rm -rf $file
+   done
+}
+
+_uninstall_automake() {
+   [[ -e Makefile ]] && esu make uninstall
+}
+
+euninstall() {
+   _elog "Uninstall:" $EBUILD
+   _init_etmp
+   _find_edirs
+   cd $ETMP
+   cd $EDIRS
+   _edebug "edirs:" $EDIRS
+   _is_python && _uninstall_python
+   eunregister
+   ( _is_automake && ! _is_python ) && _uninstall_automake
+   cd $ETMP
+   src_uninstall
+}
+
+_set_python_rights() {
+   esu chmod -R oa+rx /usr/lib/`ls --color=none -la /usr/bin/python|awk '{print $NF}'`/
+}
+
+epostinst() {
+   _elog "Postinstall"
+   src_postinst
+   [[ -z $DEBUG ]] && _clean_src
+   cd $EDIRS
+   _is_python && _set_python_rights
+#   track_installed_files
+#   [[ -z $DEBUG ]] && etmp_destroy
+}
+
+find_newest() {
+   ebuild=$(basename $1)
+   versions=$(find $EEBUILD_DIR -name "${ebuild}*.ebuild" | sort -r )
+   _edebug "Versions:" $(echo $versions)
+   ebuild=$(echo $versions | head -n 1)
+   [[ ! -e $ebuild ]] && die 1 "missing ebuild: $ebuild"
+   echo $ebuild
+}
+
+find_installed() {
+   ebuild=$(basename $1)
+   _elog "Looking for installed version:" $ebuild
+   ctrldir=$(find $ECTRL_DIR/ -type d -mindepth 1 -maxdepth 1 -name "*${ebuild}*" 2>/dev/null)
+   if [[ -z $ctrldir ]]; then
+      die 0 "not installed."
+   else
+      installed=$(basename $(find $ECTRL_DIR/ -type d -mindepth 1 -maxdepth 1 -name "*${ebuild}*" 2>/dev/null))
+      _elog "Found:" $installed
+      echo $installed
+   fi
+}   
+
+find_ebuild() {
+   ebuild=$1
+   [[ ! -e $ebuild ]] && ebuild=$EEBUILD_DIR/$ebuild
+   [[ ! -e $ebuild ]] && die 1 "missing ebuild: $ebuild"
+   echo $ebuild
+}
+
+appear() {
+   if [ ${1/.ebuild/} != ${1} ]; then
+      ebuild=$1
+   else
+      ebuild=$(find_newest $1)
+   fi
+   einclude $(find_ebuild $ebuild)
+   einstalled && die 0 "already installed."
+   epreinst
+   edepend
+   efetch
+   eunpack
+   epatch
+   econf
+   ecompile
+   etest
+   einst
+   epostinst
+}
+
+disappear() {
+   ebuild=$(find_installed $1)
+   einclude $(find_ebuild $ebuild.ebuild)
+   einstalled || die 0 "not installed."
+   euninstall
+}
+
+list_remote() {
+   #FIXME
+   wget -O - http://earth.physik.uni-kl.de/~gerolf/repository.ziegenhain.com/dists/maemo/free/binary-armel/ 2>/dev/null | sed 's/<[^>]*>//g;s/.deb.*/.deb/g' | awk '/.deb/'
+   die 1 "niy"
+}
+
+list_ebuilds() {
+   _elog "Available ebuilds:"
+   find $EEBUILD_DIR -name "*.ebuild" -type f -exec basename {} \; | sort #| awk 'n!=$1{print;n=$1}'
+}
+
+sync_ebuilds() {
+   _elog "Syncing ebuilds from:" $EBUILD_SERVER
+   cd $EEBUILD_DIR
+   ebuilds=$(wget -O - $EBUILD_SERVER 2>/dev/null | sed 's/<[^>]*>//g;s/.ebuild.*/.ebuild/g' | awk '/.ebuild/')
+   _edebug "Ebuilds:" $ebuilds
+   for ebuild in $(echo $ebuilds); do
+      [[ ! -e $ebuild ]] && wget $EBUILD_SERVER/$ebuild
+   done
+#   find -mindepth 1 -type f -exec cp -f {} . \;
+#  find -mindepth 2 -type f -exec rm {} \;
+}
+
+_wrap_patch() {
+   patchfile=$1
+   url=$2
+   _elog "Wrapping patch:" $patchfile
+   [[ ! -e $patchfile ]] && die 1 "missing $patchfile"
+   shar $patchfile 2>/dev/null | sed 's/exit/return/' | awk -v p=$patchfile -v url=$url '
+      BEGIN{
+         print "epatch_"p"() {"
+         print "# original: "url
+      }
+      NR>1{print}
+      END{
+         print"}"
+      }'
+}
+
+usage() {
+   echo "D     debug mode"
+   echo "f     force actions"
+   echo "r     disappear package"
+   echo "e     appear package"
+   echo "s     synchronize ebuilds"
+   echo "l     list avaliable ebuilds"
+   echo "p     create a epatch function from patchfile arg1 (with source url arg2)"
+}
+
+#######
+# Main
+###
+logo
+
+[[ -z $1 ]] && usage
+
+while getopts "Dse:lr:fp:h" opt; do
+   case $opt in
+      D) DEBUG=-D; ;;
+      f) FORCE=-f; ;;
+      e) appear $OPTARG; ;;
+      r) disappear $OPTARG; ;;
+      l) list_ebuilds; ;;
+      s) sync_ebuilds; ;;
+      p) _wrap_patch $OPTARG; ;;
+      h) usage; ;;
+      *) usage; ;;
+   esac
+done

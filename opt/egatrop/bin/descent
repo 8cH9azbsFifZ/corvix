@@ -1,0 +1,15 @@
+#!/bin/zsh
+. /opt/egatrop/lib/egatrop
+
+EBUILD=$(find $EBASE/ebuilds -name "*$1*" -type f)
+if [[ -e $EBUILD ]]; then
+   _einit
+   if [[ -e $ILOG ]]; then
+      LOG "Removing $EBUILD"
+      _euninstall
+   else 
+      DIE "Ebuild $EBUILD is not installed."
+   fi
+else
+   DIE "Ebuild $EBUILD doesn't exist."
+fi
