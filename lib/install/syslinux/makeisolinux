@@ -26,6 +26,7 @@ _make_image() {
    cp tmp/syslinux-$vers/core/isolinux.bin $target
    cp patches/* $target
    cp patches/* $target/.. # syslinux 
+   cp splash/splash.rle $target $target
    cp splash/splash.rle $target $target/..
 }
 
