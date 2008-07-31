@@ -20,14 +20,24 @@ _fetch_sources() {
    _ tar xzf syslinux-$vers.tar.gz
 }
 
-_make_image() {
+_make_isolinux() {
    LOG "   Make isolinux image"
+   [[ -d $target/isolinux ]] || mkdir -p $target/isolinux
+   cp tmp/syslinux-$vers/core/isolinux.bin $target/isolinux
+   cp patches/* $target/isolinux
+   cp splash/splash.rle $target/isolinux
+}
+
+_make_syslinux() {
+   LOG "   Make syslinux image"
    [[ -d $target ]] || mkdir -p $target
-   cp tmp/syslinux-$vers/core/isolinux.bin $target
    cp patches/* $target
-   cp patches/* $target/.. # syslinux 
    cp splash/splash.rle $target
-   cp splash/splash.rle $target/..
+}
+
+_make_pxelinux() {
+   LOG "   Make pxelinux image"
+
 }
 
 _splash() {
@@ -40,7 +50,9 @@ _splash() {
 }
 
 vers=3.70
-target=../tmp/isoimage/isolinux
+target=../tmp/isoimage
 [[ ! -e $target ]] && mkdir -p $target
 _fetch_sources
-_make_image
+_make_syslinux
+_make_isolinux
+_make_pxelinux

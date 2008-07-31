@@ -13,7 +13,6 @@ postinstall scripts
 	include md5 sum checking of everything
 
 boot image
-	clean up the boot menu
 	create boot-pxe script
 
 later/maybe
