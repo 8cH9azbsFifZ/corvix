@@ -1,1 +1,114 @@
-../../doc/corvix/index.html
+<html>
+<head>
+   <title>corvix GNU/Linux</title>
+   <meta http-equiv="content-type" content="text/html; charset=latin1"/>
+   <link href="style.css" rel=stylesheet type=text/css>
+   <base target="main">
+</head>
+<body>
+
+<h1>corvix GNU/Linux</h1>
+<b>The distribution / webpage is under heavy development. Don't use, yet.</b>
+In our environment we already have it running, but we have to stabilize it
+for the first release. We are expecting a first useable release in the first week of august.
+
+
+<h2>What is corvix?</h2>
+
+Corvus corvax likes to steal; this distribution steals ideas :) 
+In fact it's less a distribution and more a cheat sheet for installing 
+debian in a scientific environment. After you install the
+corvix distribution, you have a debian/etch with additional
+features.
+
+<h2>Motivation</h2>
+Usually in a scientific environment one likes to have a stable 
+base system (this also could be FreeBSD) and then only update 
+a couple of really important packages to the bleeding edge.
+Here, debian is chosen as the basis system. The corvix
+distribution will install a straight debian/etch with a set
+of common packages selected.
+
+<h2>Concept</h2>
+<ul>
+   <li>advanced user
+   <li>textmode
+   <li>full documentation: download git source tree, and
+      read <pre>/doc</pre>
+</ul>
+
+<h2>Egatrop</h2>
+The toolset egatrop has been developed. It provides
+ebuilds, which do not check anything at all (like Gentoo ;)
+and rely on the automake tools. You may better compare it to
+slackware. Egatrop is completely independent on corvix.
+You can compile all your custom stuff yourself with these
+small cheatsheets with one command! All stuff resides
+in /opt/egatrop.
+
+<h2>Features of the installer</h2>
+Linux is about choice. Here, we restrict the features strictly
+to some working configurations:
+<ul>
+   <li>Workstation
+      <ul>
+         <li>debootstrapped debian/etch
+         <li>usual debian/etch bootcd
+      </ul>
+   <li>Cluster modes:
+      <ul>
+         <li>Head server
+         <li>Nodes: will install within under 4 minutes.
+      </ul>
+</ul>
+Everything you want to do different: you can work as usual
+with debian. For custom compiled stuff have a look at the
+ebuilds.
+
+<h2>Howto install?</h2>
+
+<h3>Obtaining the software</h3>
+Download the source 
+<ul>
+   <li><a href="http://gitweb.corvix.eu/gitweb.cgi?p=corvix;a=snapshot">Snapshot</a>
+   <li>Not yet public: git clone git.corvix.eu/git/corvix
+</ul>
+Egatrop can be downloaded seperately including ebuilds.
+<ul>
+   <li><a href="http://gitweb.corvix.eu/gitweb.cgi?p=egatrop;a=snapshot">Snapshot</a>
+   <li>Not yet public: git clone git.corvix.eu/git/egatrop
+</ul>
+All software needed to build the source iso is mirrored here
+<ul>
+   <li><a href="http://mirror.corvix.eu">mirror.corvix.eu</a>
+</ul>
+
+<h3>Building the boot iso image</h3>
+<h3>Building a pxe bootserver</h3>
+<h3>Mirror options</h3>
+<ul>
+   <li>local (nfs, hdd, cd)
+   <li>mirror.corvix.eu
+</ul>
+<h3>Using egatrop separately</h3>
+
+
+<h2>Preconfigures installation profiles</h2>
+
+<h3>debian/etch</h3>
+
+<h3>debian/etch preseef</h3>
+
+<h3>corvix</h3>
+
+<h3>corvix - cluster head server</h3>
+
+<h3>corvix - cluster node</h3>
+
+
+
+
+(C)opyleft G. Ziegenhain, Y. Rosandi 2008<br>
+Released under GPLv3 <a href="http://www.gnu.org">gnu.org</a>
+</body>
+</html>
