@@ -12,9 +12,6 @@ postinstall scripts
 	include better egatrop support
 	include md5 sum checking of everything
 
-boot image
-	create boot-pxe script
-
 later/maybe
 	create independently from debian
 		kernel compilation
