@@ -1,0 +1,15 @@
+#!/bin/zsh
+. common.shell
+
+LOG "You need: dhcpd, tftp-hpa"
+PAUSE "Ok?"
+
+sudo apt-get install dhcpd tftp-hpa
+
+LOG "You want to look at /etc/dhcpd.conf"
+PAUSE "Ok?"
+
+LOG "Copying files"
+[[ -e /srv/tftp ]] || mkdir -p /srv/tftp
+cp tmp/isoimage/* /srv/tftp -r
+
