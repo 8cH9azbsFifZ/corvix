@@ -26,16 +26,16 @@ _make_image() {
    cp tmp/syslinux-$vers/core/isolinux.bin $target
    cp patches/* $target
    cp patches/* $target/.. # syslinux 
-   #_splash
+   cp splash/splash.rle $target $target/..
 }
 
 _splash() {
    LOG "   Splash image"
-   cd splash
-   pngtopnm splash.png | gzip -9 > splash.ppm.gz
-   gzip -cd splash.ppm.gz | ppmtolss16 \#000000=0 \#d0d0d0=7 \#f6f6f6=15 > splash.lss
-   cp splash.lss $target
-   cd ..
+   #cd splash
+   #pngtopnm splash.png | gzip -9 > splash.ppm.gz
+   #gzip -cd splash.ppm.gz | ppmtolss16 \#000000=0 \#d0d0d0=7 \#f6f6f6=15 > splash.lss
+   #cp splash.lss $target
+   #cd ..
 }
 
 vers=3.70

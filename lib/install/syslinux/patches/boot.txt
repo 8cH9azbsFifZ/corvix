@@ -1,5 +1,7 @@
 splash.rle
 
+Press F1control and F then 1 for help, or ENTER to splash.rle
+
 corvix boot:
 ============
 
