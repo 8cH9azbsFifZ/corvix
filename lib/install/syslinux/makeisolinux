@@ -3,6 +3,12 @@
 
 LOG "Syslinux..."
 
+_build_syslinux() {
+#   cd syslinux-$vers 
+#   _ make
+#   cd ../..
+}
+
 _fetch_sources() {
    LOG "   Prepating isolinux..."
    ESRC_URI=http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-$vers.tar.gz
@@ -12,9 +18,6 @@ _fetch_sources() {
    #_ sudo apt-get -y --force-yes build-dep syslinux
    cd tmp
    _ tar xzf syslinux-$vers.tar.gz
-#   cd syslinux-$vers 
-#   _ make
-#   cd ../..
 }
 
 _make_image() {
@@ -22,6 +25,7 @@ _make_image() {
    [[ -d $target ]] || mkdir -p $target
    cp tmp/syslinux-$vers/core/isolinux.bin $target
    cp patches/* $target
+   cp patches/* $target/.. # syslinux 
    #_splash
 }
 

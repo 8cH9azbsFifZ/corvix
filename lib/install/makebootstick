@@ -41,3 +41,4 @@ IMG=./tmp/stickimage
 LOG "Mount on $none$IMG"
 sudo mount $DEV$PART $IMG
 sudo cp ./tmp/isoimage/* $IMG -r
+sudo umount $DEV$PART
