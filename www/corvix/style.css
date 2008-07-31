@@ -27,8 +27,14 @@ body pre {
    margin: .75em 0;
    line-height: 1.0;
    font-family: monospace;
+   background: lightgray;
 }
 
 body div {
    margin 0;
 }
+
+.file {
+      color: #007a00;
+}
+
