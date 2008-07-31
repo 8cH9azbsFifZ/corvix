@@ -1,4 +1,4 @@
 splash.rle
 
-corvix boot:  F1control and F then 1 for help, or ENTER to install.
+corvix GNU/Linux: menu with F1control and F then 1, or ENTER to install.
 
