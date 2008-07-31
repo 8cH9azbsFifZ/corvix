@@ -40,5 +40,6 @@ IMG=./tmp/stickimage
 [[ -d $IMG ]] || mkdir -p $IMG
 LOG "Mount on $none$IMG"
 sudo mount $DEV$PART $IMG
+LOG "Copy files"
 sudo cp ./tmp/isoimage/* $IMG -r
 sudo umount $DEV$PART
