@@ -13,8 +13,7 @@ postinstall scripts
 	include md5 sum checking of everything
 
 boot image
-	insert boot splash image
-	create boot-stick script
+	clean up the boot menu
 	create boot-pxe script
 
 later/maybe
