@@ -1,23 +1,25 @@
-0fPREREQUISITES FOR INSTALLING DEBIAN07                                           09F207
+                  0fWelcome to Debian GNU/Linux!07                                09F107
 
-You must have at least 32 megabytes of RAM to use this Debian installer.
+This is a Debian etch installation CD-ROM.
+It was built 20080218-14:14; d-i 20070308etch2.
 
-You should have space on your hard disk to create a new disk partition
-of at least 256 megabytes to install the base system. You'll need more
-disk space to install additional packages, depending on what you wish
-to do with your new Debian system.
+0fHELP INDEX07
 
-See the Installation Manual or the FAQ for more information; both
-documents are available at the Debian web site, 0fhttp://www.debian.org/07
+0fKEY    TOPIC07
 
-Thank you for choosing Debian!
+<09F107>   This page, the help index.
+<09F207>   Prerequisites for installing Debian.
+<09F307>   Boot methods for special ways of using this CD-ROM
+<09F407>   Additional boot methods; rescue mode.
+<09F507>   Special boot parameters, overview.
+<09F607>   Special boot parameters for special machines.
+<09F707>   Special boot parameters for selected disk controllers.
+<09F807>   Special boot parameters for the install system.
+<09F907>   How to get help.
+<09F1007>  Copyrights and warranties.
+
+For F1-F9 type control and F then the digit 1-9
+For F10 type control and F then the digit 0
+
 
-
-
-
-
-
-
-
-
-Press F1control and F then 1 for the help index, or ENTER to 
+Press F2 through F10 for details, or ENTER to 
