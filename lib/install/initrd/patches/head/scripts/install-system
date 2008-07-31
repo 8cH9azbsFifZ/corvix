@@ -10,6 +10,7 @@ export srcdisk=$SOURCE
 
 . /scripts/functions
 
+
 # searching harddisks
 search_disks() {
     for hd in /sys/block/hd* /sys/block/sd*; do
@@ -20,6 +21,7 @@ search_disks() {
     [ -z "$firsthd" -o "$firstcd"="auto" ] && firsthd=$(head -1 /hdlist)
     [ -z "$srcdisk" -o "$srcdisk"="cdrom" ] && srcdisk=$(head -1 /cdlist)
 }
+
 
 prepare_setting() {
     #TODO: use xdialog?
@@ -51,6 +53,7 @@ eof
     [ "$OK" == "n" ] && panic "Installation canceled"
 
 }
+
 
 prepare_parti() {
     echo "WARNING: deleting all partitions in $firsthd..."
@@ -93,8 +96,8 @@ eof
 	mount -t ext3 ${firsthd}1 /rootfs || panic "!!!! Mounting filesystem failed !!!!"
 }
 
-# bootstrap
 
+# bootstrap
 take_from_cd() {
 	echo "Exploding bootstrap image from cdrom: $srcdisk:/images/bootstrap-${ARCH}.tgz"
     mkdir /mnt
@@ -104,12 +107,14 @@ take_from_cd() {
     tar xzvf /mnt/images/bootstrap-${ARCH}.tgz
 }
 
+
 take_from_http() {
 	echo "Downloading bootstrap image from $SOURCE"
 	wget -O /rootfs/bootstrap.tgz $SOURCE &&
 	(cd /rootfs; tar xzvf bootstrap.tgz)
 	rm bootstrap.tgz
 }
+
 
 take_from_cmd() {
 	SOURCE=$(echo $SOURCE | awk '{sub(/^~/,"");print}')
@@ -118,6 +123,7 @@ take_from_cmd() {
 	cd /
 	$SOURCE
 }
+
 
 take_load_run() {
 	SOURCE=$(echo $SOURCE | awk '{sub(/^\^/,"");print}')
@@ -129,6 +135,7 @@ take_load_run() {
 	# the script must return 255 to stop further processes
 	[ $! = 255 ] && exit
 }
+
 
 make_bootstrap() {
 	case $SOURCE in 
