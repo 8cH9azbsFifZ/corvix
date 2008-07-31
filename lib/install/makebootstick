@@ -4,7 +4,9 @@
 DEV=$1
 [[ -e $DEV || -n $DEV ]] || DIE "Missing device: $DEV"
 
-#[[ $(id -u) != 0 ]] && DIE "I want to be root"
+_prepare_software() {
+   sudo apt-get install mbr mtools syslinux dosfstools
+}
 
 _make_fs_dos() {
    LOG "Create boot stick on $none$DEV"
@@ -22,31 +24,20 @@ _make_fs_dos() {
    sudo $SYSLINUX -s $DEV$PART
 }
 
-_make_fs_ext2() {
-   LOG "Create boot stick on $none$DEV"
-   LOG "Now create the partitions.$none   n p 1 (>50MB) a 1 t 1 83 w"
-   PAUSE "ok?"
-   sudo fdisk $DEV
-
-   PART=1
-   LOG "Create filesystem on $none$DEV$PART"
-   PAUSE "ok?"
-   sudo mkfs.ext2 $DEV$PART
-   sudo e2label $DEV$PART corvix
-}
-
-
 _old_bios() {
    LOG "Fake zip-fashion"
    sudo mkdiskimage -$PART $DEV 0 64 32
 }
 
-#_make_fs_dos
+_fix_mbr() {
+   sudo install-mbr $DEV
+}
+
+_fix_mbr
+_make_fs_dos
 
 IMG=./tmp/stickimage
 [[ -d $IMG ]] || mkdir -p $IMG
 LOG "Mount on $none$IMG"
 sudo mount $DEV$PART $IMG
-sudo mkdir -p $IMG/boot
-
-
+sudo cp ./tmp/isoimage/* $IMG -r
