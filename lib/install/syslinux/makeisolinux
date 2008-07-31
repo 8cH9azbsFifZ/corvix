@@ -37,7 +37,9 @@ _make_syslinux() {
 
 _make_pxelinux() {
    LOG "   Make pxelinux image"
-
+   [[ -d $target/pxelinux.cfg ]] || mkdir -p $target/pxelinux.cfg
+   cp tmp/syslinux-$vers/core/pxelinux.0 $target/pxelinux.0
+   cat patches/syslinux.cfg | sed 's/\/boot/\/srv\/tftp/g;' > $target/pxelinux.cfg/default
 }
 
 _splash() {
