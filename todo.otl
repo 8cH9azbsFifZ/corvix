@@ -1,3 +1,6 @@
+install procedure
+	include debootstrap stuff
+
 postinstall scripts
 	profiles
 		make complete (debian) packagae lists for different scenarios
