@@ -9,20 +9,24 @@
 </head>
 <body>
 
+   
 <h1>corvix GNU/Linux</h1>
-<b>The distribution / webpage is under heavy development. Don't use, yet.</b>
+<i>The distribution / webpage is under heavy development. Don't use, yet.</i>
 <br>
 In our environment we already have it running, but we have to stabilize it
 for the first release. We are expecting a first useable release in the first week of august.
 
 
-<h3>What is corvix?</h3>
+<h2>What is corvix?</h2>
 
 Corvus corvax likes to steal; this distribution steals ideas :) 
 In fact it's less a distribution and more a cheat sheet for installing 
 debian in a scientific environment. After you install the
 corvix distribution, you have a debian/etch with additional
 features.
+
+
+<h2>Introduction</h2>
 
 <h3>Motivation</h3>
 Usually in a scientific environment one likes to have a stable 
@@ -32,6 +36,7 @@ Here, debian is chosen as the basis system. The corvix
 distribution will install a straight debian/etch with a set
 of common packages selected.
 
+
 <h3>Concept</h3>
 <ul>
    <li>advanced user
@@ -39,6 +44,9 @@ of common packages selected.
    <li>full documentation: download git source tree, and
       read <pre>/doc</pre>
 </ul>
+
+
+<h2>Package Management</h2>
 
 <h3>Egatrop</h3>
 The toolset egatrop has been developed. It provides
@@ -48,6 +56,18 @@ slackware. Egatrop is completely independent on corvix.
 You can compile all your custom stuff yourself with these
 small cheatsheets with one command! All stuff resides
 in /opt/egatrop.
+
+<h4>Using egatrop separately</h4>
+...
+
+
+<h2>Installation</h2>
+The installation procedure is done over network. You may download
+a bunch of scripts, which will build the bootable CD, USB stick
+or setup a PXE boot server for you. If you want to save bandwidth
+you may also choose to setup a mirror for the packages;
+this can be a webserver, a CD or any other storage medium you
+may access during the installation.
 
 <h3>Features of the installer</h3>
 Linux is about choice. Here, we restrict the features strictly
@@ -68,7 +88,6 @@ Everything you want to do different: you can work as usual
 with debian. For custom compiled stuff have a look at the
 ebuilds.
 
-<h3>Howto install?</h3>
 
 <h3>Obtaining the software</h3>
 Download the source 
@@ -85,6 +104,10 @@ All software needed to build the source iso is mirrored here
 <ul>
    <li><a href="http://mirror.corvix.eu">mirror.corvix.eu</a>
 </ul>
+
+
+<h3>Howto install?</h3>
+...
 
 <h4>Building the boot iso image</h4>
 You have to build a boot iso image at first:
@@ -105,7 +128,8 @@ If you have <tt class=file>qemu</tt> installed you may test the image using
    <li>local (nfs, hdd, cd)
    <li>mirror.corvix.eu
 </ul>
-<h3>Using egatrop separately</h3>
+
+
 
 
 <h3>Preconfigures installation profiles</h3>
@@ -123,7 +147,10 @@ If you have <tt class=file>qemu</tt> installed you may test the image using
 
 
 
+<div class=legal>
 (C)opyleft G. Ziegenhain, Y. Rosandi 2008<br>
 Released under GPLv3 <a href="http://www.gnu.org">gnu.org</a>
+</div>
+
 </body>
 </html>

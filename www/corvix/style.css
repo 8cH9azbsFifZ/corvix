@@ -35,6 +35,12 @@ body div {
 }
 
 .file {
-      color: #007a00;
+   color: #007a00;
 }
+
+.legal {
+   margin-top: 50px;
+   font-size: small;
+   font-variant: small-caps;
+}   
 
