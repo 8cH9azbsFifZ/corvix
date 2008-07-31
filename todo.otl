@@ -1,5 +1,3 @@
-create 1st working cd
-
 postinstall scripts
 	profiles
 		make complete (debian) packagae lists for different scenarios
@@ -7,11 +5,14 @@ postinstall scripts
 	include md5 sum checking of everything
 
 boot image
+	insert boot splash image
+	create boot-stick script
+	create boot-pxe script
+
+later/maybe
 	create independently from debian
 		kernel compilation
 		busybox compilation
 		make initrd image from scratch
-	insert boot splash image
-
-bootstrap
-	provide egatrop  compiled bootstraps
+	bootstrap
+		provide egatrop  compiled bootstraps
