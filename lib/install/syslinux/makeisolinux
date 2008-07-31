@@ -22,7 +22,7 @@ _make_image() {
    [[ -d $target ]] || mkdir -p $target
    cp tmp/syslinux-$vers/core/isolinux.bin $target
    cp patches/* $target
-   _splash
+   #_splash
 }
 
 _splash() {
