@@ -4,30 +4,50 @@
 DEV=$1
 [[ -e $DEV || -n $DEV ]] || DIE "Missing device: $DEV"
 
-[[ $(id -u) != 0 ]] && DIE "I want to be root"
+#[[ $(id -u) != 0 ]] && DIE "I want to be root"
 
-LOG "Create boot stick on $none$DEV"
-LOG "Now create the partitions.$none   n p 1 (>50MB) a 1 t 1 83 w"
-PAUSE "ok?"
-fdisk $DEV
+_make_fs_dos() {
+   LOG "Create boot stick on $none$DEV"
+   LOG "Now create the partitions.$none   n p 1 (>50MB) a 1 t 6  w"
+   PAUSE "ok?"
+   sudo fdisk $DEV
 
-PART=1
-LOG "Create filesystem on $none$DEV$PART"
-PAUSE "ok?"
-mkfs.ext2 $DEV$PART
-e2label $DEV$PART corvix
+   PART=1
+   LOG "Create filesystem on $none$DEV$PART"
+   PAUSE "ok?"
+   sudo mkdosfs $DEV$PART
 
-LOG "Fake zip-fashion"
-mkdiskimage -4 $DEV 0 64 32
+   SYSLINUX=syslinux
+   LOG "Make bootable."
+   sudo $SYSLINUX -s $DEV$PART
+}
 
-SYSLINUX=syslinux
-LOG "Make bootable."
-$SYSLINUX -s $DEV$PART
+_make_fs_ext2() {
+   LOG "Create boot stick on $none$DEV"
+   LOG "Now create the partitions.$none   n p 1 (>50MB) a 1 t 1 83 w"
+   PAUSE "ok?"
+   sudo fdisk $DEV
+
+   PART=1
+   LOG "Create filesystem on $none$DEV$PART"
+   PAUSE "ok?"
+   sudo mkfs.ext2 $DEV$PART
+   sudo e2label $DEV$PART corvix
+}
+
+
+_old_bios() {
+   LOG "Fake zip-fashion"
+   sudo mkdiskimage -$PART $DEV 0 64 32
+}
+
+#_make_fs
+#
 
 IMG=./tmp/stickimage
 [[ -d $IMG ]] || mkdir -p $IMG
 LOG "Mount on $none$IMG"
-mount $DEV$PART $IMG
-mkdir -p $IMG/boot
+sudo mount $DEV$PART $IMG
+sudo mkdir -p $IMG/boot
 
 
