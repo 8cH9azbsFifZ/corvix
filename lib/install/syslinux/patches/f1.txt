@@ -1,15 +1,15 @@
-                  0fWelcome to corvix GNU/Linux!07                                09F107
+                  0fWelcome to corvix GNU/Linux!07   
 
-corvix boot:
+02corvix boot07:
 ============
 
-debian-install       (usual debian/etch)
-debian-expert
-debian-rescue
+06debian-install07       (usual debian/etch)
+07debian-expert07
+07debian-rescue07
 
-debian-preseed       (preseeded debian/etch)
+06debian-preseed07       (preseeded debian/etch)
 
-corvix            ?? (preseeded debian/etch & egatrop)
-corvix-rescue     ??
-corvix-ch         ?? (cluster head server)
-corvix-cn         !! (cluster node)
+06corvix07            ?? (preseeded debian/etch & egatrop)
+07corvix-rescue07     ??
+04corvix-ch07         ?? (cluster head server)
+04corvix-cn07         !! (cluster node)
