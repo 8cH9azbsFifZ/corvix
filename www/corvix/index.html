@@ -127,20 +127,30 @@ All software needed to build the source iso is mirrored here
 <h3>Howto install?</h3>
 ...
 
-<h4>Building the boot iso image</h4>
-You have to build a boot iso image at first:
+<h4>Building the universal boot image</h4>
+You have to build an universal boot image at first:
 <pre>
 cd lib/install
-./do
+./make_image
 </pre>
-and the new boot image will reside in <tt class=file>~/corvix.iso</tt>.
-If you have <tt class=file>qemu</tt> installed you may test the image using
-<pre>
+afterwards there will be a directory structure in <tt class=file>tmp/isoimage</tt>.
+Now you can decide what boot method you'd like to use:
+<ol>
+   <li>Boot from CD<br>
+      <pre>
+./makebootiso
+      </pre>
+      and the new boot image will reside in <tt class=file>~/corvix.iso</tt>.
+      If you have <tt class=file>qemu</tt> installed you may test the image using
+      <pre>
 ./testbootiso
-</pre>
+      </pre>
+   <li>Boot from USB stick<br>
+      <pre>
+./makebootstick /dev/sdWHATEVERYOURUSBSTICKIS
+      <pre>
+   <li>PXE boot server<br>
 
-<h4>Building a boot stick</h4>
-<h4>Building a pxe bootserver</h4>
 <h4>Mirror options</h4>
 <ul>
    <li>local (nfs, hdd, cd)
