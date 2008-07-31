@@ -15,7 +15,7 @@ _make_fs_dos() {
    PART=1
    LOG "Create filesystem on $none$DEV$PART"
    PAUSE "ok?"
-   sudo mkdosfs $DEV$PART
+   sudo mkdosfs -v -n corvix $DEV$PART
 
    SYSLINUX=syslinux
    LOG "Make bootable."
@@ -41,8 +41,7 @@ _old_bios() {
    sudo mkdiskimage -$PART $DEV 0 64 32
 }
 
-#_make_fs
-#
+#_make_fs_dos
 
 IMG=./tmp/stickimage
 [[ -d $IMG ]] || mkdir -p $IMG
