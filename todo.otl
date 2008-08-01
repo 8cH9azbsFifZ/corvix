@@ -1,3 +1,6 @@
+head serner
+	dnsmasq ;)
+
 install procedure
 	include debootstrap stuff
 	mirror generation script
