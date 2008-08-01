@@ -33,6 +33,7 @@ _make_initrd_debian_preseed() {
 _make_initrd_corvix() {
    LOG "   Make initrd: corvix"
    _ cp patches/common/* $initrd -r
+   _ cp patches/corvix/* $initrd -r
 #   PAUSE "Yudis patches"
    _ initrd_create $initrd $target/corvix.gz
 }
