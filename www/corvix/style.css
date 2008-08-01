@@ -2,7 +2,11 @@ body  {
    margin: 1em 8% 1em 10%;
    line-height: 1.2;
 }
-img   { border:0; }
+img   { 
+   border: 0;
+   width: 200px;
+   text-align: center; 
+}
 a                 { color:#aa0000; text-decoration:none; }
 a:active, a:hover { text-decoration: underline; }
 
@@ -33,6 +37,7 @@ body pre {
 body div {
    margin 0;
 }
+
 
 .file {
    color: #007a00;
