@@ -21,11 +21,13 @@ It steals ideas in a positive way - we contribute a set of
 script, which you may use to build up your own high-performance
 cluster without the need to search for all the packages / documentation
 yourself. This distribution is the result of the lessons learned by building
-up a 160+ CPU Linux cluster from scratch.<br>
+up a 160+ CPU Linux cluster with several NFS servers from scratch.
+<br>
 In fact corvix is less a distribution and more a cheat sheet for installing 
 debian in a scientific environment. After you install the
 corvix distribution, you have a debian/etch with additional
-features.<br>
+features.
+<br>
 Corvix GNU/Linux provides preconfigured profiles for both workstations 
 (i.e. your laptop) and complete clusters. Nevertheless: If you expect
 a colorful eyecandy system... forget it. Corvix is an advanced
@@ -183,6 +185,122 @@ Now you can decide what boot method you'd like to use:
 
 <h4>corvix - cluster node</h4>
 
+
+<h2>High-Performance Cluster </h2>
+
+<h3>Planning</h3>
+
+<h4>Choosing the hardware</h4>
+In our case we want to run molecular dynamic dimulations; these systems are coupled
+loosely and if we choose a good partition (which holds for any task, of course), we can
+use cheap hardware to build our cluster.
+<br>
+Most computers avaliable today have two gigabit ports. As low-latency networking
+is still much more costly (~same cost, as one additional node), we choose to
+maximize the number of nodes instead. So our choice is dual-gigabit networking.
+<br>
+Another thing to consider is accessibility of the nodes. For a very small number of nodes,
+it is not necessary to have them mounted in a rack. There are very comfortable choices
+for terminal access (remote BIOS, KVM swichtes etc). We go the hard way, drop the
+costs per node again and have only one screen and one keyboard to plug in; more
+was never needed yet. Once the node tries to boot from hdd with pxeboot fallback,
+there is no need for terminal access any more. And everything else will be done via
+remote access (why should one want to stay in the loud server room?).
+
+<h4>Structural Layout</h4>
+We choose the following setup for the server overhead. Firstly we have a head server,
+which will provide dhcp, dns, a debian mirror, nis, ganglia and the queue. Furthermore
+this is the node, where the administrative stuff is done. It has two gigabit connections
+to inside and one connection to outside.
+<br>
+Two identical login nodes provide user access; each has only one gigabit connection to inside
+and one to outside.
+<br>
+A sum of three nas stations with hard-/software raid provide space. Each of them is connected
+with two gigabit ports to the inside.
+
+<h4>Dual Gigabit Networking</h4>
+All nodes have two gigabit connections to inside. Each of them is connected in a different
+network. These two different networks will decrease the network load.
+The dual gigabit network is used in modulo2 mode. Every 2nd node will go through the 2nd
+network to the nas stations; this way we circumvene the bottleneck at the nas without loosing
+latency through channel bonding.
+<br>
+We can drop the costs even further by not using stackable switches. The only relevant drawback
+will be, that one cannot use all nodes at once for one big task any more. By configuring
+the partitions of nodes in the queue performance loss can be prevented.
+<br>
+Our cluster uses two 48 port and two 24 port switches. Both are linked, because the servers
+then only once have to inject into each network. Two sets of nodes are now defined: one for
+fast i/o to the nas stations and one for slow (link-bottleneck) i/o.
+
+<h4>Network booting diskless clients</h4>
+It may sound nice to have a complete root-over-nfs system booted via pxe. But the documentation
+avaliable is very poor. Besides you may observe serious performance problems in booting more
+then ten nodes at ones and even worse in running state.
+<br>
+Our conclusion is here: Use pxeboot to install the nodes automatically. A small local hdd
+can also serve as local scratch for fast i/o.
+
+<h4>Hardware Installation</h4>
+riefly we summarize some lessons learned. If you choose to use different networks: use
+different colors (we didn't). As with number of particles entropy will increase dramatically,
+use cable straps and try to fix them at the rack asap. As hdds tend to break notoriously
+consider using telescope mounts in a rack. It's also very useful to have spare hdds at hand.
+
+
+<h4>Software Installation</h4>
+We have chosen debian, because we thought it is the most stable distribution and easy
+to maintain. After all it doesn't matter at all, what distribution you choose; all
+new nodes will be installed from a golden node image using tar.
+<br>
+Following
+the saying <i>If it ain't broke, don't fix it</i>: Our policy is to not change anything
+after primary installation. In particular: don't update the distribution. We kept
+a snapshot mirror of our distribution on the head server for future software installation.
+<br>
+From security point of view we have a locked rack with a trusted lan, so security doesn't
+matter there. The login nodes have outwards connection and have the recent security
+updates out course.
+<br>
+All important configuration files can be found in corvix. As in such a
+cluster much stuff is done hardware specifically we can only provide the important
+(portable) configuration files.
+
+
+<h3>Configurations</h3>
+
+<h4>All Configuration from DHCP</h4>
+Our dhcp server supports pxeboot and provides hostnames to the known nodes. Because
+we don't want to have redundant configurations, other configurations can be
+created automatically from the dhcpd.conf.
+
+<h4>Queue system</h4>
+We choose torque and in combination with the maui scheduler. Jobs may have low or high
+qos and there is a standing reservation for quickshots in case of an overloaded queue.
+
+<h4>SSH server</h4>
+We use hostbased authentification inside the cluster and public key authentification
+outside.
+
+<h4>PXE Bootserver</h4>
+Using the linux pxeboot, the head server provides debian network install and a custom
+install script for adding new nodes in under 4 minutes automatically.
+
+
+<h3>Further Software</h3>
+
+<h4>Ganglia</h4>
+
+<h4>Rgang</h4>
+
+
+
+<h3>Head Server</h3>
+
+<h3>NFS Servers</h2>
+
+<h3>Nodes</h3>
 
 
 <h2>Legal Stuff</h2>
