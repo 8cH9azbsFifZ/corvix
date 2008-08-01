@@ -1,3 +1,6 @@
+boot image
+	corvix / ch etc -> kernel panic -> finden den kernel nicht
+
 head serner
 	dnsmasq ;)
 
