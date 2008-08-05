@@ -14,6 +14,11 @@ postinstall scripts
 	include better egatrop support
 	include md5 sum checking of everything
 
+scripts
+	sync to real server system ;)
+
+===============================================================
+
 later/maybe
 	create independently from debian
 		kernel compilation
