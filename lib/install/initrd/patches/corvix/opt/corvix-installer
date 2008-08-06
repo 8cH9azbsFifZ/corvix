@@ -147,25 +147,24 @@ prepare_parti() {
 # bootstrap
 take_from_cd() {
    LOG "Exploding bootstrap image from cdrom: $srcdisk:/images/bootstrap-${ARCH}.tgz"
-    mkdir /mnt
-    mount -t iso9660 $srcdisk /mnt
-    cd /rootfs
-    [ -f /mnt/images/bootstrap-${ARCH}.tgz ] || panic "Cannot find bootstrap image for ${ARCH}"
-    tar xzvf /mnt/images/bootstrap-${ARCH}.tgz
+   mkdir /mnt
+   mount -t iso9660 $srcdisk /mnt
+   cd /rootfs
+   [ -f /mnt/images/bootstrap-${ARCH}.tgz ] || DIE "Cannot find bootstrap image for ${ARCH}"
+   _ tar xzvf /mnt/images/bootstrap-${ARCH}.tgz
 }
 
 
 take_from_http() {
-	echo "Downloading bootstrap image from $SOURCE"
-	wget -O /rootfs/bootstrap.tgz $SOURCE &&
-	(cd /rootfs; tar xzvf bootstrap.tgz)
+	LOG "Downloading bootstrap image from $SOURCE"
+	wget -O /rootfs/bootstrap.tgz $SOURCE && (cd /rootfs; tar xzvf bootstrap.tgz)
 	rm bootstrap.tgz
 }
 
 
 take_from_cmd() {
 	SOURCE=$(echo $SOURCE | awk '{sub(/^~/,"");print}')
-	echo "Running installation command: $SOURCE"
+	LOG "Running installation command: $SOURCE"
 	echo "#!/bin/sh" > /runcmd
 	cd /
 	$SOURCE
@@ -175,7 +174,7 @@ take_from_cmd() {
 take_load_run() {
 	SOURCE=$(echo $SOURCE | awk '{sub(/^\^/,"");print}')
 	cd /
-	echo "Loading installation script from: $SOURCE"
+	LOG "Loading installation script from: $SOURCE"
 	wget -O runcmd $SOURCE
 	chmod +x runcmd
 	./runcmd
@@ -199,7 +198,7 @@ make_bootstrap() {
 		take_load_run
 		;;
 	*)
-		panic "Dont know how to get the bootstrap source"
+		DIE "Dont know how to get the bootstrap source"
 		;;
 	esac
 
@@ -213,7 +212,7 @@ eof
 # post install configurations
 
 script_get_from_http() {
-	echo "Downloading first-config script"
+	LOG "Downloading first-config script"
 	mkdir /rootfs/etc/server-scripts
 	wget -O /rootfs/etc/server-scripts/first-config $INITSCR
 	chmod +x /rootfs/etc/server-scripts/first-config
@@ -262,7 +261,7 @@ eof
 ;;
 
 	manual)
-	echo "Edit /etc/network/interface after booting to new operating system!"
+	WARN "Edit /etc/network/interface after booting to new operating system!"
 	;;
 
 	esac
@@ -273,7 +272,7 @@ eof
 }
 
 install_bootloader() {
-	echo "Installing boot loader...."
+	LOG "Installing boot loader...."
 	KER=$(ls /rootfs/boot/vmlinuz*|awk '{print $1}'|sed 's/\/rootfs//g')
 	IRD=$(ls /rootfs/boot/initrd*|awk '{print $1}'|sed 's/\/rootfs//g')
 	grub-install --root-directory=/rootfs $firsthd
@@ -302,4 +301,5 @@ umount /rootfs
 
 PS1='TEST$ ' /bin/sh -i </dev/console >/dev/console 2>&1
 
-echo ">>>> Installing base system finished <<<<"
+PAUSE ">>>> Installing base system finished <<<<"
+reboot
