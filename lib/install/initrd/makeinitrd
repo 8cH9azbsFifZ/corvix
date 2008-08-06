@@ -2,7 +2,7 @@
 _fetch_initrd() {
    url=http://ftp.de.debian.org/debian/dists/etch/main/installer-i386/current/images/netboot/netboot.tar.gz
    LOG+
-   LOG "Fetching initrd: $url"
+   LOG "Fetching initrd:$none $url"
    LOG-
    [[ -d tmp/debian ]] || mkdir -p tmp/debian
    [[ -e tmp/debian/netboot.tar.gz ]] || _ wget $url -O tmp/debian/netboot.tar.gz
@@ -56,10 +56,11 @@ _make_initrd() {
    _make_initrd_debian
    _make_initrd_debian_preseed
    _make_initrd_corvix
-   _make_initrd_corvix_ch
+#   _make_initrd_corvix_ch
 }
 
 
+LOG+
 LOG "Initrds..."
 initrd=tmp/debian/initrd
 target=../tmp/isoimage/boot

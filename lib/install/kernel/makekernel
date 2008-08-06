@@ -10,6 +10,15 @@ _fetch_kernel() {
    [[ -e $kdir/Makefile ]] || _ tar xzf tmp/kernel/$filename -C tmp/kernel
 }
 
+_compile_kernel() {
+   cd $kdir
+   #make clean
+   _ make mrproper
+   _ cp /boot/config-`uname -r` ./.config
+   _ make menuconfig
+   _ make -j 4 all
+}
+
 vers=2.6.26
 
 LOG+
