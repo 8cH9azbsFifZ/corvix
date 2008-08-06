@@ -26,3 +26,6 @@ later/maybe
 		make initrd image from scratch
 	bootstrap
 		provide egatrop  compiled bootstraps
+		rip off here
+			http://mirrors.sec.informatik.tu-darmstadt.de/gentoo/releases/x86/2008.0/stages/stage1-x86-2008.0.tar.bz2
+			http://www.gentoo.org/doc/en/faq.xml
