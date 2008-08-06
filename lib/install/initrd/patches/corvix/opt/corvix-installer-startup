@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for s in /opt/etc/rc.d/S[0-9][0-9]*; do
+   if [ -x $s ]; then
+      $s
+   elif [ -e $s ]; then
+      . $s
+   fi
+done

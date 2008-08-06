@@ -154,7 +154,7 @@ _eend() {
 # Execute command in pretty print environemnt with logging
 # _  command...
 _ () {
-   qprint "${brown}Running:${none} $@" >&2
+#   qprint "${brown}Running:${none} $@" >&2
    if [ $quietopt ]; then
       $@ 2>$TMP.stderr 1>$TMP.stdout
    else

@@ -35,9 +35,8 @@ _make_initrd_corvix() {
    LOG+
    LOG "Make initrd: corvix"
    LOG-
-#   _ cp patches/common/* $initrd -r
-#   _ cp patches/corvix/* $initrd -r
-#   PAUSE "Yudis patches"
+   _ cp patches/common/* $initrd -r
+   _ cp patches/corvix/* $initrd -r
    _ initrd_create $initrd $target/corvix.gz
 }
 
