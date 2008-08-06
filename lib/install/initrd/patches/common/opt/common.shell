@@ -111,8 +111,13 @@ LOG+() { loglevel=$(($loglevel+1)) ; }
 LOG-() { loglevel=$(($loglevel-1)) ; }
 
 
-# Low level print (if qietopt not set)
-qprint() { $quietopt || echo "$@" >&2 ; }
+# Low level print
+qprint() { 
+   if [[ -z $quietopt ]]; then
+      echo "$@" >&2 ; 
+   else
+   fi   
+}
 
 # Print a message
 # mesg  message
