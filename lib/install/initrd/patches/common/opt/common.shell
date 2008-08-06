@@ -91,6 +91,14 @@ WARN () { echo "${red}* Error${none}: $@" >&2 ; }
 PAUSE () { echo -ne "${green}Pause:${none}$@"; read; }
 
 
+# Low level print
+qprint() { 
+   if [[ -z $quietopt ]]; then
+      echo "$@" >&2 ; 
+   else
+   fi   
+}
+
 # log output with a indentation level
 #     loglevel: depth of indentation
 #     logfile:  where to dump
@@ -110,14 +118,6 @@ LOG () {
 LOG+() { loglevel=$(($loglevel+1)) ; }
 LOG-() { loglevel=$(($loglevel-1)) ; }
 
-
-# Low level print
-qprint() { 
-   if [[ -z $quietopt ]]; then
-      echo "$@" >&2 ; 
-   else
-   fi   
-}
 
 # Print a message
 # mesg  message
