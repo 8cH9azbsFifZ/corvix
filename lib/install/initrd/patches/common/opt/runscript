@@ -1,0 +1,14 @@
+#!/bin/zsh 
+. common.shell
+
+_init_environment() {
+   _colors_tput
+   _get_terminal_properties
+}
+
+#quietopt -> no log to screen
+#logfile=abc -> write output also to logfile
+
+# Run command
+_init_environment
+. $@
