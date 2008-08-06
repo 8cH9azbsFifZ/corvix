@@ -95,7 +95,6 @@ PAUSE () { echo -ne "${green}Pause:${none}$@"; read; }
 qprint() { 
    if [[ -z $quietopt ]]; then
       echo "$@" >&2 ; 
-   else
    fi   
 }
 
@@ -115,14 +114,14 @@ LOG () {
 }
 
 # In/Decrease loglevel
-LOG+() { 
+LOGp() { 
    loglevel=$(($loglevel+1)) ; 
    if [[ -n  $1 ]]; then
       LOG $@
-      LOG-
+      LOGm
    fi
 }
-LOG-() { loglevel=$(($loglevel-1)) ; }
+LOGm() { loglevel=$(($loglevel-1)) ; }
 
 
 # Print a message

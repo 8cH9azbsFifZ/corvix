@@ -1,9 +1,9 @@
 #!../../runscript
 _fetch_initrd() {
    url=http://ftp.de.debian.org/debian/dists/etch/main/installer-i386/current/images/netboot/netboot.tar.gz
-   LOG+
+   LOGp
    LOG "Fetching initrd:$none $url"
-   LOG-
+   LOGm
    [[ -d tmp/debian ]] || mkdir -p tmp/debian
    [[ -e tmp/debian/netboot.tar.gz ]] || _ wget $url -O tmp/debian/netboot.tar.gz
    [[ -e tmp/debian/debian-installer/i386/initrd.gz ]] || _ tar xzf tmp/debian/netboot.tar.gz -C tmp/debian
@@ -17,33 +17,33 @@ _make_kernel_debian() {
 }
 
 _make_initrd_debian() {
-   LOG+
+   LOGp
    LOG "Make initrd: debian"
-   LOG-
+   LOGm
    _ initrd_create $initrd $target/debian.gz
 }
 
 _make_initrd_debian_preseed() {
-   LOG+
+   LOGp
    LOG "Make initrd: debian preseed"
-   LOG-
+   LOGm
    _ cp patches/common/preseed.cfg $initrd
    _ initrd_create $initrd $target/debianpreseed.gz
 }
 
 _make_initrd_corvix() {
-   LOG+
+   LOGp
    LOG "Make initrd: corvix"
-   LOG-
+   LOGm
    _ cp patches/common/* $initrd -r
    _ cp patches/corvix/* $initrd -r
    _ initrd_create $initrd $target/corvix.gz
 }
 
 _make_initrd_corvix_ch() {
-   LOG+
+   LOGp
    LOG "Make initrd: corvix-ch"
-   LOG-
+   LOGm
    _ cp patches/common/* $initrd -r
    _ cp patches/head/* $initrd -r
    _ rm $initrd/preseed.cfg
@@ -52,14 +52,14 @@ _make_initrd_corvix_ch() {
 }  
 
 _make_initrd() {
-   _make_initrd_debian
-   _make_initrd_debian_preseed
+#   _make_initrd_debian
+#   _make_initrd_debian_preseed
    _make_initrd_corvix
 #   _make_initrd_corvix_ch
 }
 
 
-LOG+
+LOGp
 LOG "Initrds..."
 initrd=tmp/debian/initrd
 target=../tmp/isoimage/boot
