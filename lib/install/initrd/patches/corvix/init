@@ -1,107 +1,23 @@
-#!/bin/sh 
-echo "loading..."
+#!/bin/sh -e
+# used for initramfs
+export PATH
+. /lib/debian-installer/init-debug
+debugshell "just booted"
 
-. /opt/common.shell
-
-LOG "Loading, please wait..."
-
-[ -d /dev ] || _ mkdir -m 0755 /dev
-[ -d /root ] || _ mkdir --mode=0700 /root
-[ -d /sys ] || _ mkdir /sys
-[ -d /proc ] || _ mkdir /proc
-[ -d /tmp ] || _ mkdir /tmp
-
-_ mkdir -p /var/lock
-_ mount -t sysfs none /sys
-_ mount -t proc none /proc
-
-tmpfs_size="10M"
-if [ -e /etc/udev/udev.conf ]; then
-	_ . /etc/udev/udev.conf
+mount /proc
+if [ -x /sbin/udevd ]; then
+	/lib/debian-installer/init-udev-devices
+else
+	mount /dev
+	mount /dev/pts
 fi
-_ mount -t tmpfs -o size=$tmpfs_size,mode=0755 udev /dev
-[ -e /dev/console ] || _ mknod /dev/console c 5 1
-[ -e /dev/null ] || _ mknod /dev/null c 1 3
-> /dev/.initramfs-tools
-_ mkdir /dev/.initramfs
-
-_ . /conf/initramfs.conf
-for i in conf/conf.d/*; do
-	[ -f ${i} ] && . ${i}
-done
-_ . /scripts/functions
-
-export break=
-export quiet=n
-export readonly=y
-export rootmnt=/rootfs
-export debug=
-export cryptopts=${CRYPTOPTS}
-export ROOTDELAY=
-export panic=
-
-export ARCH=i686
-export BOOTMODE=install
-export DEV=eth0
-export IP=dhcp
-export GATE=
-export DNS=
-export CFGFILE=default.cfg
-
-for x in $(cat /proc/cmdline); do
-	case $x in
-	mode=*)
-		BOOTMODE=${x#mode=}
-		;;
-	dev=*)
-		DEV=${x#dev=}
-		;;
-	ip=*)
-		IP=${x#ip=}
-		;;
-	dns=*)
-		DNS=${x#dns=}
-		;;
-	config=*)
-		CFGFILE=${x#config=}
-		;;
-	arch=*)
-		ARCH=${x#arch=}
-		;;
-	break=*)
-		break=${x#break=}
-		;;
-	break)
-		break=premount
-		;;
+init='busybox init'
+for i in $(cat /proc/cmdline); do
+	case $i in
+		init=*)
+			init=${i#init=}
+			;;
 	esac
 done
-
-depmod -a
-maybe_break top
-
-run_scripts /scripts/init-top
-load_modules
-run_scripts /scripts/init-premount
-
-maybe_break request
-
-
-#echo "#### getting interface address of $DEV ####"
-ipconfig -c dhcp -d $DEV
-
-case ${BOOTMODE} in
-	login)
-		PS1='TEST$ ' /bin/sh -i </dev/console >/dev/console 2>&1
-		;;
-
-	install)
-		echo "<<<< Running install..... >>>>"
-		/scripts/install-system
-		;;
-esac
-
-echo ">>>> REBOOTING NOW <<<<"
-sleep 2
-
-reboot
+debugshell "before init"
+exec $init
