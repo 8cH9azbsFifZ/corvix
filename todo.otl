@@ -1,5 +1,8 @@
 boot image
-	corvix / ch etc -> kernel panic -> finden den kernel nicht
+	initrd for corvix not working
+		ipconfig not found
+		awk  not found?
+			is busybox invoked the right way?
 
 head serner
 	dnsmasq ;)

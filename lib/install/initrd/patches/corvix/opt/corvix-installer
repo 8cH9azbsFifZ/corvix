@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/busybox sh
 . /opt/common.shell
 
 LOG "Starting installation of corvix GNU/Linux"
