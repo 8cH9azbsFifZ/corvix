@@ -1,1 +1,3 @@
-rm -rf tmp/* syslinux/tmp/* initrd/tmp/*
+#!../runscript
+LOG "Cleaning"
+_ rm -rf tmp/* syslinux/tmp/* initrd/tmp/*

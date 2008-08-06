@@ -1,0 +1,9 @@
+#!/bin/zsh 
+. common.shell
+
+#Init Environment
+_colors_tput
+_get_terminal_properties
+
+# Run command
+. $@

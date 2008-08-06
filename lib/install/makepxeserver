@@ -1,5 +1,4 @@
-#!/bin/zsh
-. common.shell
+#!../runscript
 
 LOG "You need: dhcpd, tftp-hpa"
 PAUSE "Ok?"

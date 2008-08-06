@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!../runscript
 cd initrd
 ./makeinitrd
 cd ..

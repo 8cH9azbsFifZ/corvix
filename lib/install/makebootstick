@@ -1,5 +1,4 @@
-#!/bin/zsh
-. common.shell
+#!../runscript
 
 DEV=$1
 [[ -e $DEV || -n $DEV ]] || DIE "Missing device: $DEV"

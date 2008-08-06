@@ -1,6 +1,4 @@
-#!/bin/zsh
-. common.shell
-
+#!../../runscript
 LOG "Initrds..."
 
 _fetch_initrd() {

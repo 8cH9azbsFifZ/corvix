@@ -1,5 +1,4 @@
-#!/bin/zsh
-. common.shell
+#!../runscript
 
 _make_isoimage() {
    LOG "Make isoimage"
