@@ -5,7 +5,8 @@ _make_isoimage() {
    LOG "Make isoimage"
    old=$PWD
    cd $target
-   mkisofs -R -V "corvix bootcd" \
+   _exists isolinux/isolinux.bin isolinux/boot.cat
+   _ mkisofs -R -V "corvix bootcd" \
       -o ~/corvix.iso \
       -b isolinux/isolinux.bin \
       -c isolinux/boot.cat \
