@@ -3,17 +3,79 @@
 
 LOG "Starting installation of corvix GNU/Linux"
 
-#!/bin/sh
 
-echo "<<<<< Installing HEAD node >>>>>"
+#######
+# Boot Options
+###
 
-echo "Configuration: $CFGFILE"
-echo
+# Defaults
+export break=
+export quiet=n
+export readonly=y
+export rootmnt=/rootfs
+export debug=
+export cryptopts=${CRYPTOPTS}
+export ROOTDELAY=
+export panic=
 
+export ARCH=i686
+export BOOTMODE=install
+export DEV=eth0
+export IP=dhcp
+export GATE=
+export DNS=
+export CFGFILE=default.cfg
+export TARGET=
+export SOURCE=
+
+# Parse boot options
+LOG "Parse boot options"
+for x in $(cat /proc/cmdline); do
+   case $x in
+   mode=*)
+      BOOTMODE=${x#mode=}
+      ;;
+   dev=*)
+      DEV=${x#dev=}
+      ;;
+   ip=*)
+      IP=${x#ip=}
+      ;;
+   dns=*)
+      DNS=${x#dns=}
+      ;;
+   config=*)
+      CFGFILE=${x#config=}
+      ;;
+   target=*)
+      TARGET=${x#target=}
+      ;;
+   source=*)
+      SOURCE=${x#source=}
+      ;;
+   arch=*)
+      ARCH=${x#arch=}
+      ;;
+   break=*)
+      break=${x#break=}
+      ;;
+   break)
+      break=premount
+      ;;
+   esac
+done
+
+depmod -a
+maybe_break top  # debians stuff
+
+# dhclient
+LOG "DHCP to:$none $DEV"
+ipconfig -c dhcp -d $DEV
+
+# derived defaults
+LOG "Configuration file: $none$CFGFILE"
 export firsthd=$TARGET
 export srcdisk=$SOURCE
-
-. /scripts/functions
 
 
 # searching harddisks
@@ -32,7 +94,7 @@ prepare_setting() {
     #TODO: use xdialog?
 
     (echo $CFGFILE | awk '/^http:/{exit}{exit 1}') && 
-    (rm /default.cfg; wget -O /default.cfg $CFGFILE || panic "Cannot load configuration file from $CFGFILE")
+    (rm /default.cfg; wget -O /default.cfg $CFGFILE || DIE "Cannot load configuration file from $CFGFILE")
     . /default.cfg
     search_disks
     
@@ -53,58 +115,38 @@ init scripts     = $INITSCR
 
 eof
 
-    echo "WARNING: All hardisk space in $firsthd will be used"
+    WARN "WARNING: All hardisk space in $firsthd will be used"
     read -p "Proceed? (Y/n) " OK
-    [ "$OK" == "n" ] && panic "Installation canceled"
+    [ "$OK" == "n" ] && DIE "Installation canceled"
 
 }
 
 
 prepare_parti() {
-    echo "WARNING: deleting all partitions in $firsthd..."
+    WARN "WARNING: deleting all partitions in $firsthd..."
     NPAR=$(fdisk $firsthd -l|awk '/^\/dev\//{print}'|wc -l)
-    echo "DELETING: $NPAR partitions"
+    mesg "DELETING: $NPAR partitions"
     parti=1
     while [ $parti -lt $NPAR ]; do
-    fdisk $firsthd << eof 
-d
-1
-w
+       LOG+ "Deleting partition $NPAR on $firsthd"
+       echo -ne "d\n1\nw\n\n" | fdisk $firsthd 
+       [ $NPAR -ne 0 ] && echo -ne "d\nw\n\n" | fdisk $firsthd 
+       parti=$[ $parti + 1 ]
+    done
 
-eof
-
-    [ $NPAR -ne 0 ] && fdisk $firsthd << eof
-d
-w
-
-eof
-
-parti=$[ $parti + 1 ]
-done
-
-echo "CREATING: partition"
-fdisk $firsthd << eof
-n
-p
-1
-
-
-a
-1
-w
-
-eof
-	ln -s /proc/mounts /etc/mtab
-	echo "FORMATING: ${firsthd}1"
-	mkfs.ext3 ${firsthd}1 || panic "!!!! Formating failed !!!!"
-	mkdir /rootfs 
-	mount -t ext3 ${firsthd}1 /rootfs || panic "!!!! Mounting filesystem failed !!!!"
+    LOG "CREATING: partition"
+    echo -ne "n\np\n1\n\n\na\n1\nw\n\n" | fdisk $firsthd 
+	 ln -s /proc/mounts /etc/mtab
+	 LOG "FORMATING: ${firsthd}1"
+	 _ mkfs.ext3 ${firsthd}1 || DIE "!!!! Formating failed !!!!"
+	 mkdir /rootfs 
+	 mount -t ext3 ${firsthd}1 /rootfs || DIE "!!!! Mounting filesystem failed !!!!"
 }
 
 
 # bootstrap
 take_from_cd() {
-	echo "Exploding bootstrap image from cdrom: $srcdisk:/images/bootstrap-${ARCH}.tgz"
+   LOG "Exploding bootstrap image from cdrom: $srcdisk:/images/bootstrap-${ARCH}.tgz"
     mkdir /mnt
     mount -t iso9660 $srcdisk /mnt
     cd /rootfs

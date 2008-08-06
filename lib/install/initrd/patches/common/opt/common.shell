@@ -115,7 +115,13 @@ LOG () {
 }
 
 # In/Decrease loglevel
-LOG+() { loglevel=$(($loglevel+1)) ; }
+LOG+() { 
+   loglevel=$(($loglevel+1)) ; 
+   if [[ -n  $1 ]]; then
+      LOG $@
+      LOG-
+   fi
+}
 LOG-() { loglevel=$(($loglevel-1)) ; }
 
 
@@ -135,32 +141,40 @@ is_installed () {
 # Temporary file
 TMP=/tmp/tmp.`basename $0`.`cat /dev/urandom | tr -cd a-z | head -c 5`
 
+#
+_ebegin() {
+   echo -ne "${brown}Running: ${none}$@\n" >&2
+}
+
 # Print error code of command
 # _eend  errorcode command
 _eend() {
    err=$1
    shift
-   cmd=$@
+   cmd="==========>$none" #$@
    cmd_len=${#cmd}
-   cmd="${brown}Running: ${none}$@"
+   #cmd="${brown}Running: ${none}$@"
    if [[ $err == 0 ]]; then
       str="${green}ok${none}"
    else
       str="${red}$err${none}"
    fi
-   printf "%0s%b %$((COLS - cmd_len ))s%b\n" '' "$cmd" "[$str]" >&2
+   printf "%0s%b %$((COLS - 3 ))s%b\n" '' "$cmd" "[$str]" >&2
+   #printf "%$((COLS - 7))s%b\n" '' "[$str]" >&2
 }
 
 # Execute command in pretty print environemnt with logging
 # _  command...
 _ () {
-#   qprint "${brown}Running:${none} $@" >&2
+   _ebegin $@   
    if [ $quietopt ]; then
-      $@ 2>$TMP.stderr 1>$TMP.stdout
+      $( echo $@) 2>$TMP.stderr 1>$TMP.stdout
    else
-      $@
+      $(echo $@)
    fi
-   _eend $? $@
+   _err=$?
+   _eend ${_err} $@
+   return ${_err}
 }   
 
 # Install a package (debign)
