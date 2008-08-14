@@ -1,5 +1,6 @@
 #!/bin/sh
-
+export LC_ALL=C
+export LANG=C
 #[[ -z $quietopt ]] && ;
 [[ -z $loglevel ]] && loglevel=0
 

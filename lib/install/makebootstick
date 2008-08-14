@@ -1,6 +1,6 @@
 #!../runscript
 
-DEV=/dev/sdc
+DEV=$1
 
 [[ -z $DEV ]] && DIE  "Missing device"
 [[ -e $DEV ]] || DIE "Missing device: $DEV"

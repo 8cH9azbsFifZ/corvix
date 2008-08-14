@@ -28,7 +28,7 @@ _make_initrd_debian_preseed() {
    LOG "Make initrd: debian preseed"
    LOGm
    _ cp patches/common/preseed.cfg $initrd
-   _ initrd_create $initrd $target/debianpreseed.gz
+   _ initrd_create $initrd $target/debpre.gz
 }
 
 _make_initrd_corvix() {
@@ -52,8 +52,8 @@ _make_initrd_corvix_ch() {
 }  
 
 _make_initrd() {
-#   _make_initrd_debian
-#   _make_initrd_debian_preseed
+   _make_initrd_debian
+   _make_initrd_debian_preseed
    _make_initrd_corvix
 #   _make_initrd_corvix_ch
 }
