@@ -20,15 +20,14 @@ _make_initrd_debian() {
    LOGp
    LOG "Make initrd: debian"
    LOGm
-   _ initrd_create $initrd $target/debian.gz
+   _ cp tmp/debian/debian-installer/i386/initrd.gz $target/debian.gz
 }
 
 _make_initrd_debian_preseed() {
    LOGp
    LOG "Make initrd: debian preseed"
    LOGm
-   _ cp patches/common/preseed.cfg $initrd
-   _ initrd_create $initrd $target/debpre.gz
+   _ cp tmp/debian/debian-installer/i386/initrd.gz $target/debpre.gz
 }
 
 _make_initrd_corvix() {

@@ -9,7 +9,7 @@ _build_syslinux() {
 }
 
 _fetch_sources() {
-   LOG "   Prepating isolinux..."
+   LOGp "Preparing isolinux..."
    ESRC_URI=http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-$vers.tar.gz
    [[ -d tmp ]] || mkdir tmp
    [[ -e tmp/syslinux-$vers.tar.gz ]] && return 0
@@ -21,7 +21,7 @@ _fetch_sources() {
 }
 
 _make_isolinux() {
-   LOG "   Make isolinux image"
+   LOGp "Make isolinux image"
    [[ -d $target/isolinux ]] || mkdir -p $target/isolinux
    cp tmp/syslinux-$vers/core/isolinux.bin $target/isolinux
    cp patches/* $target/isolinux
@@ -29,21 +29,21 @@ _make_isolinux() {
 }
 
 _make_syslinux() {
-   LOG "   Make syslinux image"
+   LOGp "Make syslinux image"
    [[ -d $target ]] || mkdir -p $target
    cp patches/* $target
    cp splash/splash.rle $target
 }
 
 _make_pxelinux() {
-   LOG "   Make pxelinux image"
+   LOGp "Make pxelinux image"
    [[ -d $target/pxelinux.cfg ]] || mkdir -p $target/pxelinux.cfg
    cp tmp/syslinux-$vers/core/pxelinux.0 $target/pxelinux.0
    cat patches/syslinux.cfg | sed 's/\/boot/\/srv\/tftp/g;' > $target/pxelinux.cfg/default
 }
 
 _splash() {
-   LOG "   Splash image"
+   LOGp "Splash image"
    #cd splash
    #pngtopnm splash.png | gzip -9 > splash.ppm.gz
    #gzip -cd splash.ppm.gz | ppmtolss16 \#000000=0 \#d0d0d0=7 \#f6f6f6=15 > splash.lss
