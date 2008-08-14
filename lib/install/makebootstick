@@ -1,7 +1,9 @@
 #!../runscript
 
-DEV=$1
-[[ -e $DEV || -n $DEV ]] || DIE "Missing device: $DEV"
+DEV=/dev/sdc
+
+[[ -z $DEV ]] && DIE  "Missing device"
+[[ -e $DEV ]] || DIE "Missing device: $DEV"
 
 _prepare_software() {
    sudo apt-get install mbr mtools syslinux dosfstools
@@ -9,9 +11,16 @@ _prepare_software() {
 
 _make_fs_dos() {
    LOG "Create boot stick on $none$DEV"
-   LOG "Now create the partitions.$none   n p 1 (>50MB) a 1 t 6  w"
-   PAUSE "ok?"
-   sudo fdisk $DEV
+   LOG "Now create the partitions.$none\nWe assume an empty stick! Please clean all partitions yourself."
+   LOG "This is your stick now"
+   sudo fdisk -l $DEV
+   LOG "Do you want to me to fire up fdisk now for deletions?"
+   read -s -k 1 i
+   case $i in 
+      y|Y|j) sudo fdisk $DEV
+   esac
+   PAUSE "Now creating new partitions. Ok?"
+   echo -ne "\nn\np\n1\n1\n+50M\na\n1\nt\n6\nw\n"| sudo fdisk $DEV
 
    PART=1
    LOG "Create filesystem on $none$DEV$PART"
@@ -37,7 +46,7 @@ _make_fs_dos
 
 IMG=./tmp/stickimage
 [[ -d $IMG ]] || mkdir -p $IMG
-LOG "Mount on $none$IMG"
+LOG "Mount on $none$IMG with device $DEV$PART"
 sudo mount $DEV$PART $IMG
 LOG "Copy files"
 sudo cp ./tmp/isoimage/* $IMG -r
