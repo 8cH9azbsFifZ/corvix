@@ -1,6 +1,8 @@
 #!../../runscript
 _fetch_initrd() {
-   url=http://ftp.de.debian.org/debian/dists/etch/main/installer-i386/current/images/netboot/netboot.tar.gz
+   TREE=$1
+   [[ -z $TREE ]] && DIE "Missing tree"
+   url=http://ftp.de.debian.org/debian/dists/$TREE/main/installer-i386/current/images/netboot/netboot.tar.gz
    LOGp
    LOG "Fetching initrd:$none $url"
    LOGm
@@ -67,6 +69,6 @@ LOG "Initrds..."
 initrd=tmp/debian/initrd
 target=../tmp/isoimage/boot
 [[ -d $target ]] || mkdir -p $target
-_fetch_initrd
+_fetch_initrd lenny
 _make_kernel_debian
 _make_initrd

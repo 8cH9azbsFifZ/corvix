@@ -4,6 +4,10 @@ boot image
 		awk  not found?
 			is busybox invoked the right way?
 
+BUG
+	cp /usr/lib/grub/i386-pc/* grub/
+
+
 head serner
 	dnsmasq ;)
 
