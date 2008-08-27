@@ -2,9 +2,15 @@
 # (C)opyright Gerolf Ziegenhain <gerolf@ziegenhain.com> 2008
 # Released under GPL
 
+if [[ -n $1 ]]; then
+   all=""
+else
+   all="-u "`id|sed 's/uid=....(//g;s/).*//g'`
+fi
+
 (
    qstat|sed 's/^/qstat /g' ; 
-   showq ;
+   showq $all ;
    showres -s | awk 'NR<3||$2=="Job"||NF<=3{next}{print}' |sed 's/^/showres /g' ;
    showbf|awk 'NR==3'|sed 's/^/showbf /g' ;
    pbsnodes -l | awk '{printf $1":"$2" "}END{print""}' |sed 's/^/pbsnodes /g' ;
