@@ -1,5 +1,5 @@
 #!/bin/zsh
-. /etc/cluster/common.shell
+. /opt/cluster/lib/common.shell
 
 refresh_hosts() {
    llog "Refresh hosts"
@@ -9,28 +9,20 @@ refresh_hosts() {
       /fixed-address/{match($0,/fixed-address[[:space:]]*[[:digit:].]*/,a);split(a[0],b);ip[n]=b[2]}
       END{for(i=1;i<=n;i++)if(h[i]!~/b$/){print ip[i],h[i]}} '> /etc/hosts
    echo "127.0.0.1 localhost" >> /etc/hosts
-
-   rgang -C all /etc/hosts /etc/hosts
 }
 
 
 refresh_rgang() {
    llog "Refresh rgang"
-	cat /etc/hosts | awk '{print$2}' | grep node > /etc/cluster/rgang/nodes
-	cat /etc/hosts | awk '{print$2}' | grep nigol > /etc/cluster/rgang/login
-   cat /etc/hosts | awk '{print$2}' > /etc/cluster/rgang/all
-
-   rgang -C all /etc/cluster/rgang/nodes /etc/cluster/rgang/nodes
-   rgang -C all /etc/cluster/rgang/login /etc/cluster/rgang/login
-   rgang -C all /etc/cluster/rgang/all /etc/cluster/rgang/all
+	cat /etc/hosts | awk '{print$2}' | grep node > /opt/cluster/etc/rgang/nodes
+	cat /etc/hosts | awk '{print$2}' | grep nigol > /opt/cluster/etc/rgang/login
+   cat /etc/hosts | awk '{print$2}' > /opt/cluster/etc/rgang/all
 }
 
 refresh_torque() {
    llog "Refresh torque"
-   cat /etc/hosts | grep node | awk '{print$2" np=4"}' > /etc/cluster/queue/nodes
+   cat /etc/hosts | grep node | awk '{print$2" np=4"}' > /opt/cluster/etc/queue/nodes
    /etc/init.d/torque restart
-
-   rgang -C all /etc/cluster/queue/nodes /etc/cluster/queue/nodes
    rgang all /etc/init.d/torque restart
 }
 
