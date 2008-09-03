@@ -1,0 +1,11 @@
+#!/bin/zsh
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=80:00:00
+#PBS -o transfer.out
+#PBS -N transfer
+#PBS -W x="PARTITION:login"
+
+. $HOME/.zshrc
+cd $PBS_O_WORKDIR
+
+rsync -avP . wap.physik.uni-kl.de:tmp/.

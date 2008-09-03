@@ -1,0 +1,29 @@
+if [ "`id -u`" -eq 0 ]; then
+  PATH="/opt/cluster/bin:/opt/cluster/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/maui/sbin:/usr/local/maui/bin"
+else
+  PATH="/opt/cluster/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/maui/bin"
+fi
+export PATH
+
+if [ "$PS1" ]; then
+  if [ "$BASH" ]; then
+    PS1='\u@\h:\w\$ '
+  else
+    if [ "`id -u`" -eq 0 ]; then
+      PS1='# '
+    else
+      PS1='$ '
+    fi
+  fi
+fi
+
+
+umask 022
+
+if [[ `hostname` == head ]]; then
+        /opt/cluster/etc/banner-head
+else
+        /opt/cluster/etc/banner-login
+fi
+
+cat /opt/cluster/etc/news

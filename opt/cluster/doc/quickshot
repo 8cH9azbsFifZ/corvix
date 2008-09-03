@@ -1,0 +1,11 @@
+Submitting a quickshot:
+=======================
+1. Scripts to use
+Serial: quickshot
+Parallel: quickshot-mpi
+
+2. Hint:
+You may want to add to your .zshrc (or equivalent)
+[[ -n $PBS_O_WORKDIR ]] && cd $PBS_O_WORKDIR
+in order to change to the submitted dir
+automatically

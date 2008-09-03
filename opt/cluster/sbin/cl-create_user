@@ -1,0 +1,18 @@
+#!/bin/bash
+. /etc/cluster/common.shell
+
+llog "Under construction"
+
+cat << eof
+CUSER=$1
+CUSERDIR=/nas2/$CUSER
+CGROUP=$2
+
+useradd $CUSER -g $CGROUP -m -d $USERDIR
+cu $CUSER mkdir ~/.agcluster
+su $CUSER ssh-keygen -q -N "ag cluster" -f ~/.agcluster/identity
+cat $CUSERDIR/.agcluster/identity.pub >> /etc/ssh/authorized_keys
+cp $CUSERDIR/.agcluster/identity /etc/ssh/user_identities
+eof
+
+exit 1

@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+for trg in /mnt/nas3/cluster/ desiato.physik.uni-kl.de:/mnt/vol1/cluster/; do
+   rsync -zavP \
+      --exclude /mnt --exclude /sys --exclude /dev --exclude /proc --exclude /home \
+      /. $trg/head/.
+   rsync -zavP \
+      --exclude /mnt --exclude /sys --exclude /dev --exclude /proc --exclude /home \
+      /mnt/golden-node/. $trg/node/.
+done

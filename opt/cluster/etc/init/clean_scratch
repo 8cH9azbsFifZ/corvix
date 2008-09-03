@@ -1,0 +1,5 @@
+#!/bin/zsh
+. common.shell
+LOG "Clean /scratch"
+
+rm -rf /scratch/*

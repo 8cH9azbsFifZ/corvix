@@ -1,0 +1,2 @@
+#!/bin/zsh
+qsub ... -W depend=afterany:____INSERT_JOB_NUMBER_HERE____:____OPTIONALLY_MORE_IDS____
