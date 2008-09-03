@@ -1,9 +1,15 @@
+LANGUAGE=en_US.utf8
+LC_ALL=en_US.utf8
+export $LANGUAGE
+export $LC_ALL
+
+PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/maui/bin"
+PATH="/opt/cluster/bin:/opt/cluster/lib:"$PATH
 if [ "`id -u`" -eq 0 ]; then
-  PATH="/opt/cluster/bin:/opt/cluster/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/maui/sbin:/usr/local/maui/bin"
-else
-  PATH="/opt/cluster/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/maui/bin"
+  PATH="/opt/cluster/sbin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/maui/sbin:"$PATH
 fi
-export PATH
+PATH=".:"$PATH
+export $PATH
 
 if [ "$PS1" ]; then
   if [ "$BASH" ]; then
