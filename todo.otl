@@ -1,19 +1,32 @@
-boot image
+Bootimage / Installation procedure					--- YUDI ---
+==================================
 	initrd for corvix not working
 		ipconfig not found
 		awk  not found?
 			is busybox invoked the right way?
+	enable user interaction for networking!
+	install procedure
+		include debootstrap stuff
 
-BUG
-	cp /usr/lib/grub/i386-pc/* grub/
+	BUGs
+		cp /usr/lib/grub/i386-pc/* grub/
 
 
-head serner
-	dnsmasq ;)
 
-install procedure
-	include debootstrap stuff
-	mirror generation script
+install system scripts								--- GEROLF ---
+======================
+	head server
+		dnsmasq ;)
+		create mirror
+		install opt/cluster stuff
+	slaves
+		adapt to head mirror
+
+
+
+
+here come the low priority stuff
+===============================================================
 
 postinstall scripts
 	profiles
@@ -21,12 +34,6 @@ postinstall scripts
 	include better egatrop support
 	include md5 sum checking of everything
 
-scripts
-	sync to real server system ;)
-
-
-
-===============================================================
 
 later/maybe
 	create independently from debian
