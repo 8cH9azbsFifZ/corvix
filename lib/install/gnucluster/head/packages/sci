@@ -6,3 +6,7 @@ ipython
 mencoder
 mplayer
 povray
+xfig
+inkscape
+pdftk
+python-tables
