@@ -16,6 +16,22 @@ update-rc.d -f nis remove
 update-rc.d nis defaults 98
 }
 
-#_install_pkg nis
-#_config_client
+
+cat << eof >> /etc/default/nis
+NISSERVER=master
+NISCLIENT=false
+eof
+
+cat << eof >> /etc/ypserv.securenets
+#255.255.255.0 192.168.0.0  // line 14: IP range you permit
+0.0.0.0  0.0.0.0 
+eof
+
+PAUSE "ALL = passwd shadow group hosts rpc services netid protocols netgrp  // line 114: add"
+vi /var/yp/Makefile
+
+mkdir /etc/skel/public_html
+
+
+_config_client
 PAUSE "DISABLED"

@@ -10,3 +10,8 @@ xfig
 inkscape
 pdftk
 python-tables
+libhdf5-mpich-dev
+hdf5-tools
+python-scipy
+python-matplotlib
+python-pylab

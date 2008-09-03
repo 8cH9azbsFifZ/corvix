@@ -8,3 +8,4 @@ portmap
 nfs-common
 nfs-kernel-server
 apt-mirror
+ntp

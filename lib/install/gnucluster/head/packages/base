@@ -15,3 +15,7 @@ mc
 joe
 ssh
 rsync
+ntpdate
+nis
+portmap
+nfs-common
