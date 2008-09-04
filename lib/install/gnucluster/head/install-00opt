@@ -6,12 +6,12 @@ _exchange() {
 }   
 
 _login() {
-   _exchange /etc/profile /opt/cluster/etc/profile
+   _exchange /etc/profile /opt/cluster/etc/login/profile
 }   
 
 _networking() {
-   _exchange /etc/hosts /opt/cluster/etc/hosts
-   _exchange /etc/dhcpd.conf /opt/cluster/etc/dhcpd.conf
+   _exchange /etc/hosts /opt/cluster/etc/dns/hosts
+   _exchange /etc/dhcpd.conf /opt/cluster/etc/dhcp/dhcpd.conf
 #   _exchange /etc/network/interfaces /opt/cluster/etc/network/interfaces
 }   
 
