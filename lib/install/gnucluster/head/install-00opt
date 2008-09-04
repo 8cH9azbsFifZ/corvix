@@ -60,7 +60,7 @@ cp opt/* /opt/cluster -r
 _login
 _networking
 _ganglia
-_mirror
+#_mirror
 _www
 _nfs
 _nis
