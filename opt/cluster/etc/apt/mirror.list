@@ -10,7 +10,7 @@
 # set var_path     $base_path/var
 #
 # set defaultarch  <running host architecture>
-# set nthreads     20
+set nthreads     5
 #
 set _tilde 0 
 
