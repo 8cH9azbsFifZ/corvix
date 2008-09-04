@@ -1,6 +1,7 @@
 #!/bin/zsh
 
-url=http://ftp.de.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/netboot.tar.gz
+distro=etch
+url=http://ftp.de.debian.org/debian/dists/$distro/main/installer-i386/current/images/netboot/netboot.tar.gz
 
 target=../tmp/isoimage/boot/
 
