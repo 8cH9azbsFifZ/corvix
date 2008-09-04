@@ -1,3 +1,0 @@
-RUN_DAEMON="yes"
-OPTIONS="-l -s /opt/cluster/pxeboot/tftp -a 10.1.1.1:69"
-
