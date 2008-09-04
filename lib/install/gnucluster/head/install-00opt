@@ -54,7 +54,9 @@ _queue() {
    _exchange /var/spool/torque/server_priv/nodes /opt/cluster/etc/queue/server_priv/nodes
 }  
 
-cp opt /opt/cluster -r
+mkdir /opt/cluster -p
+cp opt/* /opt/cluster -r
+
 _login
 _networking
 _ganglia
