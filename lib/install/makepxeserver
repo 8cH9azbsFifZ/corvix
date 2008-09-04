@@ -3,7 +3,7 @@
 LOG "You need: dhcpd, tftp-hpa"
 PAUSE "Ok?"
 
-sudo apt-get install dhcpd tftp-hpa
+sudo apt-get install dhcpd tftpd-hpa
 
 LOG "You want to look at our corvix /etc/dhcpd.conf, /etc/tftp"
 PAUSE "Ok?"

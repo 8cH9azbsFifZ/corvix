@@ -1,5 +1,0 @@
-Available Boot Options:
-=======================
-install     	(etch)
-rescue    	   (etch)
-makenode	      (custom)

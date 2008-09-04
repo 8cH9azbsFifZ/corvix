@@ -1,0 +1,4 @@
+splash.rle
+
+corvix GNU/Linux: menu with F1control and F then 1, or ENTER to install.
+
