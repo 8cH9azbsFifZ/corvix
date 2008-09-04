@@ -1,0 +1,20 @@
+# functions collection for initrd creation
+
+initrd_unpack() {
+	mkdir -p tmp/inflated
+	cd tmp/implated
+	gzip -dc $OLDPWD/$1 | cpio -id
+	cd $OLDPWD
+}
+
+initrd_create() {
+	[[ -d $1 ]] || DIE 'why?'
+	[[ -z $2 ]] && DIE 'I don\'t believe'
+
+	mesg 'creating initrd'
+	cd $1
+	find . -name '*~' -delete
+	echo "find .|cpio -H newc -o |gzip > $2" | fakeroot
+	cd $OLDPWD
+	mesg "   done."
+}

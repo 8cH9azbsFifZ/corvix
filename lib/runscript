@@ -1,5 +1,6 @@
-#!/bin/zsh 
-. common.shell
+#!/bin/bash
+
+. $CORVIXHOME/lib/common.shell
 
 _init_environment() {
    _colors_tput

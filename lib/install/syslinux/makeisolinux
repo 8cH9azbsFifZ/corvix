@@ -2,11 +2,11 @@
 
 LOG "Syslinux..."
 
-_build_syslinux() {
+#_build_syslinux() {
 #   cd syslinux-$vers 
 #   _ make
 #   cd ../..
-}
+#}
 
 _fetch_sources() {
    LOGp "Preparing isolinux..."
