@@ -1,0 +1,43 @@
+
+DISPLAY boot.txt
+
+F1 f1.txt
+
+DEFAULT debian-install
+
+LABEL debian-install
+	kernel /srv/tftp/linux
+	append vga=normal initrd=/srv/tftp/debian.gz -- 
+
+LABEL debian-expert
+	kernel /srv/tftp/linux
+	append priority=low vga=normal initrd=/srv/tftp/debian.gz -- 
+
+LABEL debian-rescue
+	kernel /srv/tftp/linux
+	append vga=normal initrd=/srv/tftp/debian.gz rescue/enable=true -- 
+
+LABEL debian-preseed
+   kernel /srv/tftp/linux
+   append vga=normal initrd=/srv/tftp/debpre.gz debian-installer/framebuffer=false preseed/file=/preseed.cfg  --
+
+LABEL corvix
+   kernel /srv/tftp/linux
+   append vga=normal initrd=/srv/tftp/corvix.gz --
+
+LABEL corvix-rescue
+   kernel /srv/tftp/linux
+   append vga=normal initrd=/srv/tftp/corvix.gz rescue/enable=true --
+
+LABEL corvix-ch
+   kernel /srv/tftp/linux
+   append initrd=/srv/tftp/corvixch.gz --
+
+LABEL corvix-cn
+   kernel /srv/tftp/linux
+   append initrd=/srv/tftp/corvixcn.gz --
+
+
+
+PROMPT 1
+TIMEOUT 0
