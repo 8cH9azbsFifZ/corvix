@@ -17,7 +17,7 @@ set _tilde 0
 ##
 ## Example sources
 ##
-deb http://ftp.uni-kl.de/debian/ lenny main contrib non-free
+deb http://ftp.uni-kl.de/debian/ lenny main contrib non-free main/debian-installer
 deb-src http://ftp.uni-kl.de/debian/ lenny main contrib non-free
 
 deb http://security.debian.org/ lenny/updates main contrib non-free
