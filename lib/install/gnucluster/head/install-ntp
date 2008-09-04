@@ -1,5 +1,0 @@
-#!/bin/zsh
-. common.shell
-
-LOG "Installing ntp"
-_install_pkg ntp ntpdate
