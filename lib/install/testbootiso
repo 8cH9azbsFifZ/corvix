@@ -1,3 +1,3 @@
 #!../runscript
-sudo modprobe kqemu
+#sudo modprobe kqemu
 qemu -cdrom ~/corvix.iso

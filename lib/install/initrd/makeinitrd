@@ -1,4 +1,7 @@
 #!../../runscript
+
+. functions
+
 _fetch_initrd() {
    TREE=$1
    [[ -z $TREE ]] && DIE "Missing tree"
