@@ -1,11 +1,6 @@
 #!/bin/zsh
-. common.shell
-. debian
-
-LOG "Installing /opt/cluster system"
-
 _exchange() {
-   LOG "   exchange $1 by $2"
+   echo "   exchange $1 by $2"
    [[ -e $1 ]] && rm -rf $1
    ln -s $2 $1
 }   

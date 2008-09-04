@@ -1,42 +1,34 @@
 #!/bin/zsh
-. common.shell
-
 ver_maui=3.2.6p19
 ver_torque=2.1.6
 
-LOG "Installing torque $ver_torque and maui $ver_maui ..."
-
 _prepare() {
-   LOG "   Prepare installation"
    [[ -d /usr/src/cluster ]] || mkdir -p /usr/src/cluster
    cd /usr/src/cluster
 
-   _ wget http://www.clusterresources.com/downloads/torque/torque-$ver_torque.tar.gz
-   _ wget http://www.clusterresources.com/downloads/maui/maui-$ver_maui.tar.gz
+   wget http://www.clusterresources.com/downloads/torque/torque-$ver_torque.tar.gz
+   wget http://www.clusterresources.com/downloads/maui/maui-$ver_maui.tar.gz
 
-   _ tar xzf torque-$ver_torque.tar.gz
-   _ tar xzf maui-$ver_maui.tar.gz
+   tar xzf torque-$ver_torque.tar.gz
+   tar xzf maui-$ver_maui.tar.gz
 }
 
 _compile_torque() {
-   LOG "   Compiling torque"
    cd /usr/src/cluster/torque-$ver_torque
-   _ ./configure --enable-server --enable-monitor --enable-clients --enable-syslog
-   _ make -j 2
-   _ make install
+   ./configure --enable-server --enable-monitor --enable-clients --enable-syslog
+   make -j 2
+   make install
 }   
 _compile_maui() {   
-   LOG "   Compiling Maui"
    cd /usr/src/cluster/maui-$ver_maui
    export MAUIADMIN=root
-   _ ./configure --with-spooldir=/var/spool/torque --with-pbs=/usr/local
-   _ make -j 2
-   _ make install
+   ./configure --with-spooldir=/var/spool/torque --with-pbs=/usr/local
+   make -j 2
+   make install
 }
 
 _postinstall() {
-   LOG "   Postinstall stuff"
-   _ chmod aog+rwx /var/spool/torque/spool
+   chmod aog+rwx /var/spool/torque/spool
 }
 
 _prepare

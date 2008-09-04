@@ -1,8 +1,4 @@
 #!/bin/zsh
-. common.shell
-
-LOG "Installing nis"
-
 _config_client() {
 cat << eof >> $target/etc/group
 +:::
@@ -27,11 +23,11 @@ cat << eof >> /etc/ypserv.securenets
 0.0.0.0  0.0.0.0 
 eof
 
-PAUSE "ALL = passwd shadow group hosts rpc services netid protocols netgrp  // line 114: add"
+echo "ALL = passwd shadow group hosts rpc services netid protocols netgrp  // line 114: add"
+read
 vi /var/yp/Makefile
 
 mkdir /etc/skel/public_html
 
 
 _config_client
-PAUSE "DISABLED"
