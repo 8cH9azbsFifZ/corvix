@@ -1,5 +1,0 @@
-#!/bin/zsh
-. common.shell
-
-LOG "Networking"
-PAUSE "Critical: edit interfaces: /opt/cluster/etc/network/interfaces"
