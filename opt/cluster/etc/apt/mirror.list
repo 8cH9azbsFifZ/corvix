@@ -17,12 +17,17 @@ set _tilde 0
 ##
 ## Example sources
 ##
+deb http://ftp.uni-kl.de/debian/ etch main contrib non-free main/debian-installer
+deb-src http://ftp.uni-kl.de/debian/ etch main contrib non-free
+deb http://security.debian.org/ etch/updates main contrib non-free
+deb-src http://security.debian.org/ etch/updates main contrib non-free
+deb ftp://debian.netcologne.de/debian-multimedia.org etch main
+deb-src ftp://debian.netcologne.de/debian-multimedia.org etch main
+
 deb http://ftp.uni-kl.de/debian/ lenny main contrib non-free main/debian-installer
 deb-src http://ftp.uni-kl.de/debian/ lenny main contrib non-free
-
 deb http://security.debian.org/ lenny/updates main contrib non-free
 deb-src http://security.debian.org/ lenny/updates main contrib non-free
-
 deb ftp://debian.netcologne.de/debian-multimedia.org lenny main
 deb-src ftp://debian.netcologne.de/debian-multimedia.org lenny main
 
