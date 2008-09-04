@@ -13,16 +13,17 @@ _configure_zsh() {
 }
 
 _configure_debian() {
-   LOG "   Configuring DEBIAN..."   
+   distro=lenny
+   LOG "   Configuring DEBIAN... "$distro
 cat << eof > $root/etc/apt/sources.list
-deb http://ftp.uni-kl.de/debian/ etch main contrib non-free
-deb-src http://ftp.uni-kl.de/debian/ etch main contrib non-free
+deb http://ftp.uni-kl.de/debian/ $distro main contrib non-free
+deb-src http://ftp.uni-kl.de/debian/ $distro main contrib non-free
 
-deb http://security.debian.org/ etch/updates main contrib
-deb-src http://security.debian.org/ etch/updates main contrib
+deb http://security.debian.org/ $distro/updates main contrib
+deb-src http://security.debian.org/ $distro/updates main contrib
 
-deb ftp://ftp.uni-kl.de/debian-multimedia etch main
-deb-src ftp://ftp.uni-kl.de/debian-multimedia etch main
+deb ftp://ftp.uni-kl.de/debian-multimedia $distro main
+deb-src ftp://ftp.uni-kl.de/debian-multimedia $distro main
 eof
 
    apt-get update
@@ -42,7 +43,7 @@ for list in $(find ./packages/ -name "*" -type f); do
    done
 done
 
-LOG "Processing installation scripts"
-for script in $(find . -name "install-*" | sort); do
-   _ $script
-done
+#LOG "Processing installation scripts"
+#for script in $(find . -name "install-*" | sort); do
+#   _ $script
+#done

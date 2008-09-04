@@ -9,3 +9,12 @@ nfs-common
 nfs-kernel-server
 apt-mirror
 ntp
+ganglia-monitor 
+gmetad 
+apache2 
+php5 
+libapache2-mod-php5
+phpmyadmin 
+php5-mysql 
+php4-mysql
+dhcp3-server
