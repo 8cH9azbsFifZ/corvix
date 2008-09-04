@@ -1,7 +1,4 @@
 #!/bin/zsh
-. /opt/cluster/lib/common.shell
-
-LOG "Let's play Münchhausen...."
 PATH=$PATH:/opt/cluster/bin:/opt/cluster/sbin:/opt/cluster/lib
 export PATH
 
@@ -14,7 +11,6 @@ _configure_zsh() {
 
 _configure_debian() {
    distro=lenny
-   LOG "   Configuring DEBIAN... "$distro
 cat << eof > $root/etc/apt/sources.list
 deb http://ftp.uni-kl.de/debian/ $distro main contrib non-free
 deb-src http://ftp.uni-kl.de/debian/ $distro main contrib non-free
@@ -26,9 +22,9 @@ deb ftp://ftp.uni-kl.de/debian-multimedia $distro main
 deb-src ftp://ftp.uni-kl.de/debian-multimedia $distro main
 eof
 
-   apt-get update
-   apt-get -y --force-yes install debian-multimedia-keyring
-   apt-get update
+   sudo apt-get update
+   sudo apt-get -y --force-yes install debian-multimedia-keyring
+   sudo apt-get update
 }
 
 
@@ -36,10 +32,9 @@ _configure_zsh
 _configure_debian
 
 
-LOG "Installing additional packages"
 for list in $(find ./packages/ -name "*" -type f); do
    for pkg in $(cat $list); do
-      _install_pkg $pkg
+      sudo apt-get -y --force-yes install $pkg
    done
 done
 
