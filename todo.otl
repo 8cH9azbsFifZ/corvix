@@ -1,5 +1,7 @@
 Bootimage / Installation procedure					--- YUDI ---
 ==================================
+	remove toy stuff :( common.shell
+
 	initrd for corvix not working
 		ipconfig not found
 		awk  not found?
@@ -7,9 +9,6 @@ Bootimage / Installation procedure					--- YUDI ---
 	enable user interaction for networking!
 	install procedure
 		include debootstrap stuff
-
-	BUGs
-		cp /usr/lib/grub/i386-pc/* grub/
 
 
 
