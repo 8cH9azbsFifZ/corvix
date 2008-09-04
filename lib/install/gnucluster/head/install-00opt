@@ -22,7 +22,7 @@ _ganglia() {
 
 _mirror() { 
    _exchange /etc/apt/mirror.list /opt/cluster/etc/apt/mirror.list
-   _exchange /var/spool/apt-mirror/mirror/ /opt/cluster/lib/www/mirror
+   _exchange /var/spool/apt-mirror/mirror /opt/cluster/lib/www/mirror
 }   
 
 _www() {
