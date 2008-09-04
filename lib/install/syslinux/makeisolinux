@@ -1,27 +1,21 @@
-#!../../runscript
+#!/bin/zsh
 
-LOG "Syslinux..."
-
-#_build_syslinux() {
-#   cd syslinux-$vers 
-#   _ make
-#   cd ../..
-#}
+echo "Syslinux..."
 
 _fetch_sources() {
-   LOGp "Preparing isolinux..."
+   echo "Preparing isolinux..."
    ESRC_URI=http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-$vers.tar.gz
    [[ -d tmp ]] || mkdir tmp
    [[ -e tmp/syslinux-$vers.tar.gz ]] && return 0
-   _ wget $ESRC_URI -O tmp/syslinux-$vers.tar.gz
+   wget $ESRC_URI -O tmp/syslinux-$vers.tar.gz
    #_ sudo apt-get -y --force-yes build-dep syslinux
    cd tmp
-   _ tar xzf syslinux-$vers.tar.gz
+   tar xzf syslinux-$vers.tar.gz
    cd ..
 }
 
 _make_isolinux() {
-   LOGp "Make isolinux image"
+   echo "Make isolinux image"
    [[ -d $target/isolinux ]] || mkdir -p $target/isolinux
    cp tmp/syslinux-$vers/core/isolinux.bin $target/isolinux
    cp patches/* $target/isolinux
@@ -29,21 +23,21 @@ _make_isolinux() {
 }
 
 _make_syslinux() {
-   LOGp "Make syslinux image"
+   echo "Make syslinux image"
    [[ -d $target ]] || mkdir -p $target
    cp patches/* $target
    cp splash/splash.rle $target
 }
 
 _make_pxelinux() {
-   LOGp "Make pxelinux image"
+   echo "Make pxelinux image"
    [[ -d $target/pxelinux.cfg ]] || mkdir -p $target/pxelinux.cfg
    cp tmp/syslinux-$vers/core/pxelinux.0 $target/pxelinux.0
    cat patches/syslinux.cfg > $target/pxelinux.cfg/default
 }
 
 _splash() {
-   LOGp "Splash image"
+   echo "Splash image"
    #cd splash
    #pngtopnm splash.png | gzip -9 > splash.ppm.gz
    #gzip -cd splash.ppm.gz | ppmtolss16 \#000000=0 \#d0d0d0=7 \#f6f6f6=15 > splash.lss
