@@ -1,4 +1,6 @@
 #!/bin/zsh
+[[ -e tmp/isoimage/boot/ ]] || mkdir -p tmp/isoimage/boot/
+
 cd initrd
 ./makeinitrd
 cd ..

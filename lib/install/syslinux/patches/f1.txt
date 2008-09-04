@@ -8,8 +8,3 @@
 07debian-rescue07
 
 06debian-preseed07       (preseeded debian/etch)
-
-06corvix07            ?? (preseeded debian/etch & egatrop)
-07corvix-rescue07     ??
-04corvix-ch07         ?? (cluster head server)
-04corvix-cn07         !! (cluster node)
