@@ -13,3 +13,5 @@
 #echo "Copying files"
 #[[ -e /srv/tftp ]] || mkdir -p /srv/tftp
 cp tmp/isoimage/* /opt/cluster/lib/pxeboot/tftp/ -r
+chmod -R aog+rx /opt/cluster/lib/pxeboot/tftp/
+/etc/init.d/xinetd restart
