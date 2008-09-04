@@ -1,15 +1,15 @@
 #!/bin/zsh
 
-echo "You need: dhcpd, tftp-hpa"
-echo "Ok?"
-read
+#echo "You need: dhcpd, tftp-hpa"
+#echo "Ok?"
+#read
 
-sudo apt-get install dhcpd tftpd-hpa
+#sudo apt-get install dhcpd tftpd-hpa
 
-echo "You want to look at our corvix /etc/dhcpd.conf, /etc/tftp"
-echo "Ok?"
-read
+#echo "You want to look at our corvix /etc/dhcpd.conf, /etc/tftp"
+#echo "Ok?"
+#read
 
-echo "Copying files"
-[[ -e /srv/tftp ]] || mkdir -p /srv/tftp
-cp tmp/isoimage/* /srv/tftp -r
+#echo "Copying files"
+#[[ -e /srv/tftp ]] || mkdir -p /srv/tftp
+cp tmp/isoimage/* /opt/cluster/lib/pxeboot/tftp/ -r
