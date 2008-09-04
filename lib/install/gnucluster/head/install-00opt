@@ -10,12 +10,14 @@ _exchange() {
    ln -s $2 $1
 }   
 
-_exchange /etc/profile /opt/cluster/etc/profile
+_login() {
+   _exchange /etc/profile /opt/cluster/etc/profile
+}   
 
 _networking() {
    _exchange /etc/hosts /opt/cluster/etc/hosts
    _exchange /etc/dhcpd.conf /opt/cluster/etc/dhcpd.conf
-   _exchange /etc/network/interfaces /opt/cluster/etc/network/interfaces
+#   _exchange /etc/network/interfaces /opt/cluster/etc/network/interfaces
 }   
 
 _ganglia() {
@@ -55,4 +57,15 @@ _queue() {
    _exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
    _exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
    _exchange /var/spool/torque/server_priv/nodes /opt/cluster/etc/queue/server_priv/nodes
-}   
+}  
+
+cp opt /opt/cluster -r
+_login
+_networking
+_ganglia
+_mirror
+_www
+_nfs
+_nis
+_pxeboot
+_queue
