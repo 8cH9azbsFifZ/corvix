@@ -15,7 +15,7 @@ _prepare() {
 
 _compile_torque() {
    cd /usr/src/cluster/torque-$ver_torque
-   ./configure --enable-server --enable-monitor --enable-clients --enable-syslog
+   ./configure --enable-monitor --enable-clients --enable-syslog
    make -j 2
    make install
 }   

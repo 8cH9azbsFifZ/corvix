@@ -12,19 +12,22 @@ _configure_zsh() {
 _configure_debian() {
    distro=lenny
 cat << eof > $root/etc/apt/sources.list
-deb http://ftp.uni-kl.de/debian/ $distro main contrib non-free
-deb-src http://ftp.uni-kl.de/debian/ $distro main contrib non-free
+deb http://10.1.1.1/mirror/ftp.uni-kl.de/debian/ $distro main contrib non-free
+deb-src http://10.1.1.1/mirror/ftp.uni-kl.de/debian/ $distro main contrib non-free
 
-deb http://security.debian.org/ $distro/updates main contrib
-deb-src http://security.debian.org/ $distro/updates main contrib
+deb http://10.1.1.1/mirror/security.debian.org/ $distro/updates main contrib
+deb-src http://10.1.1.1/mirror/security.debian.org/ $distro/updates main contrib
 
-deb ftp://ftp.uni-kl.de/debian-multimedia $distro main
-deb-src ftp://ftp.uni-kl.de/debian-multimedia $distro main
+deb ftp://10.1.1.1/mirror/ftp.uni-kl.de/debian-multimedia $distro main
+deb-src ftp://10.1.1.1/mirror/ftp.uni-kl.de/debian-multimedia $distro main
 eof
 
    apt-get update
    apt-get -y --force-yes install debian-multimedia-keyring
    apt-get update
+   apt-get -y --force-yes install nfs-common
+   apt-get -y --force-yes upgrade
+   apt-get dist-upgrade
 }
 
 
