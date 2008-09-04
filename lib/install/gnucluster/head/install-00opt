@@ -12,6 +12,7 @@ _login() {
 _networking() {
    _exchange /etc/hosts /opt/cluster/etc/dns/hosts
    _exchange /etc/dhcpd.conf /opt/cluster/etc/dhcp/dhcpd.conf
+   _exchange /etc/dhcp3/dhcpd.conf /opt/cluster/etc/dhcp/dhcpd.conf
 #   _exchange /etc/network/interfaces /opt/cluster/etc/network/interfaces
 }   
 
