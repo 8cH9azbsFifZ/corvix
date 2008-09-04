@@ -1,13 +1,13 @@
 #!/bin/zsh
 
-distro=etch
-url=http://ftp.de.debian.org/debian/dists/$distro/main/installer-i386/current/images/netboot/netboot.tar.gz
+for distro in etch;do
+   url=http://ftp.de.debian.org/debian/dists/$distro/main/installer-i386/current/images/netboot/netboot.tar.gz
 
-target=../tmp/isoimage/boot/
+   target=../tmp/isoimage/boot/
 
-[[ -d tmp ]] || mkdir -p tmp
-[[ -e tmp/netboot.tar.gz ]] || wget $url -O tmp/netboot.tar.gz
-[[ -e tmp/debian-installer/i386/initrd.gz ]] || tar xzf tmp/netboot.tar.gz -C tmp
-cp tmp/debian-installer/i386/initrd.gz $target
-cp tmp/debian-installer/i386/linux $target
-
+   [[ -d tmp/$distro ]] || mkdir -p tmp/$distro
+   [[ -e tmp/$distro/netboot.tar.gz ]] || wget $url -O tmp/$distro/netboot.tar.gz
+   [[ -e tmp/$distro/debian-installer/i386/initrd.gz ]] || tar xzf tmp/$distro/netboot.tar.gz -C tmp/$distro/
+   cp tmp/$distro/debian-installer/i386/initrd.gz $target/initrd.gz
+   cp tmp/$distro/debian-installer/i386/linux $target/linux
+done
