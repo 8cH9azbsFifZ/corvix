@@ -22,9 +22,9 @@ deb ftp://ftp.uni-kl.de/debian-multimedia $distro main
 deb-src ftp://ftp.uni-kl.de/debian-multimedia $distro main
 eof
 
-   sudo apt-get update
-   sudo apt-get -y --force-yes install debian-multimedia-keyring
-   sudo apt-get update
+   apt-get update
+   apt-get -y --force-yes install debian-multimedia-keyring
+   apt-get update
 }
 
 
@@ -34,7 +34,7 @@ _configure_debian
 
 for list in $(find ./packages/ -name "*" -type f); do
    for pkg in $(cat $list); do
-      sudo apt-get -y --force-yes install $pkg
+      apt-get -y --force-yes install $pkg
    done
 done
 
