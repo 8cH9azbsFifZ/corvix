@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 _make_isoimage() {
-   LOG "Make isoimage"
+   echo "Make isoimage"
    old=$PWD
    cd $target
    [[ -e isolinux/isolinux.bin ]] || exit

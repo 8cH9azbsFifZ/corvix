@@ -21,23 +21,5 @@ LABEL debian-preseed
    kernel /boot/linux
    append vga=normal initrd=/boot/debpre.gz debian-installer/framebuffer=false preseed/file=/preseed.cfg  --
 
-LABEL corvix
-   kernel /boot/linux
-   append vga=normal initrd=/boot/corvix.gz --
-
-LABEL corvix-rescue
-   kernel /boot/linux
-   append vga=normal initrd=/boot/corvix.gz rescue/enable=true --
-
-LABEL corvix-ch
-   kernel /boot/linux
-   append initrd=/boot/corvixch.gz --
-
-LABEL corvix-cn
-   kernel /boot/linux
-   append initrd=/boot/corvixcn.gz --
-
-
-
 PROMPT 1
 TIMEOUT 0
