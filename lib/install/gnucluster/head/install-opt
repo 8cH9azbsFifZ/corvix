@@ -12,39 +12,47 @@ _exchange() {
 
 _exchange /etc/profile /opt/cluster/etc/profile
 
-# Networking
-_exchange /etc/hosts /opt/cluster/etc/hosts
-_exchange /etc/dhcpd.conf /opt/cluster/etc/dhcpd.conf
-_exchange /etc/network/interfaces /opt/cluster/etc/network/interfaces
+_networking() {
+   _exchange /etc/hosts /opt/cluster/etc/hosts
+   _exchange /etc/dhcpd.conf /opt/cluster/etc/dhcpd.conf
+   _exchange /etc/network/interfaces /opt/cluster/etc/network/interfaces
+}   
 
-# Ganglia
-_exchange /etc/gmond.conf /opt/cluster/etc/ganglia/gmond.conf
-_exchange /etc/gmetad.conf /opt/cluster/etc/ganglia/gmetad.conf
+_ganglia() {
+   _exchange /etc/gmond.conf /opt/cluster/etc/ganglia/gmond.conf
+   _exchange /etc/gmetad.conf /opt/cluster/etc/ganglia/gmetad.conf
+}   
 
-# Mirror
-_exchange /etc/apt/mirror.list /opt/cluster/etc/apt/mirror.list
-_exchange /var/spool/apt-mirror/mirror/ /opt/cluster/pxeboot/mirror
+_mirror() { 
+   _exchange /etc/apt/mirror.list /opt/cluster/etc/apt/mirror.list
+   _exchange /var/spool/apt-mirror/mirror/ /opt/cluster/pxeboot/mirror
+}   
 
-# WWW
-_exchange /var/www /opt/cluster/www
+_www() {
+   _exchange /var/www /opt/cluster/www
+}   
 
-# NFS
-_exchange /etc/exports /opt/cluster/etc/nfs/exports
+_nfs() {
+   _exchange /etc/exports /opt/cluster/etc/nfs/exports
+}   
 
-# NIS
-_exchange /etc/default/nis /opt/cluster/etc/nis/nis
-_exchange /etc/defaultdomain /opt/cluster/etc/nis/defaultdomain
-_exchange /etc/ypserv.securenets /opt/cluster/etc/nis/ypserv.securenets
-_exchange /var/yp/Makefile /opt/cluster/etc/nis/Makefile
-_exchange /etc/nsswitch.conf /opt/cluster/etc/nis/nsswitch.conf
+_nis() {
+   _exchange /etc/default/nis /opt/cluster/etc/nis/nis
+   _exchange /etc/defaultdomain /opt/cluster/etc/nis/defaultdomain
+   _exchange /etc/ypserv.securenets /opt/cluster/etc/nis/ypserv.securenets
+   _exchange /var/yp/Makefile /opt/cluster/etc/nis/Makefile
+   _exchange /etc/nsswitch.conf /opt/cluster/etc/nis/nsswitch.conf
+}
 
-# PXEBOOT
-_exchange /etc/default/tftpd-hpa /opt/cluster/etc/tftp/tftpd-hpa
+_pxeboot() {
+   _exchange /etc/default/tftpd-hpa /opt/cluster/etc/tftp/tftpd-hpa
+}   
 
-# Queue
-_exchange /var/spool/torque/maui.cfg /opt/cluster/etc/queue/maui.cfg
-_exchange /var/spool/torque/servername /opt/cluster/etc/queue/server_name
-_exchange /var/spool/torque/mom_priv/config /opt/cluster/etc/queue/mom_priv/config
-_exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
-_exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
-_exchange /var/spool/torque/server_priv/nodes /opt/cluster/etc/queue/server_priv/nodes
+_queue() {
+   _exchange /var/spool/torque/maui.cfg /opt/cluster/etc/queue/maui.cfg
+   _exchange /var/spool/torque/servername /opt/cluster/etc/queue/server_name
+   _exchange /var/spool/torque/mom_priv/config /opt/cluster/etc/queue/mom_priv/config
+   _exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
+   _exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
+   _exchange /var/spool/torque/server_priv/nodes /opt/cluster/etc/queue/server_priv/nodes
+}   
