@@ -1,5 +1,6 @@
 syslinux 
 dhcp
+xinetd
 tftp-hpa
 arping 
 mtools

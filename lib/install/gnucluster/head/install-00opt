@@ -43,7 +43,8 @@ _nis() {
 }
 
 _pxeboot() {
-   _exchange /etc/default/tftpd-hpa /opt/cluster/etc/tftp/tftpd-hpa
+#   _exchange /etc/default/tftpd-hpa /opt/cluster/etc/tftp/tftpd-hpa
+   _exchange /etc/xinet.d/tftp opt/etc/tftp/tftp
 }   
 
 _queue() {
