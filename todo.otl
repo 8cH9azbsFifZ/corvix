@@ -16,12 +16,6 @@ install system scripts								--- GEROLF ---
 ======================
 	head server
 		dnsmasq ;)
-		create mirror
-		install opt/cluster stuff
-	slaves
-		adapt to head mirror
-
-
 
 
 here come the low priority stuff
