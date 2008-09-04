@@ -1,34 +1,5 @@
 #!/bin/zsh
 
-initrd_unpack() {
-initrd=$1
-target=$2
-[[ -z $2 ]] && target=initrd.tmp
-[[ -e $target ]] && exit
-mkdir $target
-[[ ! -e $initrd ]] && exit
-cd $target
-fakeroot << endf
-zcat ../$initrd | cpio -i --make-directories
-endf
-}
-
-initrd_create() {
-ONM=$2
-[[ -d $1 ]] || exit
-[[ -z $ONM ]] && ONM=$PWD/new-initrd
-[[ -z $2 ]] && exit
-cd $1
-for i in `find . -name '*~'`; do rm $i; done
-TM=/tmp/tmp-$$
-fakeroot << endf
-find .|cpio -H newc -o |gzip > $TM
-endf
-cd - > /dev/null 2>&1
-mv $TM $ONM
-}
-
-
 _fetch_initrd() {
    TREE=$1
    [[ -z $TREE ]] && exit 
