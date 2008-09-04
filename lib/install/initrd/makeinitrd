@@ -2,9 +2,8 @@
 
 _fetch_initrd() {
    TREE=$1
-   [[ -z $TREE ]] && exit 
+   [[ -z $TREE ]] && exit
    url=http://ftp.de.debian.org/debian/dists/$TREE/main/installer-i386/current/images/netboot/netboot.tar.gz
-   echo "Fetching initrd:$none $url"
    [[ -d tmp/debian ]] || mkdir -p tmp/debian
    [[ -e tmp/debian/netboot.tar.gz ]] || wget $url -O tmp/debian/netboot.tar.gz
    [[ -e tmp/debian/debian-installer/i386/initrd.gz ]] || tar xzf tmp/debian/netboot.tar.gz -C tmp/debian
@@ -16,41 +15,6 @@ _fetch_initrd() {
 _make_kernel_debian() {
    cp tmp/debian/debian-installer/i386/linux $target/linux
 }
-
-_make_initrd_debian() {
-   echo "Make initrd: debian"
-   cp patches/debian_preseed/* $initrd
-   initrd_create $initrd $target/corvix.gz
-}
-
-_make_initrd_debian_preseed() {
-   echo "Make initrd: debian preseed"
-   cp patches/debian_preseed/* $initrd
-   initrd_create $initrd $target/corvix.gz
-}
-
-_make_initrd_corvix() {
-   "Make initrd: corvix"
-   cp patches/common/* $initrd -r
-   cp patches/corvix/* $initrd -r
-   initrd_create $initrd $target/corvix.gz
-}
-
-_make_initrd_corvix_ch() {
-   echo "Make initrd: corvix-ch"
-   cp patches/common/* $initrd -r
-   cp patches/head/* $initrd -r
-   rm $initrd/preseed.cfg
-   initrd_create $initrd $target/corvixch.gz
-}  
-
-_make_initrd() {
-   _make_initrd_debian
-   _make_initrd_debian_preseed
-   _make_initrd_corvix
-#   _make_initrd_corvix_ch
-}
-
 
 echo "Initrds..."
 initrd=tmp/debian/initrd
