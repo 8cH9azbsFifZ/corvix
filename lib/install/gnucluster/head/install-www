@@ -1,9 +1,0 @@
-#!/bin/zsh
-. common.shell
-
-LOG "Installing www"
-
-_install_pkg apache2 php5 libapache2-mod-php5
-_install_pkg phpmyadmin php5-mysql php4-mysql
-
-PAUSE "NB: /opt/cluster/www"

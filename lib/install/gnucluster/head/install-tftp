@@ -1,6 +1,0 @@
-#!/bin/zsh
-. common.shell
-
-LOG "Installing tftp"
-_install_pkg tftp-hpa syslinux
-
