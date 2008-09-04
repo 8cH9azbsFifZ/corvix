@@ -26,7 +26,6 @@ find .|cpio -H newc -o |gzip > $TM
 endf
 cd - > /dev/null 2>&1
 mv $TM $ONM
-echo "   done."
 }
 
 

@@ -1,14 +1,13 @@
-#!/bin/zsh
+#!../runscript
 
 _make_isoimage() {
    LOG "Make isoimage"
    old=$PWD
    cd $target
-   [[ -e isolinux/isolinux.bin ]] || exit
-   [[ -e isolinux/boot.cat ]] || exit
-   mkisofs -R -V corvix_bootcd -o ~/corvix.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -J -r -q -boot-info-table ./
-   cd $old
+   _exists isolinux/isolinux.bin isolinux/boot.cat
+   _ mkisofs -R -V corvix_bootcd -o ~/corvix.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -J -r -q -boot-info-table ./
+    cd $old
 }
 target=tmp/isoimage
 [[ -d $target ]] || mkdir -p $target
-_make_isoimage || exit 
+_make_isoimage || DIE ":/"
