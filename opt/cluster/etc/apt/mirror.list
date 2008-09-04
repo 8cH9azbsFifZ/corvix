@@ -17,17 +17,16 @@ set _tilde 0
 ##
 ## Example sources
 ##
-deb http://ftp.uni-kl.de/debian/ etch main contrib non-free
-deb-src http://ftp.uni-kl.de/debian/ etch main contrib non-free
+deb http://ftp.uni-kl.de/debian/ lenny main contrib non-free
+deb-src http://ftp.uni-kl.de/debian/ lenny main contrib non-free
 
-deb http://security.debian.org/ etch/updates main contrib non-free
-deb-src http://security.debian.org/ etch/updates main contrib non-free
+deb http://security.debian.org/ lenny/updates main contrib non-free
+deb-src http://security.debian.org/ lenny/updates main contrib non-free
 
-deb ftp://debian.netcologne.de/debian-multimedia.org etch main
-deb-src ftp://debian.netcologne.de/debian-multimedia.org etch main
+deb ftp://debian.netcologne.de/debian-multimedia.org lenny main
+deb-src ftp://debian.netcologne.de/debian-multimedia.org lenny main
 
-deb http://ftp.uni-kl.de/debian-local etch-unikl main unikl
+#deb http://ftp.uni-kl.de/debian-local etch-unikl main unikl
 
-deb http://lmello.virt-br.org/debian ./
-deb-src http://lmello.virt-br.org/debian ./
-
+#deb http://lmello.virt-br.org/debian ./
+#deb-src http://lmello.virt-br.org/debian ./
