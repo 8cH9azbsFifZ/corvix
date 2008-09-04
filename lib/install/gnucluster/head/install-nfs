@@ -1,6 +1,0 @@
-#!/bin/zsh
-. common.shell
-
-LOG "Installing nfs"
-_install_pkg nfs-common portmap nfs-kernel-server
-PAUSE "NB: /opt/cluster/etc/nfs/exports"
