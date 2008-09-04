@@ -1,13 +1,15 @@
-#!../runscript
+#!/bin/zsh
 
-LOG "You need: dhcpd, tftp-hpa"
-PAUSE "Ok?"
+echo "You need: dhcpd, tftp-hpa"
+echo "Ok?"
+read
 
 sudo apt-get install dhcpd tftpd-hpa
 
-LOG "You want to look at our corvix /etc/dhcpd.conf, /etc/tftp"
-PAUSE "Ok?"
+echo "You want to look at our corvix /etc/dhcpd.conf, /etc/tftp"
+echo "Ok?"
+read
 
-LOG "Copying files"
+echo "Copying files"
 [[ -e /srv/tftp ]] || mkdir -p /srv/tftp
 cp tmp/isoimage/* /srv/tftp -r
