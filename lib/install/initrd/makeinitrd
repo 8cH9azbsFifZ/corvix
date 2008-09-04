@@ -1,25 +1,12 @@
 #!/bin/zsh
 
-_fetch_initrd() {
-   TREE=$1
-   [[ -z $TREE ]] && exit
-   url=http://ftp.de.debian.org/debian/dists/$TREE/main/installer-i386/current/images/netboot/netboot.tar.gz
-   [[ -d tmp/debian ]] || mkdir -p tmp/debian
-   [[ -e tmp/debian/netboot.tar.gz ]] || wget $url -O tmp/debian/netboot.tar.gz
-   [[ -e tmp/debian/debian-installer/i386/initrd.gz ]] || tar xzf tmp/debian/netboot.tar.gz -C tmp/debian
-   [[ -d $initrd ]] && rm -rf $initrd
-   initrd_unpack tmp/debian/debian-installer/i386/initrd.gz 
-   mv initrd.tmp $initrd
-}
+url=http://ftp.de.debian.org/debian/dists/lenny/main/installer-i386/current/images/netboot/netboot.tar.gz
 
-_make_kernel_debian() {
-   cp tmp/debian/debian-installer/i386/linux $target/linux
-}
+target=../tmp/isoimage/boot/
 
-echo "Initrds..."
-initrd=tmp/debian/initrd
-target=../tmp/isoimage/boot
-[[ -d $target ]] || mkdir -p $target
-_fetch_initrd lenny
-_make_kernel_debian
-_make_initrd
+[[ -d tmp ]] || mkdir -p tmp
+[[ -e tmp/netboot.tar.gz ]] || wget $url -O tmp/netboot.tar.gz
+[[ -e tmp/debian-installer/i386/initrd.gz ]] || tar xzf tmp/netboot.tar.gz -C tmp
+cp tmp/debian-installer/i386/initrd.gz $target
+cp tmp/debian-installer/i386/linux $target
+
