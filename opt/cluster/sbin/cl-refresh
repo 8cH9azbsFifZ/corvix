@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# cat /etc/dhcp3/dhcpd.conf | awk '/host/&&/fixed-address/&&!/#/{gsub("host","");gsub("{","");gsub("}","");gsub("hardware","");gsub("ethernet","");gsub(";","");gsub("fixed-address","");host=$1;ip=$3}' 
+
+
 refresh_hosts() {
    echo "Refresh hosts"
    cat /etc/dhcp3/dhcpd.conf | awk '
