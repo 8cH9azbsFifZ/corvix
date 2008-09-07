@@ -16,9 +16,9 @@ refresh_hosts() {
 
 refresh_rgang() {
    echo "Refresh rgang"
-	cat /etc/hosts | awk '{print$2}' | grep node > /opt/cluster/etc/rgang/nodes
+	cat /etc/hosts | grep -v "a" | awk '{print$2}' | grep node > /opt/cluster/etc/rgang/nodes
 	cat /etc/hosts | awk '{print$2}' | grep nigol > /opt/cluster/etc/rgang/login
-   cat /etc/hosts | awk '{print$2}' > /opt/cluster/etc/rgang/all
+   cat /etc/hosts | grep -v "a" | awk '{print$2}' > /opt/cluster/etc/rgang/all
 }
 
 refresh_torque() {
