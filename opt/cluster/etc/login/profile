@@ -1,7 +1,7 @@
-LANGUAGE=en_US.utf8
-LC_ALL=en_US.utf8
-export $LANGUAGE
-export $LC_ALL
+#LANGUAGE=en_US.utf8
+#LC_ALL=en_US.utf8
+#export $LANGUAGE
+#export $LC_ALL
 
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/maui/bin"
 PATH="/opt/cluster/bin:/opt/cluster/lib:"$PATH
@@ -9,7 +9,7 @@ if [ "`id -u`" -eq 0 ]; then
   PATH="/opt/cluster/sbin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/maui/sbin:"$PATH
 fi
 PATH=".:"$PATH
-export $PATH
+export PATH
 
 if [ "$PS1" ]; then
   if [ "$BASH" ]; then
