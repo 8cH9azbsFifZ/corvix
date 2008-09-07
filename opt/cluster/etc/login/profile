@@ -27,9 +27,9 @@ fi
 umask 022
 
 if [[ `hostname` == head ]]; then
-        /opt/cluster/etc/banner-head
+        /opt/cluster/etc/login/banner-head
 else
-        /opt/cluster/etc/banner-login
+        /opt/cluster/etc/login/banner-login
 fi
 
-cat /opt/cluster/etc/news
+cat /opt/cluster/etc/login/news
