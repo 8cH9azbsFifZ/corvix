@@ -5,12 +5,12 @@ case "$1" in
         /usr/local/sbin/pbs_mom
         /usr/local/sbin/pbs_server
         echo "Starting maui scheduler: "
-	/usr/local/maui/sbin/maui
-	for job in `/usr/local/maui/bin/showq | awk '/Deferred/{print$1}'`; do 
-		echo Fixing job: $job; 
-		runjob -c $job; 
-		releasehold $job; 
-	done
+        /usr/local/maui/sbin/maui
+        for job in `/usr/local/maui/bin/showq | awk '/Deferred/{print$1}'`; do 
+		     echo Fixing job: $job; 
+		     runjob -c $job; 
+		     releasehold $job; 
+	     done
 
         ;;
   stop)
