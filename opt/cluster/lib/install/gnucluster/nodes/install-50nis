@@ -23,6 +23,7 @@ cat << eof >> /etc/ypserv.securenets
 0.0.0.0  0.0.0.0 
 eof
 
+echo "Exchange now manually (sucks) this line:"
 echo "ALL = passwd shadow group hosts rpc services netid protocols netgrp  // line 114: add"
 read
 vi /var/yp/Makefile
