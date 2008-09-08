@@ -1,14 +1,10 @@
+build-essential
 nasm
 gcc
-g77
 gfortran
-build-essential
 g++
 g++-3.4 
 g++-4.1 
-g77 
-gcc-3.4
-gcc-4.1 
 gmake
 git-core
 cvs

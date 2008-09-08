@@ -5,9 +5,8 @@ less
 most 
 psutils
 psmisc 
-rsync 
 gawk 
-librrd2
+librrd4
 vim
 mtools
 lynx 
