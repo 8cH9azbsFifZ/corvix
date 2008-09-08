@@ -3,6 +3,9 @@
 #export $LANGUAGE
 #export $LC_ALL
 
+TZ='Europe/Berlin'; export TZ
+
+
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/maui/bin"
 PATH="/opt/cluster/bin:/opt/cluster/lib:"$PATH
 if [ "`id -u`" -eq 0 ]; then
