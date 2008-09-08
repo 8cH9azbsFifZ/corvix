@@ -18,8 +18,8 @@ deb-src http://10.1.1.1/mirror/ftp.uni-kl.de/debian/ $distro main contrib non-fr
 deb http://10.1.1.1/mirror/security.debian.org/ $distro/updates main contrib
 deb-src http://10.1.1.1/mirror/security.debian.org/ $distro/updates main contrib
 
-deb ftp://10.1.1.1/mirror/ftp.uni-kl.de/debian-multimedia $distro main
-deb-src ftp://10.1.1.1/mirror/ftp.uni-kl.de/debian-multimedia $distro main
+deb http://10.1.1.1/mirror/debian.netcologne.de/debian-multimedia.org $distro main
+deb-src http://10.1.1.1/mirror/debian.netcologne.de/debian-multimedia.org $distro main
 eof
 
    apt-get update
