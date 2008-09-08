@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+mkdir -p /opt/cluster
+echo 10.1.1.1:/opt/cluster /opt/cluster nfs defaults,user,auto 0 0 >> /etc/fstab
+chmod aog+rx /opt
+chmod aog+rx /opt/cluster
+mount /opt/cluster
