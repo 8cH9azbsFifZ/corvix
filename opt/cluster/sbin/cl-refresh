@@ -16,7 +16,7 @@ refresh_hosts() {
 
 refresh_rgang() {
    echo "Refresh rgang"
-	cat /etc/hosts | grep -v "a" | awk '{print$2}' | grep r | grep n > /opt/cluster/etc/rgang/nodes
+	cat /etc/hosts | grep -v "a" | awk '{print$2}' | grep "r[0-9]n" > /opt/cluster/etc/rgang/nodes
 	cat /etc/hosts | awk '{print$2}' | grep nigol > /opt/cluster/etc/rgang/login
    cat /etc/hosts | grep -v "a" | awk '{print$2}' > /opt/cluster/etc/rgang/all
 }
