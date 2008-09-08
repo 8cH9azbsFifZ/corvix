@@ -1,5 +1,8 @@
 #!/bin/zsh
-. common.shell
 LOG "Clean /scratch"
-
-rm -rf /scratch/*
+if [[ -d /scratch ]]; then
+   rm -rf /scratch/*
+else
+   mkdir -p /scratch
+   chmod aog+rwx /scratch
+fi   
