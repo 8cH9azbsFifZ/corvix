@@ -16,14 +16,14 @@ _prepare() {
 _compile_torque() {
    cd /usr/src/cluster/torque-$ver_torque
    ./configure --enable-server --enable-monitor --enable-clients --enable-syslog
-   make -j 2
+   make -j 4
    make install
 }   
 _compile_maui() {   
    cd /usr/src/cluster/maui-$ver_maui
    export MAUIADMIN=root
    ./configure --with-spooldir=/var/spool/torque --with-pbs=/usr/local
-   make -j 2
+   make -j 4
    make install
 }
 
