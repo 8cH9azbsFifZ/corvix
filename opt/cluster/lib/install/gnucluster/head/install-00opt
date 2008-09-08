@@ -64,6 +64,7 @@ _queue_server() {
 
 _time() {
    _exchange /etc/timezone /opt/cluster/etc/time/timezone
+   _exchange /etc/default/ntpdate /opt/cluster/etc/time/ntpdate
 }
 
 mkdir /opt/cluster -p
