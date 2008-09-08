@@ -31,6 +31,9 @@ _queue_client() {
    _exchange /etc/rc2.d/S69queue-client /opt/cluster/etc/init/queue-client
 }
 
+_time() {
+   _exchange /etc/timezone /opt/cluster/etc/time/timezone
+}  
 
 if [[ ! -d /opt/cluster ]]; then
    mkdir -p /opt/cluster
@@ -43,3 +46,4 @@ fi
 _login 
 _queue
 _queue_client
+_time

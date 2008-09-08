@@ -62,9 +62,14 @@ _queue_server() {
    _exchange /etc/rc2.d/S69queue-server /opt/cluster/etc/init/queue-server
 }
 
+_time() {
+   _exchange /etc/timezone /opt/cluster/etc/time/timezone
+}
+
 mkdir /opt/cluster -p
 cp opt/* /opt/cluster -r
 
+_time
 _login
 _networking
 _ganglia
