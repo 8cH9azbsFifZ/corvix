@@ -21,7 +21,7 @@ refresh_rgang() {
    cat /etc/hosts | grep -v "a" | awk '{print$2}' > /opt/cluster/etc/rgang/all
    cat /etc/hosts | grep -v "a" | awk '{print$2}' | grep "r1n" > /opt/cluster/etc/rgang/rack1
    cat /etc/hosts | grep -v "a" | awk '{print$2}' | grep "r2n" > /opt/cluster/etc/rgang/rack2
-   cat /etc/hosts | grep -v "a" | awk '{print$2}' | grep "nas" > /opt/cluster/etc/rgang/nas
+   cat /etc/hosts | grep -v "a " | awk '{print$2}' | grep "nas" > /opt/cluster/etc/rgang/nas
 }
 
 refresh_torque() {
