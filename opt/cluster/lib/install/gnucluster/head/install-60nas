@@ -1,5 +1,5 @@
 #!/bin/zsh
-for i in $(seq 1 2); do 
+for i in $(seq 1 3); do 
    mkdir -p /mnt/nas$i
    echo "nas$i:/mnt/vol1 /mnt/nas$i nfs defaults,auto,exec 0 0">> /etc/fstab
    mount /mnt/nas$i
