@@ -13,9 +13,9 @@ update-rc.d nis defaults 98
 }
 
 
-cat << eof >> /etc/default/nis
-NISSERVER=master
-NISCLIENT=false
+cat << eof > /etc/default/nis
+NISSERVER=false
+NISCLIENT=yes
 eof
 
 cat << eof >> /etc/ypserv.securenets

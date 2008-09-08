@@ -13,7 +13,7 @@ update-rc.d nis defaults 98
 }
 
 
-cat << eof >> /etc/default/nis
+cat << eof > /etc/default/nis
 NISSERVER=master
 NISCLIENT=false
 eof
