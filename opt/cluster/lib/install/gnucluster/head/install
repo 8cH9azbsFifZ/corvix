@@ -35,12 +35,6 @@ _configure_zsh
 _configure_debian
 
 
-for list in $(find ./packages/ -name "*" -type f); do
-   for pkg in $(cat $list); do
-      apt-get -y --force-yes install $pkg
-   done
-done
-
 for script in $(find . -name "install-*" | sort); do
    _ $script
 done

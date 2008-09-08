@@ -1,0 +1,5 @@
+#!/bin/zsh
+for i in $(seq 1 4); do 
+   mkdir -p /mnt/nas$i
+   echo nas$i:/
+done   
