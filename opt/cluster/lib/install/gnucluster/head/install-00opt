@@ -62,11 +62,6 @@ _queue_server() {
    _exchange /etc/rc2.d/S69queue-server /opt/cluster/etc/init/queue-server
 }
 
-_queue_client() {
-   _exchange /etc/init.d/queue-client /opt/cluster/etc/init/queue-client
-   _exchange /etc/rc2.d/S69queue-client /opt/cluster/etc/init/queue-client
-}
-
 mkdir /opt/cluster -p
 cp opt/* /opt/cluster -r
 
