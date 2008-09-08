@@ -19,7 +19,7 @@ _nis() {
 
 _queue() {
    _exchange /var/spool/torque/maui.cfg /opt/cluster/etc/queue/maui.cfg
-   _exchange /var/spool/torque/servername /opt/cluster/etc/queue/server_name
+   _exchange /var/spool/torque/server_name /opt/cluster/etc/queue/server_name
    _exchange /var/spool/torque/mom_priv/config /opt/cluster/etc/queue/mom_priv/config
    _exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
    _exchange /var/spool/torque/mom_priv/epilogue /opt/cluster/etc/queue/mom_priv/epilogue.parallel
