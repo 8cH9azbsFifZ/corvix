@@ -23,21 +23,6 @@ cat << eof >> /etc/ypserv.securenets
 0.0.0.0  0.0.0.0 
 eof
 
-cat << eof > /etc/nsswitch.conf
-passwd:         nis compat
-group:          nis compat
-shadow:         nis compat
-hosts:          nis files dns
-networks:       files
-protocols:      db files
-services:       db files
-ethers:         db files
-rpc:            db files
-netgroup:       nis files
-
-eof
-
-
 cat /var/yp/Makefile | awk '/^ALL =/{$0="ALL = passwd shadow group hosts rpc services netid protocols netgrp"}{print}' > /tmp/1 && mv /tmp/1 /var/yp/Makefile
 
 mkdir /etc/skel/public_html
