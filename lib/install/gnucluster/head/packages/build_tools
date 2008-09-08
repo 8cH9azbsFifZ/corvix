@@ -1,14 +1,11 @@
 build-essential
 nasm
 gcc
+gcc-3.4 
 gfortran
 g++
-g++-3.4 
 g++-4.1 
-gmake
 git-core
 cvs
-svn
+subversion
 mpich-bin 
-libmpich1.0c2 
-libmpich1.0-dev

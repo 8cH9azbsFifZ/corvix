@@ -1,5 +1,5 @@
 emacs
-octave
+octave3.0
 gromacs
 gnuplot
 ipython
@@ -14,4 +14,5 @@ libhdf5-mpich-dev
 hdf5-tools
 python-scipy
 python-matplotlib
-python-pylab
+libhdf5-doc
+h5utils
