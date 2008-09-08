@@ -18,14 +18,4 @@ NISSERVER=false
 NISCLIENT=yes
 eof
 
-cat << eof >> /etc/ypserv.securenets
-#255.255.255.0 192.168.0.0  // line 14: IP range you permit
-0.0.0.0  0.0.0.0 
-eof
-
-cat /var/yp/Makefile | awk '/^ALL =/{$0="ALL = passwd shadow group hosts rpc services netid protocols netgrp"}{print}' > /tmp/1 && mv /tmp/1 /var/yp/Makefile
-
-mkdir /etc/skel/public_html
-
-
 _config_client
