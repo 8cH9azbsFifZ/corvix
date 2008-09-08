@@ -1,0 +1,2 @@
+apt-get -y --force-yes install linux-image-2.6-amd64 libc6-dev-amd64
+
