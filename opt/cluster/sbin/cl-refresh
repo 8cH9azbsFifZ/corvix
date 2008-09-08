@@ -30,6 +30,6 @@ refresh_torque() {
 
 refresh_hosts
 refresh_rgang
-refresh_hosts
-refresh_rgang
+#refresh_hosts
+#refresh_rgang
 refresh_torque
