@@ -27,6 +27,11 @@ _compile_maui() {
    make install
 }
 
+_make_mirror() {
+   cp /usr/src/cluster/torque-$ver_torque.tar.gz /opt/cluster/lib/www/corvix/
+   cp /usr/src/cluster/maui-$ver_maui.tar.gz /opt/cluster/lib/www/corvix/
+}
+
 _postinstall() {
    chmod aog+rwx /var/spool/torque/spool
 }
@@ -35,3 +40,4 @@ _prepare
 _compile_torque
 _compile_maui
 _postinstall
+_make_mirror
