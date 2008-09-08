@@ -36,5 +36,5 @@ _configure_debian
 
 
 for script in $(find . -name "install-*" | sort); do
-   _ $script
+   $script
 done
