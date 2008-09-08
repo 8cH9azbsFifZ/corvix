@@ -31,6 +31,12 @@ refresh_torque() {
    rgang all /etc/init.d/queue-client restart
 }
 
+refresh_users() {
+   cd /var/yp
+   make
+   /etc/init.d/nis restart
+}
+
 refresh_hosts
 refresh_rgang
 refresh_torque
