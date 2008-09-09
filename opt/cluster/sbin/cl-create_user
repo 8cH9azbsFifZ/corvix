@@ -1,6 +1,10 @@
 #!/bin/bash
+echo "$0 <user> <group>"
+user=$1
+group=$2
+[[ -z $2 ]] && exit
 
-useradd $1
+useradd --gid $group --home-dir /home/$group/$user $user
 
 echo "Now make the homedir and edit /etc/passwd" 
 
