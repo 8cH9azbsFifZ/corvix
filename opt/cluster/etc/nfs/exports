@@ -1,3 +1,4 @@
 /var/lib/ganglia/rrds 10.1.100.1/255.255.255.0(ro,no_root_squash,no_all_squash,sync,subtree_check)
 /opt/cluster 10.1.0.0/255.0.0.0(ro,no_root_squash,no_all_squash,sync,subtree_check)
+/usr/local/maui 10.1.0.0/255.0.0.0(ro,no_root_squash,no_all_squash,sync,subtree_check)
 
