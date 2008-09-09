@@ -22,7 +22,7 @@ _compile_torque() {
 _compile_maui() {   
    cd /usr/src/cluster/maui-$ver_maui
    export MAUIADMIN=root
-   ./configure --with-spooldir=/var/spool/torque --with-pbs=/usr/local
+   ./configure --with-spooldir=/var/spool/torque --with-pbs=/usr/local --with-key=666
    make -j 4
    make install
 }
