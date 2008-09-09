@@ -37,33 +37,19 @@ echo "Warning! Use internal hostname only."
 read
 /usr/local/sbin/pbs_server -t create
 cat << eof | qmgr 
-#
-# Create queues and set their attributes.
-#
-#
 # Create and define queue batch
-#
-#create queue batch
+create queue batch
 set queue batch queue_type = Execution
 set queue batch acl_host_enable = False
-#set queue batch resources_max.nodect = 6
 set queue batch resources_default.nodes = 1
 set queue batch resources_default.walltime = 01:00:00
-#set queue batch resources_available.nodect = 18
 set queue batch enabled = True
 set queue batch started = True
-#
 # Set server attributes.
-#
 set server scheduling = True
-#set server managers += scott@*.icluster.org
-#set server managers += wightman@*.icluster.org
-#set server operators += scott@*.icluster.org
-#set server operators += wightman@*.icluster.org
 set server default_queue = batch
 set server log_events = 511
 set server mail_from = adm
-#set server resources_available.nodect = 80
 set server scheduler_iteration = 600
 set server node_ping_rate = 300
 set server node_check_rate = 600
@@ -86,7 +72,6 @@ _postinstall() {
    chmod aog+rwx /var/spool/torque/spool
    _configure_queue
    _make_mirror
-   ./install-00opt
 }
 
 _prepare
