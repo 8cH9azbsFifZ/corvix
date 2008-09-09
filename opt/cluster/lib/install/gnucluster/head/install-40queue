@@ -56,10 +56,8 @@ set queue batch started = True
 # Set server attributes.
 #
 set server scheduling = True
-#set server managers = griduser@oahu.icluster.org
 #set server managers += scott@*.icluster.org
 #set server managers += wightman@*.icluster.org
-#set server operators = griduser@oahu.icluster.org
 #set server operators += scott@*.icluster.org
 #set server operators += wightman@*.icluster.org
 set server default_queue = batch
@@ -74,6 +72,10 @@ set server tcp_timeout = 6
 set server submit_hosts += nigol1
 set server submit_hosts += nigol2
 set server submit_hosts += head
+set server managers += root@nigol1
+set server operators += root@nigol1
+set server managers += root@nigol2
+set server operators += root@nigol2
 eof
 qterm
 }
