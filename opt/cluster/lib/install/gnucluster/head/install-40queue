@@ -32,12 +32,18 @@ _make_mirror() {
    cp /usr/src/cluster/maui-$ver_maui.tar.gz /opt/cluster/lib/www/corvix/
 }
 
+_virgin() {
+   echo "Test the server. Abort with Ctrl+C if its running."
+   /usr/local/sbin/pbs_server || /usr/local/sbin/pbs_server -t create
+}
+
 _postinstall() {
    chmod aog+rwx /var/spool/torque/spool
+   _virgin()
+   _make_mirror
 }
 
 _prepare
 _compile_torque
 _compile_maui
 _postinstall
-_make_mirror
