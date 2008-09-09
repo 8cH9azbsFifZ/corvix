@@ -26,7 +26,7 @@ refresh_rgang() {
 
 refresh_torque() {
    echo "Refresh torque"
-   cat /etc/hosts | grep "r[0-9]n[0-9]" |grep -v "a" | awk '{print$2" np=4"}' > /opt/cluster/etc/queue/nodes
+   cat /etc/hosts | grep "r[0-9]n[0-9]" |grep -v "a" | awk '{print$2" np=4"}' > /opt/cluster/etc/queue/server_priv/nodes
    /etc/init.d/queue-server restart
    rgang all /etc/init.d/queue-client restart
 }
