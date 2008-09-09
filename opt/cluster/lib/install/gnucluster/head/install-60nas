@@ -3,4 +3,6 @@ for i in $(seq 1 3); do
    mkdir -p /mnt/nas$i
    echo "nas$i:/mnt/vol1 /mnt/nas$i nfs defaults,auto,exec 0 0">> /etc/fstab
    mount /mnt/nas$i
-done   
+done  
+mkdir /usr/local/maui -p
+echo "head:/usr/local/maui /usr/local/maui nfs defaults,auto,exec 0 0">> /etc/fstab
