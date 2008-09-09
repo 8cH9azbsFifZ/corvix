@@ -41,6 +41,7 @@ _postinstall() {
    chmod aog+rwx /var/spool/torque/spool
    _virgin()
    _make_mirror
+   ./install-00opt
 }
 
 _prepare
