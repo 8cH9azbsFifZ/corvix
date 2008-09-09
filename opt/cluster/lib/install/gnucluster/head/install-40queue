@@ -35,7 +35,7 @@ _make_mirror() {
 _configure_queue() {
 echo "Warning! Use internal hostname only."
 read
-/usr/local/sbin/pbs_server -t create
+echo y | /usr/local/sbin/pbs_server -t create
 cat << eof | qmgr 
 # Create and define queue batch
 create queue batch
