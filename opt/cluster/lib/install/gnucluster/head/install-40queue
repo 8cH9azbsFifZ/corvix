@@ -76,6 +76,8 @@ set server managers += root@nigol1
 set server operators += root@nigol1
 set server managers += root@nigol2
 set server operators += root@nigol2
+# mailing
+set server mail_from="wap@physik.uni-kl.de"
 eof
 qterm
 }
