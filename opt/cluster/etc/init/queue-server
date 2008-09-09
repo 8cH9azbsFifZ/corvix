@@ -2,8 +2,8 @@
 case "$1" in
   start)
         echo "Starting torque server: "
-        /usr/local/sbin/pbs_mom &
         /usr/local/sbin/pbs_server &
+        /usr/local/sbin/pbs_mom &
         echo "Starting maui scheduler: "
         /usr/local/maui/sbin/maui &
         for job in `/usr/local/maui/bin/showq | awk '/Deferred/{print$1}'`; do 
@@ -15,7 +15,7 @@ case "$1" in
         ;;
   stop)
         echo "Shutting down maui scheduler: "
-        killall -KILL pbs_sched maui
+        killall -KILL maui
         echo "Shutting down torque server: "
         killall -KILL pbs_server
         killall -KILL pbs_mom
