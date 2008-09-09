@@ -70,6 +70,10 @@ set server scheduler_iteration = 600
 set server node_ping_rate = 300
 set server node_check_rate = 600
 set server tcp_timeout = 6
+#submit hosts
+set server submit_hosts += nigol1
+set server submit_hosts += nigol2
+set server submit_hosts += head
 eof
 qterm
 }
