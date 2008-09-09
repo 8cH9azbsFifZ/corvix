@@ -46,10 +46,10 @@ cat << eof | qmgr
 #create queue batch
 set queue batch queue_type = Execution
 set queue batch acl_host_enable = False
-set queue batch resources_max.nodect = 6
+#set queue batch resources_max.nodect = 6
 set queue batch resources_default.nodes = 1
 set queue batch resources_default.walltime = 01:00:00
-set queue batch resources_available.nodect = 18
+#set queue batch resources_available.nodect = 18
 set queue batch enabled = True
 set queue batch started = True
 #
@@ -65,7 +65,7 @@ set server scheduling = True
 set server default_queue = batch
 set server log_events = 511
 set server mail_from = adm
-set server resources_available.nodect = 80
+#set server resources_available.nodect = 80
 set server scheduler_iteration = 600
 set server node_ping_rate = 300
 set server node_check_rate = 600
