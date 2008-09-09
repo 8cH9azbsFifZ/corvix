@@ -2,10 +2,10 @@
 case "$1" in
   start)
         echo "Starting torque server: "
-        /usr/local/sbin/pbs_server &
-        /usr/local/sbin/pbs_mom &
+        /usr/local/sbin/pbs_server 
+        /usr/local/sbin/pbs_mom 
         echo "Starting maui scheduler: "
-        /usr/local/maui/sbin/maui &
+        /usr/local/maui/sbin/maui 
         for job in `/usr/local/maui/bin/showq | awk '/Deferred/{print$1}'`; do 
 		     echo Fixing job: $job; 
 		     runjob -c $job; 
