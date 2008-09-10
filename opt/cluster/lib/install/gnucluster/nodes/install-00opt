@@ -36,6 +36,10 @@ _time() {
    _exchange /etc/default/ntpdate /opt/cluster/etc/time/ntpdate
 }  
 
+_ganglia() {
+   _exchange /etc/gmond.conf /opt/cluster/etc/ganglia/gmond.conf
+}
+
 if [[ ! -d /opt/cluster ]]; then
    mkdir -p /opt/cluster
    echo 10.1.1.1:/opt/cluster /opt/cluster nfs defaults,user,auto,exec 0 0 >> /etc/fstab
@@ -48,3 +52,4 @@ _login
 _queue
 _queue_client
 _time
+_ganglia
