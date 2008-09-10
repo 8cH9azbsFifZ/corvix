@@ -1,29 +1,21 @@
-Bootimage / Installation procedure					--- YUDI ---
+Bootimage / Installation procedure			
 ==================================
-	remove toy stuff :( common.shell
-
-	initrd for corvix not working
-		ipconfig not found
-		awk  not found?
-			is busybox invoked the right way?
-	enable user interaction for networking!
-	install procedure
-		include debootstrap stuff
-
-
-
-install system scripts								--- GEROLF ---
-======================
-	head server
-		dnsmasq ;)
+	(1) Corvix poor mans install					--- YUDI ---
+		initrd for corvix not working
+			ipconfig not found
+			awk  not found?
+				is busybox invoked the right way?
+		enable user interaction for networking!
+		install procedure
+			include debootstrap stuff
+	(2) Corvix preeseeded install					--- GEROLF ---			
+		Preseeding doesn't really work (i.e. networking still asking for confirmations)
 
 
 here come the low priority stuff
 ===============================================================
 
 postinstall scripts
-	profiles
-		make complete (debian) packagae lists for different scenarios
 	include better egatrop support
 	include md5 sum checking of everything
 
