@@ -9,6 +9,6 @@
 SHELL=/bin/zsh
 MAILTO="ziegen@rhrk.uni-kl.de"
 
-0     23    *     *     * rgang all ntpdate -u head
+0     23    *     *     * /opt/cluster/sbin/rgang all ntpdate -u head
 0       23 * * * /etc/init.d/queue-server restart
 
