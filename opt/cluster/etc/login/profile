@@ -3,6 +3,8 @@
 #export $LANGUAGE
 #export $LC_ALL
 
+export TMOUT=85000
+
 TZ='Europe/Berlin'; export TZ
 
 
