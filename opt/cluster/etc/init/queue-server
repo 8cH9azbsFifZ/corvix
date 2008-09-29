@@ -8,8 +8,8 @@ case "$1" in
         /usr/local/maui/sbin/maui 
         for job in `/usr/local/maui/bin/showq | awk '/Deferred/{print$1}'`; do 
 		     echo Fixing job: $job; 
-		     runjob -c $job; 
-		     releasehold $job; 
+		     /usr/local/maui/bin/runjob -c $job; 
+		     /usr/local/maui/bin/releasehold $job; 
 	     done
 
         ;;
