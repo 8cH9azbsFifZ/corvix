@@ -1,0 +1,11 @@
+#!/bin/zsh
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00
+#PBS -o stdout
+#PBS -j oe
+#PBS -M abc@de.de
+#PBS -m ae
+#PBS -N Testchen
+
+cd  $PBS_O_WORKDIR
+
