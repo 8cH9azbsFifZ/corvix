@@ -8,6 +8,6 @@ useradd --gid $group --home-dir /home/$group/$user $user
 
 echo "Now make the homedir and edit /etc/passwd" 
 
-cat /var/yp
+cd  /var/yp
 make
 /etc/init.d/nis restart
