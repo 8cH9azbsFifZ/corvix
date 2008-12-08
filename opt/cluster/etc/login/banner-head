@@ -17,23 +17,13 @@ light_gray="\033[0;37m"
 white="\033[1;37m"
 none="\033[0m"
 
-g=$green 
-r=$red
-w=$light_gray
-
-echo -ne $g'                            ___====-_  _-====___\n'
-echo -ne '                      _--~~~#####//      \\\\#####~~~--_\n'
-echo -ne '                   _-~##########// (    ) \\\\##########~-_\n'
-echo -ne '                  -############//  :\^^/:  \\\\############-\n'
-echo -ne '                _~############//   ('$r'@'$g'::'$r'@'$g')   \\\\############~_\n'
-echo -ne '               ~#############((     \\\\//     ))#############~\n'
-echo -ne '              -###############\\\\    (oo)    //###############-\n'
-echo -ne '             -#################\\\\  / '$w'""'$g$' \  //#################-\n'
-echo -ne '            -###################\\\\/      \//###################-\n'
-echo -ne '           _#/:##########/\######(   /\   )######/\##########:\#_\n'
-echo -ne '           :/ :#/\#/\#/\/  \#/\##\  :  :  /##/\#/  \/\#/\#/\#: \:\n'
-echo -ne '           '$w'"'$g'  :/  V  V  '$w'"'$g$'   V  \#\: :  : :/#/  V   '$w'"'$g$'  V  V  \:  '$w'"'$g'\n'
-echo -ne '              '$w'"'$g'   '$w'"'$g'  '$w'"'$g'      '$w'"'$g'   / : :  : : \   '$w'"'$g'      '$w'"'$g'  '$w'"'$g'   '$w'"'$g'\n'
-echo -ne '                               (  : :  : :  )\n'
-echo -ne '                              __\ : :  : : /__\n'
-echo -ne '                             ('$w'vvv'$g'('$w'VVV'$g')('$w'VVV'$g')'$w'vvv'$g')\n'$w
+echo -ne '      '${dark_gray}'  .---.        .-----------\n'
+echo -ne '       /     \\  '${white}'__'${dark_gray}'  /    ------\n'
+echo -ne '      / /     \\'${white}'(..)'${dark_gray}'/    -----\n'
+echo -ne "     //////   ${white}' ${brown}\\/ ${white}\`${dark_gray}   ---\n"
+echo -ne "    //// / // ${white}:    :${dark_gray} ---\n"
+echo -ne "   // /   /  /${white}\`    '${dark_gray}--\n"
+echo -ne "  //          //${white}..${dark_gray}\\\\\\\\\\n"
+echo -ne "${blue}#===${green}corvix${blue}===${brown}UU${blue}====${brown}UU${blue}==-->\n"
+echo -ne "${dark_gray}             '//||\\\\\\\`                                      \n"
+echo -ne "               ''\`\`$none \n"
