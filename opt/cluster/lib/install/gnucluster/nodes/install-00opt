@@ -49,7 +49,9 @@ if [[ ! -d /opt/cluster ]]; then
 fi
 
 _login 
-_queue
-_queue_client
+if [[ $0 == install-99opt ]]; then
+   _queue     
+   _queue_client
+fi
 _time
 _ganglia
