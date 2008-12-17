@@ -40,7 +40,8 @@ _old_bios() {
 }
 
 _fix_mbr() {
-   sudo install-mbr $DEV
+   echo "Make the mbr in ${DEV/[0-9]*/}"
+   sudo install-mbr ${DEV/[0-9]*/}
 }
 
 _fix_mbr

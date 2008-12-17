@@ -8,6 +8,6 @@ for distro in etch;do
    [[ -d tmp/$distro ]] || mkdir -p tmp/$distro
    [[ -e tmp/$distro/netboot.tar.gz ]] || wget $url -O tmp/$distro/netboot.tar.gz
    [[ -e tmp/$distro/debian-installer/i386/initrd.gz ]] || tar xzf tmp/$distro/netboot.tar.gz -C tmp/$distro/
-   cp tmp/$distro/debian-installer/i386/initrd.gz $target/initrd.gz
+   cp tmp/$distro/debian-installer/i386/initrd.gz $target/debian.gz
    cp tmp/$distro/debian-installer/i386/linux $target/linux
 done
