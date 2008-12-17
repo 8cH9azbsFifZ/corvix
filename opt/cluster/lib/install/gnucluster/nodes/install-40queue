@@ -6,8 +6,8 @@ _prepare() {
    [[ -d /usr/src/cluster ]] || mkdir -p /usr/src/cluster
    cd /usr/src/cluster
 
-   [[  -e /usr/src/cluster/torque-$ver_torque.tar.gz ]] || wget http://10.1.1.1/corvix/torque-$ver_torque.tar.gz
-   [[ -e /usr/src/cluster/maui-$ver_maui.tar.gz ]] || wget http://10.1.1.1/corvix/maui-$ver_maui.tar.gz
+   [[  -e /usr/src/cluster/torque-$ver_torque.tar.gz ]] || wget http://head/corvix/torque-$ver_torque.tar.gz
+   [[ -e /usr/src/cluster/maui-$ver_maui.tar.gz ]] || wget http://head/corvix/maui-$ver_maui.tar.gz
 
    tar xzf torque-$ver_torque.tar.gz
    tar xzf maui-$ver_maui.tar.gz
@@ -33,5 +33,6 @@ _postinstall() {
 
 _prepare
 _compile_torque
-_compile_maui
+_compile_maui  #FIXME: check if key=666 really solves the problem, or if we have to copy the stuff to /opt/cluster
+               # maui provides secrit keys...
 _postinstall

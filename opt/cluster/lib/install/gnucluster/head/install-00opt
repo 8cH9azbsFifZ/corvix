@@ -79,5 +79,7 @@ _www
 _nfs
 _nis
 _pxeboot
-_queue
-_queue_server
+if [[ $0 == install-99opt ]]; then
+   _queue
+   _queue_server
+fi   
