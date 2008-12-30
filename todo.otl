@@ -1,18 +1,14 @@
 Bootimage / Installation procedure			
 ==================================
-	(1) Corvix poor mans install					--- YUDI ---
-		initrd for corvix not working
-			ipconfig not found
-			awk  not found?
-				is busybox invoked the right way?
-		enable user interaction for networking!
-		install procedure
-			include debootstrap stuff
-	(2) Corvix preeseeded install					--- GEROLF ---			
-		Preseeding doesn't really work (i.e. networking still asking for confirmations)
+	Corvix preeseeded install					--- GEROLF ---			
+		include preseed file
+		test images
+		connect to postinstall stuff
+	postinstall stuff
+		make initrd like framework for scripts
 
 
-here come the low priority stuff
+here comes the low priority stuff
 ===============================================================
 
 postinstall scripts
