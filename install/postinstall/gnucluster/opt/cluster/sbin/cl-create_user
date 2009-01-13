@@ -6,7 +6,7 @@ homedir=$3
 [[ -z $3 ]] && exit
 
 # add
-useradd --gid $group --home-dir $homedir $user
+useradd --gid $group --home-dir $homedir --shell /bin/bash $user 
 
 # nis
 cd /var/yp
