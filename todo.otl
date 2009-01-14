@@ -1,11 +1,22 @@
 Bootimage / Installation procedure			
 ==================================
-	Corvix preeseeded install					--- GEROLF ---			
-		include preseed file
-		test images
-		connect to postinstall stuff
+	distributions
+		etch & lenny
+			restructure directory layout
+	preseeding	
+		include on image
+		access webserver
+
+	tasksel
+		restructure packages pulled in to tasksel
+		package_lister can make file-flags for the postinstall selection of the node type
+		put tasksel to image
+		access webserver
+
 	postinstall stuff
 		make initrd like framework for scripts
+		put them to the image
+		put them on the webserver
 
 
 here comes the low priority stuff
