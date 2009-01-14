@@ -1,0 +1,5 @@
+#!/bin/sh
+for f in *desc; do
+   cp $f /usr/share/tasksel
+   cp ${f/.desc/} /usr/lib/tasksel/packages
+done
