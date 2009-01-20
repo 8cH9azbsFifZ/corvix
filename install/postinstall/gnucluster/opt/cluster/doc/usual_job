@@ -3,9 +3,30 @@
 #PBS -l walltime=10:00:00
 #PBS -o stdout
 #PBS -j oe
-#PBS -M abc@de.de
+#PBS -M YOURMAILADDRESS@abc.de
 #PBS -m ae
 #PBS -N Testchen
 
 cd  $PBS_O_WORKDIR
+
+
+#### Temporary local scratch
+# to use: call
+# call _maketemp
+# write your simulation data to $TEMPDIR
+# call _copytemp
+# call _cleantemp
+_maketemp() {
+	TEMPDIR=$(mktemp -d /tmp/user_$(id -u).XXXXXXXX)
+}
+
+_cleantemp() {
+	[[ -z $TEMPDIR ]] && exit 1
+	rm -rf $TEMPDIR
+}
+
+_copytemp() {
+	cp $TEMDIR $PBS_O_WORKDIR -rv
+}
+
 
