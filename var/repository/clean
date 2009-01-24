@@ -1,2 +1,0 @@
-#!/bin/zsh
-rm dists/* dists/testing/* dists/testing/meta/* dists/testing/meta/binary-all/* 2>/dev/null

@@ -1,7 +1,7 @@
 #!/bin/zsh
 ./clean
 # copy .deb files
-cp ../deb-package/*deb dists/testing/meta/binary-all/
+cp ../deb-package/*deb pool
 
 # make directory strucutre
 #cd dists/testing/meta/
@@ -27,7 +27,10 @@ apt-ftparchive release $dd >> $dd/Release
 gpg -u corvix.eu -abs -o $dd/Release.gpg $dd/Release
 }   
 
-apt-ftparchive packages dists/testing/meta/binary-all |gzip > dists/testing/meta/binary-all/Packages.gz
+_create_packages() {
+dd=$1   
+apt-ftparchive packages pool |gzip > $dd/Packages.gz
+}
 #_create_release dists/testing/meta/binary-all
 #_create_release dists/testing
 
