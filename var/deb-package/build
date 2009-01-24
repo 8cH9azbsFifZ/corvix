@@ -3,5 +3,5 @@ for f in $(find . -mindepth 1 -maxdepth 1 -type d); do
    echo Processing $f
    chmod -R 755 $f
    dpkg -b $f $f.deb
-   dpkg-sig -k corvix.eu -s corvix.eu $f.deb
+   dpkg-sig -k corvix.eu -s corvix $f.deb
 done
