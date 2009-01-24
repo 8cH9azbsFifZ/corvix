@@ -12,13 +12,11 @@ echo "   arg2: \"message\""
 [[ -z $2 ]] && exit 1
 [[ ! -x $smsi ]] && exit 2
 
+no=$1
 if [[ -e $HOME/.phonebook ]]; then 
-   if [[ grep $1 $HOME/.phonebook ]]; then
-      no=$(cat $HOME/.phonebook | awk '{print $2}')
-   fi
+   grep $1 $HOME/.phonebook && no=$(cat $HOME/.phonebook | awk '{print $2}')
 fi
 
-no=$1
 message=$2
 $smsi $user $pass $no $message
 
