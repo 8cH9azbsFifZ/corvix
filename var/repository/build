@@ -34,8 +34,16 @@ dd=$1
 apt-ftparchive packages pool |gzip > $dd/Packages.gz
 }
 
-_create_packages dists/testing/meta/binary-all
+#_create_packages dists/testing/meta/binary-all
 _create_packages dists/testing/meta/binary-i386
+
+cat << eof > dists/testing/meta/binary-i386/Release
+Archive: testing
+Component: meta
+Origin: corvix
+Label: corvix
+Architecture: i386
+eof
 
 #_create_release dists/testing/meta/binary-all
 #_create_release dists/testing/meta/binary-i386
