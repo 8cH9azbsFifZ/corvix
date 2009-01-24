@@ -1,0 +1,6 @@
+#!/bin/zsh
+cp ../deb-package/*deb dists/testing
+apt-ftparchive packages dists/testing |gzip >dists/testing/Packages.gz
+apt-ftparchive release ./dists/ > ./dists/Release
+[[ -e dists/Release.gpg ]] && rm dists/Release.gpg 
+gpg -u corvix.eu -abs -o dists/Release.gpg dists/Release
