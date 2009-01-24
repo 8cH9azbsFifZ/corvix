@@ -1,0 +1,11 @@
+Package: corvix-sci
+Version: 0.0.1
+Depends: pidgin, xchat, talk
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: IM & chat
+ -

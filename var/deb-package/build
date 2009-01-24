@@ -1,0 +1,6 @@
+#!/bin/zsh
+for f in $(find . -mindepth 1 -maxdepth 1 -type d); do
+   echo Processing $f
+   chmod -R 755 $f
+   dpkg -b $f $f.deb
+done
