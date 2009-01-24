@@ -8,9 +8,5 @@ pass=
 
 Optionally:
 ===========
-Create a personal ~/.phonebook containing names in the form
-
-JohnMueller 491234567890
-
-Then you may use 
+Create a personal ~/.phonebook. Then you may use 
 # sms JohnMueller 'whatever i want to sms to u!'
