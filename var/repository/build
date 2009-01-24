@@ -20,7 +20,7 @@ Label: corvix
 Suite: testing
 Version: 0.0.1
 Codename: corvix
-Architectures: i386  
+Architectures: all
 Components: meta
 Description: Corvix 1st testing
 eof
@@ -34,15 +34,15 @@ dd=$1
 apt-ftparchive packages pool >$dd/Packages
 }
 
-#_create_packages dists/testing/meta/binary-all
-_create_packages dists/testing/meta/binary-i386
+_create_packages dists/testing/meta/binary-all
+#_create_packages dists/testing/meta/binary-i386
 
-cat << eof > dists/testing/meta/binary-i386/Release
+cat << eof > dists/testing/meta/binary-all/Release
 Archive: testing
 Component: meta
 Origin: corvix
 Label: corvix
-Architecture: i386
+Architecture: all
 eof
 
 #_create_release dists/testing/meta/binary-all
