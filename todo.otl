@@ -1,5 +1,9 @@
 Bootimage / Installation procedure			
 ==================================
+	packages
+		create metapackages including the relevant packages
+		create typical host colletions
+
 	distributions
 		etch & lenny
 			restructure directory layout
@@ -17,23 +21,3 @@ Bootimage / Installation procedure
 		make initrd like framework for scripts
 		put them to the image
 		put them on the webserver
-
-
-here comes the low priority stuff
-===============================================================
-
-postinstall scripts
-	include better egatrop support
-	include md5 sum checking of everything
-
-
-later/maybe
-	create independently from debian
-		kernel compilation
-		busybox compilation
-		make initrd image from scratch
-	bootstrap
-		provide egatrop  compiled bootstraps
-		rip off here
-			http://mirrors.sec.informatik.tu-darmstadt.de/gentoo/releases/x86/2008.0/stages/stage1-x86-2008.0.tar.bz2
-			http://www.gentoo.org/doc/en/faq.xml
