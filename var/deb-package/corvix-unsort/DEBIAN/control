@@ -1,0 +1,11 @@
+Package: corvix-unsort
+Version: 0.0.1
+Depends: mpage, thunar-data, thunar-thumbnailers, thunar-volman, mkisofs, mbr, mtools, syslinux, dosfstools, gcalcli, python-wxglade, #mingetty, xinit, vim-gtk, uml-utilities, bluetooth, synaptic, ssh, cryptsetup, unzip, zsh, vim, grub, debootstrap, dosfstools, e2fsprogs, ekee, dvd+rw-tools, easytag-aac, espeak, fakeroot, ffmpeg, fftw-dev, fftw2, finger, freeglut3, frozen-bubble, git-cvs, git-svn, git-core, gnumeric, gnupg-agent, h5utils, hdf5-tools, josm, josm-plugins, most, msttcorefonts, mtools, ntpdate, nfs-common, netpbm, octave, openoffice.org, pamusb-tools, portmap, povray, psutils, rdesktop, sane-utils, rxvt-unicode, build-essential , module-assistant , bluez-firmware, bluez-utils, scrot, alsamixergui, mesa-utils
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: unsort stuff
+ -

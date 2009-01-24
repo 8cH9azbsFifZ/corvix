@@ -1,0 +1,11 @@
+Package: corvix-security
+Version: 0.0.1
+Depends: gpg, pamusb
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: security stuff
+ -
