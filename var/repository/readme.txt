@@ -1,4 +1,4 @@
-deb http://corvix.eu testing/
+deb http://corvix.eu dists/testing/
 
 key:
 gpg --export -a corvix.eu > corvix.eu.pub
