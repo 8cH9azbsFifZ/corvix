@@ -1,6 +1,6 @@
 Package: corvix-network
 Version: 0.0.1
-Depends: sun-java6-plugin, arping, wpasupplicant, kmail, iceweasel, iceape, lynx, links, links2, ettercap, ethtool, wireshark, flashplugin-nonfree-extrasound, flashplayer-mozilla, icedove, ifupdown, iceweasel, kphone, mozilla
+Depends: sun-java6-plugin, arping, wpasupplicant, kmail, iceweasel, iceape, lynx, links, links2, ettercap, ethtool, wireshark, flashplugin-nonfree-extrasound, flashplayer-mozilla, icedove, ifupdown, iceweasel, kphone, mozilla, portmap
 Essential: no
 Priority: standard
 Section: corvix

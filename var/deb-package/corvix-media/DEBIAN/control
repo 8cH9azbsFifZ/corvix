@@ -1,6 +1,6 @@
 Package: corvix-media
 Version: 0.0.1
-Depends: id3, eyed3, id3v2, amarok, mpc, ncmpc, gimp-plugin-registry, normalize-audio, libk3b3-extracodecs, keyjnote, clive, mplayer, mencoder, lame, easytag-aac, grip, k3b, w32codecs, alsa-tools, alsamixergui, alsa-utils, sonata, sox, streamtuner, streamripper, sox, sonata, mpd
+Depends: id3, eyed3, id3v2, amarok, mpc, ncmpc, gimp-plugin-registry, normalize-audio, libk3b3-extracodecs, keyjnote, clive, mplayer, mencoder, lame, easytag-aac, grip, k3b, w32codecs, alsa-tools, alsamixergui, alsa-utils, sonata, sox, streamtuner, streamripper, sox, sonata, mpd, alsamixergui, mesa-utils, ffmpeg, freeglut3, espeak
 Essential: no
 Priority: standard
 Section: corvix

@@ -1,6 +1,6 @@
 Package: corvix-security
 Version: 0.0.1
-Depends: gpg, pamusb
+Depends: gpg, pamusb, gnupg-agent, pamusb-tools
 Essential: no
 Priority: standard
 Section: corvix

@@ -1,6 +1,6 @@
 Package: corvix-filesystems
 Version: 0.0.1
-Depends: sshfs
+Depends: sshfs, dosfstools, e2fsprogs, mtools, mbr, syslinux, mkisofs, cryptsetup, mdadm, nfs-common, dvd+rw-tools
 Essential: no
 Priority: standard
 Section: corvix

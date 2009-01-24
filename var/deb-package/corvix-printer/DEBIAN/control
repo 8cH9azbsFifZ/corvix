@@ -1,6 +1,6 @@
 Package: corvix-printer
 Version: 0.0.1
-Depends: cups-bsd, hplip, hpijs, cups
+Depends: cups-bsd, hplip, hpijs, cups, mpage
 Essential: no
 Priority: standard
 Section: corvix
