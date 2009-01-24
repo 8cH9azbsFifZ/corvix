@@ -2,52 +2,49 @@
 find pool -type f -exec rm {} \;
 find dists -type f -exec rm {} \;
 
-# copy .deb files
+_copy_debs() {
 cp ../deb-package/*deb pool
-
-# make directory strucutre
-#cd dists/testing/meta/
-#for a in binary-arm binary-i386 binary-alpha; do 
-#   ln -s binary-all $a
-#done
-#cd ../../../
-
-_create_release() {
-dd=$1
-cat << eof >$dd/Release
-Origin: corvix
-Label: corvix
-Suite: testing
-Version: 0.0.1
-Codename: corvix
-Architectures: all
-Components: meta
-Description: Corvix 1st testing
-eof
-apt-ftparchive release $dd >> $dd/Release
-[[ -e $dd/Release.gpg ]] && rm $dd/Release.gpg
-gpg -u corvix.eu -abs -o $dd/Release.gpg $dd/Release
-}   
-
-_create_packages() {
-dd=$1   
-apt-ftparchive packages pool >$dd/Packages
 }
 
-_create_packages dists/testing/meta/binary-all
-#_create_packages dists/testing/meta/binary-i386
-
-cat << eof > dists/testing/meta/binary-all/Release
-Archive: testing
-Component: meta
+_create_release() {
+cat << eof > dists/$suit/Release
 Origin: corvix
 Label: corvix
-Architecture: all
+Suite: $suit
+Version: $vers
+Codename: corvix
+Architectures: $archs
+Components: $comps
+Description: http://corvix.eu
 eof
+apt-ftparchive release dists/$suit >> dists/$suit/Release
+[[ -e dists/$suit/Release.gpg ]] && rm dists/$suit/Release.gpg
+gpg -u corvix.eu -abs -o dists/$suit/Release.gpg dists/$suit/Release
+}   
 
-#_create_release dists/testing/meta/binary-all
-#_create_release dists/testing/meta/binary-i386
-_create_release dists/testing
+_create_arch() {
+apt-ftparchive packages pool > $dir/Packages
+cat << eof > $dir/Release
+Archive: $suit
+Component: $comp
+Origin: corvix
+Label: corvix
+Architecture: $arch
+eof
+}
+
+archs="i386 alpha"
+comps=meta
+suit=testing
+comp=meta
+
+_copy_debs
+
+for arch in $(echo $archs); do
+   dir=dists/$suit/$comp/binary-$arch
+   _create_arch 
+done
+_create_release dists/$comp
 
 #cd dists/testing
 #apt-ftparchive packages . |gzip >Packages.gz
