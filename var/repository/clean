@@ -1,0 +1,3 @@
+#!/bin/sh
+find pool -type f -exec rm {} \;
+find dists -type f -exec rm {} \;
