@@ -1,4 +1,5 @@
 #!/bin/zsh
+./clean
 cp ../deb-package/*deb dists/testing
 apt-ftparchive packages dists/testing |gzip >dists/testing/Packages.gz
 apt-ftparchive release ./dists/ > ./dists/Release
