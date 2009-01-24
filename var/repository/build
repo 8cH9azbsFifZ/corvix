@@ -4,18 +4,32 @@
 cp ../deb-package/*deb dists/testing/meta/binary-all/
 
 # make directory strucutre
-cd dists/testing/meta/
-for a in binary-arm binary-i386 binary-alpha; do 
-   ln -s binary-all $a
-done
-cd ../../../
+#cd dists/testing/meta/
+#for a in binary-arm binary-i386 binary-alpha; do 
+#   ln -s binary-all $a
+#done
+#cd ../../../
 
-# create & sign package list
-apt-ftparchive packages dists/testing/meta/binary-all |gzip >dists/testing/meta/binary-all/Packages.gz
-# create & sign release file
-apt-ftparchive release ./dists/ > ./dists/Release
-[[ -e dists/Release.gpg ]] && rm dists/Release.gpg 
-gpg -u corvix.eu -abs -o dists/Release.gpg dists/Release
+_create_release() {
+dd=$1
+cat << eof >$dd/Release
+Origin: corvix
+Label: corvix
+Suite: testing
+Version: 0.0.1
+Codename: corvix
+Architectures: i386  
+Components: meta
+Description: Corvix 1st testing
+eof
+apt-ftparchive release $dd >> $dd/Release
+[[ -e $dd/Release.gpg ]] && rm $dd/Release.gpg
+gpg -u corvix.eu -abs -o $dd/Release.gpg $dd/Release
+}   
+
+apt-ftparchive packages dists/testing/meta/binary-all |gzip > dists/testing/meta/binary-all/Packages.gz
+#_create_release dists/testing/meta/binary-all
+#_create_release dists/testing
 
 #cd dists/testing
 #apt-ftparchive packages . |gzip >Packages.gz
