@@ -34,7 +34,7 @@ eof
 archs="i386 alpha"
 vers=0.1
 comps=meta
-suit=testing
+suit=corvix
 comp=meta
 
 _copy_debs

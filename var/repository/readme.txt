@@ -1,5 +1,5 @@
 How to use: in /etc/sources.list:
-deb http://corvix.eu testing meta
+deb http://corvix.eu testing meta ware
 
 
 Key signatures:
