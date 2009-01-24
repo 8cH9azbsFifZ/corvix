@@ -1,4 +1,4 @@
-deb file:///home/gerolf/gnu/debian/repository testing/
+deb http://corvix.eu testing/
 
 key:
 gpg --export -a corvix.eu > corvix.eu.pub
