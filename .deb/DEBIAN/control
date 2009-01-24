@@ -1,5 +1,5 @@
 Package: sms-sipgate
-Version: 0.0.1
+Version: 0.2
 Depends: libfrontier-rpc-perl
 Essential: no
 Priority: standard

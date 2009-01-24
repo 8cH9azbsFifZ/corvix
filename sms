@@ -1,5 +1,4 @@
 #!/bin/zsh
-. /opt/corvix/etc/sipgate.de
 [[ -e $HOME/.sipgate.de ]] && . $HOME/.sipgate.de
 
 [[ -z $user ]] && exit 3
