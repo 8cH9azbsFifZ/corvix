@@ -31,7 +31,7 @@ gpg -u corvix.eu -abs -o $dd/Release.gpg $dd/Release
 
 _create_packages() {
 dd=$1   
-apt-ftparchive packages pool |gzip > $dd/Packages.gz
+apt-ftparchive packages pool >$dd/Packages
 }
 
 #_create_packages dists/testing/meta/binary-all
