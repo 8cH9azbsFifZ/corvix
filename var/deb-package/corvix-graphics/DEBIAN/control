@@ -1,0 +1,11 @@
+Package: corvix-graphics
+Version: 0.0.1
+Depends: python-opengl, unpaper, inkscape, xfig, gimp, imagemagick, gs, gv, pdftk, xpdf, a2ps, acroread
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: graphix
+ -

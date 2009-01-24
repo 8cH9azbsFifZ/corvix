@@ -1,0 +1,11 @@
+Package: corvix-desktop
+Version: 0.0.1
+Depends: xosd-bin, thunar-archive-plugin, thunar-thumbnailers, python-gdata, kontact, gconf-editor, gnome-bluetooth, bluez-gnome, electricsheep, fvwm-icons, gmessage, msttcorefonts, fvwm, gmrun, kdm, habak, conky, xscreensaver, xsel, xutils, xutils-dev, kde-kdm-themes, kdmtheme, trayer
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: desktop stuff
+ -

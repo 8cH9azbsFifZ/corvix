@@ -1,0 +1,11 @@
+Package: corvix-edit
+Version: 0.0.1
+Depends: aspell-de-alt, aspell-de, texlive-publishers, vim, lyx, texlive-fonts-extra, texlive-pictures, texlive-math-extra, texlive-latex-recommended, texlive-latex-extra, texlive-generic-extra, texlive-fonts-recommended
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: edit stuff
+ -

@@ -1,0 +1,11 @@
+Package: corvix-coding
+Version: 0.0.1
+Depends: gcc, g++, build-essential, git, subversion, cvs, hg, autoconf, qgit
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: coding stuff
+ -

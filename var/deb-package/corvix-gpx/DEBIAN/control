@@ -1,0 +1,11 @@
+Package: corvix-gpx
+Version: 0.0.1
+Depends: gpscorrelate-gui, merkaartor, gpsbabel, marble
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: gpx stuff
+ -

@@ -1,0 +1,11 @@
+Package: corvix-games
+Version: 0.0.1
+Depends: scummvm, xmoto, sauerbraten, openarena, wesnoth
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: gamez
+ -
