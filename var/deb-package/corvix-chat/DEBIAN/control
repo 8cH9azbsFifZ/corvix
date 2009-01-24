@@ -1,4 +1,4 @@
-Package: corvix-sci
+Package: corvix-chat
 Version: 0.0.1
 Depends: pidgin, xchat, talk
 Essential: no
