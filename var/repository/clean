@@ -1,2 +1,2 @@
 #!/bin/zsh
-rm dists/* dists/testing/*
+rm dists/* dists/testing/* dists/testing/meta/* dists/testing/meta/binary-all/*

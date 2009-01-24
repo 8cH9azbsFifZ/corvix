@@ -1,5 +1,5 @@
 Package: corvix-sci
-Version: 0.0.1
+Version: 0.0.2
 Depends: grace, gromacs, pymol
 Essential: no
 Priority: standard

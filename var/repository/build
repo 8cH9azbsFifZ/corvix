@@ -1,10 +1,23 @@
 #!/bin/zsh
 ./clean
 # copy .deb files
-cp ../deb-package/*deb dists/testing
+cp ../deb-package/*deb dists/testing/meta/binary-all/
+
+# make directory strucutre
+cd dists/testing/meta/
+ln -s binary-all binary-i386
+cd ../../../
+
 # create & sign package list
-apt-ftparchive packages dists/testing |gzip >dists/testing/Packages.gz
+apt-ftparchive packages dists/testing/meta/binary-all |gzip >dists/testing/meta/binary-all/Packages.gz
 # create & sign release file
 apt-ftparchive release ./dists/ > ./dists/Release
 [[ -e dists/Release.gpg ]] && rm dists/Release.gpg 
 gpg -u corvix.eu -abs -o dists/Release.gpg dists/Release
+
+#cd dists/testing
+#apt-ftparchive packages . |gzip >Packages.gz
+# create & sign release file
+#apt-ftparchive release . > ./Release
+#[[ -e Release.gpg ]] && rm Release.gpg 
+#gpg -u corvix.eu -abs -o Release.gpg Release
