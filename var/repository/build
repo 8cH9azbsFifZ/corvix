@@ -1,6 +1,4 @@
 #!/bin/zsh
-find pool -type f -exec rm {} \;
-find dists -type f -exec rm {} \;
 
 _copy_debs() {
 cp ../deb-package/*deb pool
@@ -34,6 +32,7 @@ eof
 }
 
 archs="i386 alpha"
+vers=0.1
 comps=meta
 suit=testing
 comp=meta
