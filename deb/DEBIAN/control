@@ -1,0 +1,11 @@
+Package: sms-sipgate
+Version: 0.0.1
+Depends: libfrontier-rpc-perl
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: Send sms from commandline using sipgate.de
+ Not working yet! Script has to be inserted.

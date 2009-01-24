@@ -1,0 +1,25 @@
+#!/bin/zsh
+. /opt/corvix/etc/sipgate.de
+[[ -e $HOME/.sipgate.de ]] && . $HOME/.sipgate.de
+
+[[ -z $user ]] && exit 3
+[[ -z $pass ]] && exit 3
+
+smsi=/opt/corvix/lib/sipgateAPI-sms.pl
+
+echo "Sending SMS."
+echo "   arg1: number in format 49..."
+echo "   arg2: \"message\""
+[[ -z $2 ]] && exit 1
+[[ ! -x $smsi ]] && exit 2
+
+if [[ -e $HOME/.phonebook ]]; then 
+   if [[ grep $1 $HOME/.phonebook ]]; then
+      no=$(cat $HOME/.phonebook | awk '{print $2}')
+   fi
+fi
+
+no=$1
+message=$2
+$smsi $user $pass $no $message
+
