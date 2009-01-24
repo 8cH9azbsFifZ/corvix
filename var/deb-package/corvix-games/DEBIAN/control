@@ -1,6 +1,6 @@
 Package: corvix-games
 Version: 0.0.1
-Depends: scummvm, xmoto, sauerbraten, openarena, wesnoth
+Depends: scummvm, xmoto, sauerbraten, openarena, wesnoth, frozen-bubble
 Essential: no
 Priority: standard
 Section: corvix
