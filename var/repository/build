@@ -42,6 +42,7 @@ _copy_debs
 
 for arch in $(echo $archs); do
    dir=dists/$suit/$comp/binary-$arch
+   [[ ! -e $dir ]] && mkdir -p $dir
    _create_arch 
 done
 _create_release dists/$comp
