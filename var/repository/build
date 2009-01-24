@@ -5,7 +5,9 @@ cp ../deb-package/*deb dists/testing/meta/binary-all/
 
 # make directory strucutre
 cd dists/testing/meta/
-ln -s binary-all binary-i386
+for a in binary-arm binary-i386 binary-alpha; do 
+   ln -s binary-all $a
+done
 cd ../../../
 
 # create & sign package list
