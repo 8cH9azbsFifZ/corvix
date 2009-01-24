@@ -1,0 +1,11 @@
+Package: corvix-base
+Version: 0.0.1
+Depends: ssh, unzip, zsh, vim, grub, debootstrap, fakeroot, finger, most, ntpdate
+Essential: yes
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: basis stuff
+ -
