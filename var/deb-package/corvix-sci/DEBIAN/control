@@ -1,6 +1,6 @@
 Package: corvix-sci
-Version: 0.0.3
-Depends: grace, gromacs, pymol, units, ipython, gnuplot, python-matplotlib, cscipy, python-tables, python-gd, g3data, octave3.0, povray, xfig, h5utils, hdf5-tools, gnumeric, Img2Movie
+Version: 0.0.4
+Depends: grace, gromacs, pymol, units, ipython, gnuplot, python-matplotlib, cscipy, python-tables, python-gd, g3data, octave3.0, povray, xfig, h5utils, hdf5-tools, gnumeric, img2movie
 Essential: no
 Priority: standard
 Section: corvix
