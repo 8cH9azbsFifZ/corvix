@@ -1,0 +1,10 @@
+#!/bin/sh
+_check_profile() {
+   grep ". /opt/corvix/etc/profile" /etc/profile 1>/dev/null
+}
+
+_add_profile() {
+   echo ". /opt/corvix/etc/profile" >> /etc/profile
+}
+
+_check_profile || _add_profile

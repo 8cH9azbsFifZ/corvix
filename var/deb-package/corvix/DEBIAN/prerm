@@ -1,0 +1,11 @@
+#!/bin/sh
+_check_profile() {
+   grep ". /opt/corvix/etc/profile" /etc/profile 1>/dev/null
+}
+
+_del_profile() {
+   cat /etc/profile | grep -v /opt/corvix > /tmp/profile.corvix
+   mv /tmp/profile.corvix /etc/profile
+}
+
+_check_profile || _del_profile

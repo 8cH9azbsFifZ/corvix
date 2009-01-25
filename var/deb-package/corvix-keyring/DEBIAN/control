@@ -1,0 +1,10 @@
+Package: corvix-keyring
+Version: 0.0.1
+Essential: yes
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: keyring for the repository.
+ -

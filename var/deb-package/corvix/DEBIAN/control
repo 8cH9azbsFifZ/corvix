@@ -1,0 +1,11 @@
+Package: corvix
+Version: 0.0.2
+Depends: ssh, vim, zsh
+Essential: yes
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: essential 
+ -

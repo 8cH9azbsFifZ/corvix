@@ -1,0 +1,3 @@
+#!/bin/sh
+cat /opt/corvix/lib/corvix.eu.pub | apt-key add -
+
