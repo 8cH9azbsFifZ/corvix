@@ -1,6 +1,6 @@
 Package: corvix-desktop
 Version: 0.0.1
-Depends: xosd-bin, thunar-archive-plugin, thunar-thumbnailers, python-gdata, kontact, gconf-editor, gnome-bluetooth, bluez-gnome, electricsheep, fvwm-icons, gmessage, msttcorefonts, fvwm, gmrun, kdm, habak, gsetroot, conky, xscreensaver, xsel, xutils, xutils-dev, kde-kdm-themes, kdmtheme, trayer, rxvt-unicode, rxvt, xterm, unclutter, ipython, scrot, thunar-data, thunar, k3b, pidgin, kphone, thunar-volman, gcalcli, synaptic, bluez-firmware, bluez-utils, msttcorefonts, vim-gtk, rdesktop, python-wxglade, xinit, bluetooth, f-spot, pinentry-gtk2
+Depends: xosd-bin, thunar-archive-plugin, thunar-thumbnailers, python-gdata, kontact, gconf-editor, gnome-bluetooth, bluez-gnome, electricsheep, fvwm-icons, gmessage, msttcorefonts, fvwm, gmrun, kdm, habak, gsetroot, conky, xscreensaver, xsel, xutils, xutils-dev, kde-kdm-themes, kdmtheme, trayer, rxvt-unicode, rxvt, xterm, unclutter, ipython, scrot, thunar-data, thunar, k3b, pidgin, kphone, cfvwm, thunar-volman, gcalcli, synaptic, bluez-firmware, bluez-utils, msttcorefonts, vim-gtk, rdesktop, python-wxglade, xinit, bluetooth, f-spot, pinentry-gtk2
 Essential: no
 Priority: standard
 Section: corvix
