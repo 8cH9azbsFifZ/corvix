@@ -5,3 +5,6 @@ for f in $(find . -mindepth 1 -maxdepth 1 -type d); do
    dpkg -b $f $f.deb
    dpkg-sig -k corvix.eu -s corvix $f.deb
 done
+cd ~/src/repository
+./build
+./publish

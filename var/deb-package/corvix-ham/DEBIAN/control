@@ -1,11 +1,11 @@
-Package: corvix-base
+Package: corvix-ham
 Version: 0.0.1
-Depends: ssh, unzip, zsh, vim, grub, debootstrap, fakeroot, finger, most, ntpdate, leo
+Depends: minimorse, fldigi, grig, libhamlib++-dev, libhamlib-dev, libhamlib-utils, libhamlib-doc
 Essential: yes
 Priority: standard
 Section: corvix
 Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
 Homepage: corvix.eu
 Architecture: all
-Description: basis stuff
+Description: hamradio stuff
  -
