@@ -1,7 +1,7 @@
 Package: corvix-ham
-Version: 0.0.1
+Version: 0.0.2
 Depends: minimorse, fldigi, grig, libhamlib++-dev, libhamlib-dev, libhamlib-utils, libhamlib-doc
-Essential: yes
+Essential: no
 Priority: standard
 Section: corvix
 Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
