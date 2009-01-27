@@ -1,0 +1,11 @@
+Package: cluster-buildtools
+Version: 0.0.1
+Depends: f2c, fftw-dev, build-essential, nasm, gcc, gcc-3.4, gfortran, g++, g++-4.1, git-core, cvs, subversion, mpich-bin
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: cluster buildtools packages
+ -

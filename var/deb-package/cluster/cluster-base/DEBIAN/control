@@ -1,0 +1,11 @@
+Package: cluster-base
+Version: 0.0.1
+Depends: watchdog, sudo, debconf-utils, mkisofs, telnet, less, most, psutils, psmisc, gawk, librrd4, vim, mtools, lynx, links, links2, wget, mc, joe, ssh, rsync, ntpdate, nis, portmap, nfs-common
+Essential: yes
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: cluster base packages
+ -
