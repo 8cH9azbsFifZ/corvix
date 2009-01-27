@@ -7,4 +7,12 @@ _add_profile() {
    echo ". /opt/corvix/etc/profile" >> /etc/profile
 }
 
+_change_shell() {
+   chsh -s /bin/zsh root
+   echo -ne ". /etc/profile" > /root/.zshrc
+   echo -ne "PATH=$PATH" >> /etc/profile
+}
+
 _check_profile || _add_profile
+_change_shell
+
