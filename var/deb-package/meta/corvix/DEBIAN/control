@@ -1,5 +1,5 @@
 Package: corvix
-Version: 0.0.3
+Version: 0.0.4
 Depends: ssh, vim, zsh, grub, unzip, finger, most, ntpdate, leo, createpass, rbackup
 Essential: yes
 Priority: standard
