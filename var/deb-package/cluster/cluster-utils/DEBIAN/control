@@ -1,0 +1,11 @@
+Package: cluster-utils
+Version: 0.0.1
+Depends: pymol, finger, tcpdump, imagemagick, w32codecs, mencoder, mplayer, zsh, bash, csh, ash
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: cluster utility packages
+ -
