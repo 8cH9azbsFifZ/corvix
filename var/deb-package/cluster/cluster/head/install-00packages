@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-for list in $(find ./packages/ -mindepth 1 -maxdepth 1 -name "*" ); do
-   for pkg in $(cat $list); do
-      apt-get -y --force-yes install $pkg
-   done
-done
