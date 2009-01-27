@@ -1,0 +1,11 @@
+Package: corvix-clusterhead
+Version: 0.0.1
+#Depends: 
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: cluster head
+ -
