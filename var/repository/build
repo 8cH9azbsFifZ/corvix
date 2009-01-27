@@ -46,9 +46,3 @@ for arch in $(echo $archs); do
 done
 _create_release dists/$comp
 
-#cd dists/testing
-#apt-ftparchive packages . |gzip >Packages.gz
-# create & sign release file
-#apt-ftparchive release . > ./Release
-#[[ -e Release.gpg ]] && rm Release.gpg 
-#gpg -u corvix.eu -abs -o Release.gpg Release
