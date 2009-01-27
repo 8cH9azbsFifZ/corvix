@@ -1,6 +1,6 @@
 Package: corvix-gpx
-Version: 0.0.1
-Depends: gpscorrelate-gui, merkaartor, gpsbabel, marble, josm, josm-plugins
+Version: 0.0.2
+Depends: gpscorrelate-gui, merkaartor, gpsbabel, marble, josm, josm-plugins, xmlstarlet
 Essential: no
 Priority: standard
 Section: corvix

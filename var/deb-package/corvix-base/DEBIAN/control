@@ -1,5 +1,5 @@
 Package: corvix-base
-Version: 0.0.3
+Version: 0.0.5
 Depends: unzip, zsh, grub, debootstrap, fakeroot, finger, most, ntpdate, leo, createpass, rbackup
 Essential: no
 Priority: standard

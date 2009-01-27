@@ -1,0 +1,6 @@
+#!/bin/sh
+
+chsh -s /bin/zsh root
+echo -ne ". /etc/profile" > /root/.zshrc
+echo -ne "PATH=$PATH" >> /etc/profile
+. /root/.zshrc
