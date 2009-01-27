@@ -2,7 +2,7 @@ Files:
 ======
 - todo.otl
    vim outliner file with project track
-- www/corvix/index.html:
+- doc/corvix/index.html:
    all documentation 
 
 
