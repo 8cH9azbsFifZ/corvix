@@ -1,6 +1,6 @@
 Package: corvix-coding
 Version: 0.0.2
-Depends: gcc, g++, build-essential, git, subversion, cvs, mercurial, autoconf, qgit, module-assistant, git-cvs, git-svn, git-core, fftw-dev, fftw2, uml-utilities, dpkg-sig
+Depends: gcc, g++, build-essential, git, subversion, cvs, mercurial, autoconf, qgit, module-assistant, git-cvs, git-svn, git-core, fftw-dev, fftw2, uml-utilities, dpkg-sig, debootstrap, fakeroot
 Essential: no
 Priority: standard
 Section: corvix
