@@ -1,7 +1,0 @@
-#!/bin/zsh
-for group in urbassek rethfeld; do
-   mkdir -p /home/$group
-   chgrp $group /home/$group
-   chmod gu+rwx /home/$group
-   chmod o-rwx /home/$group
-done   
