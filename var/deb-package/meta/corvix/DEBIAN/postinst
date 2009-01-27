@@ -10,9 +10,42 @@ _add_profile() {
 _change_shell() {
    chsh -s /bin/zsh root
    echo -ne ". /etc/profile" > /root/.zshrc
-   echo -ne "PATH=$PATH" >> /etc/profile
+}
+
+_check_debianmultimedia() {
+   grep "debian-multimedia.org" /etc/apt/sources.list 1>/dev/null
+}
+
+_install_debianmultimedia() {
+cat << eof >> /etc/apt/sources.list
+deb ftp://debian.netcologne.de/debian-multimedia.org lenny main 
+deb-src ftp://debian.netcologne.de/debian-multimedia.org lenny main 
+eof
+apt-get update
+apt-get -y --force-yes install debian-multimedia-keyring
+apt-get update
+}
+
+_check_debian() {
+   grep "main contrib non-free" /etc/apt/sources.list 1>/dev/null
+}
+
+_install_debian() {
+cat << eof > /etc/apt/sources.list
+deb http://ftp.uni-kl.de/debian/ lenny main contrib non-free
+deb-src http://ftp.uni-kl.de/debian/ lenny main contrib non-free
+
+deb http://security.debian.org/ lenny/updates main contrib
+deb-src http://security.debian.org/ lenny/updates main contrib
+
+deb http://corvix.eu testing meta ware 
+eof
+apt-get update
 }
 
 _check_profile || _add_profile
 _change_shell
+_check_debian || _install_debian
+_check_debianmultimedia || _install_debianmultimedia
+
 
