@@ -1,5 +1,5 @@
 Package: cluster-sci
-Version: 0.0.1
+Version: 0.0.2
 Depends: texlive-latex-extra, python-gnuplot, gs, xpdf, gv, netpbm, emacs, octave3.0, gromacs, gnuplot, ipython, mencoder, mplayer, povray, xfig, inkscape, pdftk, python-tables, libhdf5-mpich-dev, hdf5-tools, python-scipy, python-matplotlib, libhdf5-doc, h5utils
 Essential: no
 Priority: standard
@@ -8,4 +8,4 @@ Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
 Homepage: corvix.eu
 Architecture: all
 Description: cluster scientific packages
- -
+ This is a meta-package.

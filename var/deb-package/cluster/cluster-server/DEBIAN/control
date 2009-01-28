@@ -1,5 +1,5 @@
 Package: cluster-server
-Version: 0.0.1
+Version: 0.0.2
 Depends: dnsmasq, syslinux, dhcp, xinetd, tftpd-hpa, tftp-hpa, arping, mtools, gmond, portmap, nfs-common, nfs-kernel-server, apt-mirror, ntp, ganglia-monitor, gmetad, apache2, php5, libapache2-mod-php5, phpmyadmin, php5-mysql, dhcp3-server
 Essential: no
 Priority: standard
@@ -8,4 +8,4 @@ Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
 Homepage: corvix.eu
 Architecture: all
 Description: cluster server packages
- -
+ This is a meta-package.

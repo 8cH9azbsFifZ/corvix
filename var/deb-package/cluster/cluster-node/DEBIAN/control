@@ -1,5 +1,5 @@
 Package: cluster-node
-Version: 0.0.1
+Version: 0.0.2
 Depends: nis, ganglia-monitor
 Essential: no
 Priority: standard
@@ -8,4 +8,4 @@ Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
 Homepage: corvix.eu
 Architecture: all
 Description: cluster node packages
- -
+ This is a meta-package.
