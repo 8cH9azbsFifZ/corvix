@@ -35,3 +35,7 @@ Bootimage / Installation procedure
 		make initrd like framework for scripts
 		put them to the image
 		put them on the webserver
+
+environment
+	module loader for different mpi etc
+	check user-dir skeleton
