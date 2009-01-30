@@ -1,6 +1,6 @@
 #!/bin/zsh
 tmp=$CORVIX/tmp
-for distro in lenny etch;do
+for distro in lenny etch sid;do
    url=http://ftp.de.debian.org/debian/dists/$distro/main/installer-i386/current/images/netboot/netboot.tar.gz
 
    target=$CORVIX/isoimage/boot/$distro
