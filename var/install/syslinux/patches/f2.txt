@@ -1,0 +1,10 @@
+                  0fWelcome to corvix GNU/Linux!07   
+
+02corvix boot07:
+============
+
+06debian-install07       (usual debian/etch)
+07debian-expert07
+07debian-rescue07
+
+06debian-preseed07       (preseeded debian/etch)
