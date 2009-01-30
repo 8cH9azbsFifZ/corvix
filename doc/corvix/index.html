@@ -76,6 +76,21 @@ do: RTFM.
 For the stable packages we rely completely on the Debian GNU/Linux
 distribution.
 <br>
+You have to put the components in your /etc/apt/sources.list.
+
+<h4>Key signatures:</h4>
+<ol>
+   <li>from keyserver
+<pre>
+gpg --keyserver pgpkeys.mit.edu --recv-key 974E7D68
+gpg -a --export 974E7D68 | sudo apt-key add -
+</pre>
+   <li>from keyring
+<pre>
+apt-get -y --force-yes install corvix-keyring
+</pre>
+   </ol>
+
 
 <h4>Component: meta</h4>
 <pre>
@@ -134,13 +149,6 @@ git clone git://git.corvix.eu/corvix.git
       </pre>
       The repositories are hosted on <a href=http://repo.or.cz>repo.or.cz</a>. 
 </ul>
-
-<h4>Mirror</h4>
-All software needed to build the source iso is mirrored here
-<ul>
-   <li><a href="http://mirror.corvix.eu">mirror.corvix.eu</a>
-</ul>
-
 
 <h3>Howto install?</h3>
 ...
