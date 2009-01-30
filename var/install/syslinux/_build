@@ -45,6 +45,7 @@ _splash() {
    #cd ..
 }
 
+[[ -z $CORVIX ]] && exit 1
 vers=3.70
 target=$CORVIX/isoimage
 tmp=$CORVIX/tmp
