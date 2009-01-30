@@ -1,9 +1,10 @@
 #!/bin/zsh
 
-for distro in etch;do
+for distro in lenny etch;do
    url=http://ftp.de.debian.org/debian/dists/$distro/main/installer-i386/current/images/netboot/netboot.tar.gz
 
-   target=../tmp/isoimage/boot/
+   target=./tmp/isoimage/boot/$distro
+   [[ -d $target ]] || mkdir -p $target
 
    [[ -d tmp/$distro ]] || mkdir -p tmp/$distro
    [[ -e tmp/$distro/netboot.tar.gz ]] || wget $url -O tmp/$distro/netboot.tar.gz
