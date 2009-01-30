@@ -112,6 +112,20 @@ or setup a PXE boot server for you. If you want to save bandwidth
 you may also choose to setup a mirror for the packages;
 this can be a webserver, a CD or any other storage medium you
 may access during the installation.
+<br>
+<h3>Creating a primary bootimage</h3>
+The easiest way is to start from a debian system. Install the corvix repositories
+and then create the bootimage in:
+<br>
+<pre>
+cd var/install
+./build
+</pre>
+<h3>Testing the bootimage</h3>
+Once created you may test it using:
+<pre>
+qemu -cdrom corvix.iso 
+</pre>
 
 <h3>Features of the installer</h3>
 Linux is about choice. Here, we restrict the features strictly
