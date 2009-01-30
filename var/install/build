@@ -1,11 +1,11 @@
 #!/bin/zsh
-[[ -e tmp/isoimage/boot/ ]] || mkdir -p tmp/isoimage/boot/
+[[ -z $CORVIX ]] && export CORVIX=$PWD/
 
 cd initrd
-./makeinitrd
+./_build
 cd ..
 
 cd syslinux
-./makeisolinux
+./_build
 cd ..
 
