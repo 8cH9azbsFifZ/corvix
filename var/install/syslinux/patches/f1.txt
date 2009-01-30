@@ -3,8 +3,21 @@
 02corvix boot07:
 ============
 
-06debian-install07       (usual debian/etch)
-07debian-expert07
-07debian-rescue07
+Usual etch installations:
+06etch-install07       (usual debian/etch)
+07etch-expert07
+07etch-rescue07
 
-06debian-preseed07       (preseeded debian/etch)
+Usual lenny installations:
+06lenny-install07       (usual debian/lenny)
+07lenny-expert07
+07lenny-rescue07
+
+Usual sid installations:
+06sid-install07       (usual debian/sid)
+07sid-expert07
+07sid-rescue07
+
+Preseeded installations:
+06etch-preseed07       (preseeded debian/etch)
+06lenny-preseed07       (preseeded debian/lenny)
