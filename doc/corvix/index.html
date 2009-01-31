@@ -32,7 +32,7 @@ up a 160+ CPU Linux cluster with several NFS servers from scratch.
 <br>
 In fact corvix is less a distribution and more a cheat sheet for installing 
 debian in a scientific environment. After you install the
-corvix distribution, you have a debian/etch with additional
+corvix distribution, you have a debian with additional
 features.
 <br>
 Corvix GNU/Linux provides preconfigured profiles for both workstations 
@@ -128,27 +128,48 @@ repositories. The packages have not been built by us.
 
 
 <h2>Installation</h2>
-The installation procedure is done over network. You may download
+<!--
+The installation procedure is done over network, usb stick, cd or whatever. 
+You may download
 a bunch of scripts, which will build the bootable CD, USB stick
 or setup a PXE boot server for you. If you want to save bandwidth
 you may also choose to setup a mirror for the packages;
 this can be a webserver, a CD or any other storage medium you
 may access during the installation.
-<br>
+-->
+
 <h3>Creating a primary bootimage</h3>
-The easiest way is to start from a debian system. Install the corvix repositories
-and then create the bootimage in:
+The easiest way is to start from a debian system. Check out our git source tree and then
+create the bootimage in:
 <br>
 <pre>
 cd var/install
 ./build
 </pre>
+
 <h3>Testing the bootimage</h3>
 Once created you may test it using:
 <pre>
 qemu -cdrom corvix.iso 
 </pre>
 
+<h3>Downloading a primary bootimage</h3>
+You may also download a current <a href=http://corvix.eu/boot/corvix.iso>corvix.iso</a>.
+
+<h3>Boot from cd</h3>
+Burn the corvix.iso to cd :)
+
+<h3>Boot from usb stick</h3>
+Create a bootable stick:
+<pre>
+makebootstick /dev/YOURUSBDEVICE1234
+</pre>
+If you specify a partition (i.e. /dev/sdg2) the script will install the stuff in this partition
+on the stick. And if you execute it with a whole disk (i.e. /dev/sdg) it will also create 
+a patition layout on the stick.
+
+
+<!--
 <h3>Features of the installer</h3>
 Linux is about choice. Here, we restrict the features strictly
 to some working configurations:
@@ -167,56 +188,33 @@ to some working configurations:
 Everything you want to do different: you can work as usual
 with debian. For custom compiled stuff have a look at the
 ebuilds.
+-->
 
 
-<h3>Obtaining the software</h3>
-Download the source 
+<h2>Corvix Source Tree</h2>
 
-<h4>Corvix Bootstrap</h4>
-<ul>
-   <li>Offical releases<br>
-      <a href="http://gitweb.corvix.eu/corvix.git?a=snapshot;h=26ba9b9d6094f6abfe923cb34cecfe319e51d862;sf=tgz">v0.1.2</a>
-   <li>GIT repository<br>
-      You may download the 
-      <a href="http://gitweb.corvix.eu/corvix.git?a=snapshot">Latest Snapshot</a>
-      via browser or clone the public repository
-      <pre>
-git clone git://git.corvix.eu/corvix.git
-      </pre>
-      The repositories are hosted on <a href=http://repo.or.cz>repo.or.cz</a>. 
-</ul>
+<h3>Offical releases</h3>
+Full source tree of an official release.
+<br>
+(none yet)
+   <!--<a href="http://gitweb.corvix.eu/corvix.git?a=snapshot;h=26ba9b9d6094f6abfe923cb34cecfe319e51d862;sf=tgz">v0.1.2</a>-->
+   
+<h3>Latest Snapshot</h3>
+You may download the 
+<a href="http://gitweb.corvix.eu/corvix.git?a=snapshot">Latest Snapshot</a>
+via browser or clone the public repository.
 
-<h3>Howto install?</h3>
-...
-
-<h4>Building the universal boot image</h4>
-You have to build an universal boot image at first:
+<h3>GIT repository</h3>
 <pre>
-cd lib/install
-./make_image
+git clone git://git.corvix.eu/corvix.git
 </pre>
-afterwards there will be a directory structure in <tt class=file>tmp/isoimage</tt>.
-Now you can decide what boot method you'd like to use:
-<ol>
-   <li>Boot from CD<br>
-      <pre>./makebootiso</pre>
-      and the new boot image will reside in <tt class=file>~/corvix.iso</tt>.
-      If you have <tt class=file>qemu</tt> installed you may test the image using
-      <pre>./testbootiso</pre>
-   <li>Boot from USB stick<br>
-      <pre>./makebootstick /dev/sdWHATEVERYOURUSBSTICKIS</pre>
-   <li>PXE boot server<br>
-
-<h4>Mirror options</h4>
-<ul>
-   <li>local (nfs, hdd, cd)
-   <li>mirror.corvix.eu
-</ul>
+The repositories are hosted on <a href=http://repo.or.cz>repo.or.cz</a>. 
 
 
 
-
-<h3>Preconfigured installation profiles</h3>
+<!--
+<h2>Preconfigured installation profiles</h2>
+We have to condense it... 
 
 <h4>debian/etch</h4>
 
@@ -228,8 +226,9 @@ Now you can decide what boot method you'd like to use:
 
 <h4>corvix - cluster node</h4>
 
+-->
 
-<h2>High-Performance Cluster </h2>
+<h2>Building a High-Performance Cluster</h2>
 
 <h3>Planning</h3>
 
@@ -411,12 +410,13 @@ This cluster is property of the
 </table>
 
 
+<!--
 <h3>Profile: Head Server</h3>
 
 <h3>Profile: NFS Servers</h2>
 
 <h3>Profile: Nodes</h3>
-
+-->
 
 <h2>Legal Stuff</h2>
 Of course we reject any kind of warranty. Expect your hardware to explode
