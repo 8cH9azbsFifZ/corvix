@@ -1,0 +1,11 @@
+Package: rgang
+Version: 0.0.1
+Depends: ssh
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: rgang
+ || ssh
