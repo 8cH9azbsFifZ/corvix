@@ -1,0 +1,4 @@
+d-i preseed/include string lenny.cfg
+d-i preseed/run string ../classes.sh
+d-i preseed/include string ../classes/loc/preseed.cfg
+
