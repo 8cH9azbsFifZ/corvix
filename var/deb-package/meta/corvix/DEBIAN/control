@@ -1,5 +1,6 @@
 Package: corvix
-Version: 0.0.4
+Version: 0.0.5
+Pre-Depend: debconf (>= 0.2.17)
 Depends: ssh, vim, zsh, grub, unzip, finger, most, ntpdate, leo, createpass, rbackup
 Essential: yes
 Priority: standard

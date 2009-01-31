@@ -1,0 +1,8 @@
+#!/bin/sh -e
+. /usr/share/debconf/confmodule
+
+set -e
+umask 022
+
+db_input high corvix/banner || true
+db_go

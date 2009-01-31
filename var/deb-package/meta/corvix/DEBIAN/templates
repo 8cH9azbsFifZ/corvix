@@ -1,0 +1,9 @@
+Template: corvix/banner
+Type: note
+Description: This is corvix GNU/Linux
+ Did you relly want to install this?  ?:/
+ .
+ For all further documentation look at the website http://corvix.eu
+ or even better check out our git repository: git clone git://git.corvix.eu/corvix.git.
+ .
+ (C)opyleft G. Ziegenhain, Y. Rosandi 2008-2009
