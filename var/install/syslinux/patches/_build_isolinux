@@ -19,11 +19,27 @@ LABEL ${d}r${arch}
 
 LABEL ${d}p${arch}
    kernel /boot/${arch}/${dist}/linux
-   append vga=normal initrd=/boot/${arch}/${dist}/debian.gz url=http://corvix.eu/d-i/./${dist}.cfg console-keymaps-at/keymap=de locale=de_DE interface=eth0 hostname=x domain=x netcfg/dhcp_timeout=60 --
+   append vga=normal initrd=/boot/${arch}/${dist}/debian.gz url=http://corvix.eu/d-i/${dist}/./preseed.cfg console-keymaps-at/keymap=de locale=de_DE interface=eth0 hostname=x domain=x netcfg/dhcp_timeout=60 --
 
 LABEL ${d}a${arch}
    kernel /boot/${arch}/${dist}/linux
    append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz --
+
+LABEL ${d}d${arch}
+   kernel /boot/${arch}/${dist}/linux
+   append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=corvix;desktop; --
+
+LABEL ${d}m${arch}
+   kernel /boot/${arch}/${dist}/linux
+   append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=corvix;mediacenter; --
+
+LABEL ${d}c${arch}
+   kernel /boot/${arch}/${dist}/linux
+   append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=corvix;cluster; --
+
+LABEL ${d}n${arch}
+   kernel /boot/${arch}/${dist}/linux
+   append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=corvix;node; --
 eof
 
 done
