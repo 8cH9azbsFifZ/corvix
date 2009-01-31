@@ -12,6 +12,9 @@ Bootimage / Installation procedure
 			nas
 
 	preseeding	
+		test 
+			etch,sid
+			amd64
 		include on image
 		access webserver
 
