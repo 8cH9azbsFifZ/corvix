@@ -5,5 +5,5 @@
 
 The keycode is as follows: {distribution}{action}{architecture}
 06(e)tch (l)enny (s)id07                                            (distributions)
-06(i)install (e)xpert_install (r)escue (p)preseed_install 07        (actions)
+06(i)install (e)xpert_install (r)escue (p)reseed_install 07         (actions)
 06(i386) (amd64)07                                                  (architectures)
