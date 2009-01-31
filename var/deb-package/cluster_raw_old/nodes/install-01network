@@ -1,5 +1,0 @@
-#!/bin/zsh
-cat << eof >> /etc/network/interfaces
-allow-hotplug eth1
-iface eth1 inet dhcp
-eof
