@@ -21,27 +21,9 @@ _ganglia() {
    _exchange /etc/gmetad.conf /opt/cluster/etc/ganglia/gmetad.conf
 }   
 
-_mirror() { 
-   _exchange /etc/apt/mirror.list /opt/cluster/etc/apt/mirror.list
-   _exchange /var/spool/apt-mirror/mirror /opt/cluster/lib/www/mirror
-}   
-
-_www() {
-   _exchange /var/www /opt/cluster/lib/www
-}   
-
 _nfs() {
    _exchange /etc/exports /opt/cluster/etc/nfs/exports
 }   
-
-_nis() {
-   _exchange /etc/default/nis /opt/cluster/etc/nis/nis
-   _exchange /etc/defaultdomain /opt/cluster/etc/nis/defaultdomain
-   _exchange /etc/ypserv.securenets /opt/cluster/etc/nis/ypserv.securenets
-   _exchange /var/yp/Makefile /opt/cluster/etc/nis/Makefile
-   _exchange /etc/nsswitch.conf /opt/cluster/etc/nis/nsswitch.conf
-}
-
 _pxeboot() {
 #   _exchange /etc/default/tftpd-hpa /opt/cluster/etc/tftp/tftpd-hpa
    _exchange /etc/xinetd.d/tftp /opt/cluster/etc/tftp/tftp
@@ -70,16 +52,3 @@ _time() {
 mkdir /opt/cluster -p
 cp opt/* /opt/cluster -r
 
-_time
-_login
-_networking
-_ganglia
-#_mirror
-_www
-_nfs
-_nis
-_pxeboot
-if [[ $0 == install-99opt ]]; then
-   _queue
-   _queue_server
-fi   
