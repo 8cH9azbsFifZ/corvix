@@ -1,0 +1,11 @@
+Package: ganglia-webserver
+Version: 0.0.1
+Depends: apache2
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: ganglia
+ -

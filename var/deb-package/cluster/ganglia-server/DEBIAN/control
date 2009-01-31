@@ -1,0 +1,12 @@
+Package: ganglia-server
+Version: 0.0.1
+Depends: gmetad
+Replaces: gmetad
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: ganglia
+ -
