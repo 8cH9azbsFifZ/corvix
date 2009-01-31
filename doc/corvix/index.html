@@ -148,9 +148,14 @@ cd var/install
 </pre>
 
 <h3>Testing the bootimage</h3>
-Once created you may test it using:
+Once created you may test it using qemu.
+At first create an empty disk image
 <pre>
-qemu -cdrom corvix.iso 
+qemu-img create -f qcow ./corvix.qcow 10G
+</pre>
+Fire up qemu:
+<pre>
+qemu -cdrom boot/corvix.iso -hda corvix.qcow 
 </pre>
 
 <h3>Downloading a primary bootimage</h3>
