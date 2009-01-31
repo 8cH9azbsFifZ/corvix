@@ -1,6 +1,7 @@
 Package: nis-server
-Version: 0.0.1
+Version: 0.0.2
 Depends: nis
+Replaces: nis
 Essential: yes
 Priority: standard
 Section: corvix

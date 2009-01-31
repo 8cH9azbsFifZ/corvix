@@ -1,6 +1,7 @@
 Package: nis-client
 Version: 0.0.1
 Depends: nis
+Replaces: nis
 Essential: yes
 Priority: standard
 Section: corvix
