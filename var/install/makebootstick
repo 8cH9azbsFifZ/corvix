@@ -12,14 +12,14 @@ _make_partition() {
    echo "Do you want to me to fire up fdisk now for deletions?"
    read -s -k 1 i
    case $i in 
-      y|Y|j) sudo fdisk $DEV
-      *) exit 0
+      y|Y|j) sudo fdisk $DEV; ;;
+      *) exit 0; ;;
    esac
    echo "Now creating new partitions. Ok?"
    read -s -k 1 i
    case $i in 
-      y|Y|j) echo -ne "\nn\np\n1\n1\n+50M\na\n1\nt\n6\nw\n"| sudo fdisk $DEV
-      *) exit 0
+      y|Y|j) echo -ne "\nn\np\n1\n1\n+50M\na\n1\nt\n6\nw\n"| sudo fdisk $DEV; ;;
+      *) exit 0; ;;
    esac
 
    DEV=${DEV}1
@@ -30,8 +30,8 @@ _make_fs_dos() {
    echo "ok?"
    read -s -k 1 i
    case $i in 
-      y|Y|j) sudo mkdosfs -v -n corvix $DEV
-      *) exit 0
+      y|Y|j) sudo mkdosfs -v -n corvix $DEV; ;;
+      *) exit 0; ;;
    esac
 
    echo "Make bootable."
