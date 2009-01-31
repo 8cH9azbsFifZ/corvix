@@ -4,8 +4,8 @@ set -e
 . /usr/share/debconf/confmodule
 
 db_get auto-install/classes && classes=$RET
-[[ $RET == 10 ]] && exit 0
-classes=$(echo $RET |  sed -e 's/;/\n/g')
+[[ $classes == 10 ]] && exit 0
+classes=$(echo $classes |  sed -e 's/;/\n/g')
 include=""
 for c in $classes; do
    include="$include ../classes/$c/preseed.cfg "
