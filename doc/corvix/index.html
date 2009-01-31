@@ -15,8 +15,10 @@ Welcome to the webpage of the corvix distribution.
 <br>
 <b>Current status:</b> 
 We are merging our working installation
-into a reproduceable framework. This project is under heavy development
-and <i>not yet working</i> for the end-user. Nevertheless you already may
+into a reproduceable framework. 
+This project is under heavy development
+and <i>not yet working</i> for the end-user. 
+Nevertheless you already may
 check out our source tree or add the repositories to your current debian installation.
 
 
@@ -37,6 +39,10 @@ Corvix GNU/Linux provides preconfigured profiles for both workstations
 (i.e. your laptop) and complete clusters. Nevertheless: If you expect
 a colorful eyecandy system... forget it. Corvix is an advanced
 distribution; or call it a dirty hack... It works for us ;)
+
+<h2>Who may want to use this?</h2>
+Nobody, except us! If you nevertheless want to use it, feel free to do so
+without any kind of warranty.
 
 
 <h2>Introduction</h2>
@@ -65,7 +71,7 @@ do: RTFM.
 <ul>
    <li>advanced user
    <li>textmode
-   <li>full documentation: download git source tree, and
+   <li>full (?) documentation: download git source tree, and
       read <pre>/doc</pre>
 </ul>
 
@@ -74,11 +80,14 @@ do: RTFM.
 
 <h3>Debian</h3>
 For the stable packages we rely completely on the Debian GNU/Linux
-distribution.
-<br>
-You have to put the components in your /etc/apt/sources.list.
+distribution. If you want to use our stuff, you have to put the 
+components in your /etc/apt/sources.list to use our repositories.
+So far we have only a testing distribution (in terms of
+debians vocabulary); once we have one 
+complete framework, we will provide this as the stable distribution.
 
 <h4>Key signatures:</h4>
+We use secure apt. So use our public key to make sure, you apt-get no black-hat stuff.
 <ol>
    <li>from keyserver
 <pre>
@@ -102,7 +111,20 @@ Contains virtual packages for quick configuration of lots of pcs.
 <pre>
 deb http://corvix.eu testing cluster
 </pre>
-Countains cluster installation packages.
+Contains cluster installation packages.
+
+<h4>Component: ware</h4>
+<pre>
+deb http://corvix.eu testing ware
+</pre>
+Contains packages with more or less useful scripts/software.
+
+<h4>Component: external</h4>
+<pre>
+deb http://corvix.eu testing external
+</pre>
+Contains some software, which is not included in the main debian
+repositories. The packages have not been built by us.
 
 
 <h2>Installation</h2>

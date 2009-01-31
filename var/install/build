@@ -12,5 +12,5 @@ cd ..
 [[ -e isoimage/isolinux/isolinux.bin ]] || exit
 [[ -e isoimage/isolinux/boot.cat ]] || exit
 cd isoimage
-mkisofs -R -V corvix_bootcd -o ../corvix.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -J -r -q -boot-info-table ./
+mkisofs -R -V corvix_bootcd -o ../boot/corvix.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -J -r -q -boot-info-table ./
 cd ..
