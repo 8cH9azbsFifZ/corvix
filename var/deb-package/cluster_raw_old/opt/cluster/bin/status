@@ -1,2 +1,0 @@
-#!/bin/sh
-gstat -a1|sort|awk 'NR>10'|sed 's/[a-zA-Z]*$//g'
