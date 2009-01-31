@@ -1,0 +1,71 @@
+#!/bin/zsh
+
+DEV=$1
+
+[[ -z $DEV ]] && exit 1
+[[ -e $DEV ]] || exit 2
+
+_make_partition() {
+   echo "Now create the partitions.$none\nWe assume an empty stick! Please clean all partitions yourself."
+   echo "This is your stick now"
+   sudo fdisk -l $DEV
+   echo "Do you want to me to fire up fdisk now for deletions?"
+   read -s -k 1 i
+   case $i in 
+      y|Y|j) sudo fdisk $DEV
+      *) exit 0
+   esac
+   echo "Now creating new partitions. Ok?"
+   read -s -k 1 i
+   case $i in 
+      y|Y|j) echo -ne "\nn\np\n1\n1\n+50M\na\n1\nt\n6\nw\n"| sudo fdisk $DEV
+      *) exit 0
+   esac
+
+   DEV=${DEV}1
+}
+
+_make_fs_dos() {
+   echo "Create filesystem on $none$DEV"
+   echo "ok?"
+   read -s -k 1 i
+   case $i in 
+      y|Y|j) sudo mkdosfs -v -n corvix $DEV
+      *) exit 0
+   esac
+
+   echo "Make bootable."
+   sudo syslinux -s $DEV
+}
+
+_old_bios() {
+   echo "Fake zip-fashion"
+   sudo mkdiskimage -$PART $DEV 0 64 32
+}
+
+_fix_mbr() {
+   echo "Make the mbr in ${DEV/[0-9]*/}"
+   sudo install-mbr ${DEV/[0-9]*/}
+}
+
+_dev_is_partition() {
+   echo $DEV | grep "[0-9]" #1>/dev/null 2>/dev/null
+}
+
+_make_image() {
+   echo "Create boot stick on $none$DEV"
+   IMG=/tmp/stickimage
+   [[ -d $IMG ]] || mkdir -p $IMG
+   echo "Mount on $none$IMG with device $DEV$PART"
+   sudo mount $DEV$PART $IMG
+   echo "Copy files"
+   sudo cp isoimage/* $IMG -r
+   sudo umount $DEV$PART
+   sudo rmdir $IMG
+}
+
+_dev_is_partition || _fix_mbr 
+_dev_is_partition || _make_partition
+
+_make_fs_dos
+_make_image
