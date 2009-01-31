@@ -1,6 +1,6 @@
 Package: cluster-utils
 Version: 0.0.2
-Depends: pymol, finger, tcpdump, imagemagick, w32codecs, mencoder, mplayer, zsh, bash, csh, ash
+Depends: pymol, finger, tcpdump, imagemagick, w32codecs, mencoder, mplayer, zsh, bash, csh, ash, queue-utils, rgang
 Essential: no
 Priority: standard
 Section: corvix
