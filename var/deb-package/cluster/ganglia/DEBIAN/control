@@ -1,0 +1,11 @@
+Package: ganglia
+Version: 0.0.1
+Depends: queue
+Essential: no
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: ganglia
+ -
