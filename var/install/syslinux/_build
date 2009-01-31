@@ -25,6 +25,9 @@ _make_isolinux() {
 _make_syslinux() {
    echo "Make syslinux image"
    [[ -d $target ]] || mkdir -p $target
+   cd patches
+   ./_build_isolinux
+   cd ..
    cp patches/* $target
    cp splash/splash.rle $target
 }
