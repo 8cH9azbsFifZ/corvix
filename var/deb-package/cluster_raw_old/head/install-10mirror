@@ -1,7 +1,0 @@
-#!/bin/sh
-
-apt-mirror
-
-ln -s /opt/cluster/lib/www/mirror/ftp.uni-kl.de/debian/dists/etch /opt/cluster/lib/www/mirror/ftp.uni-kl.de/debian/dists/stable
-ln -s /opt/cluster/lib/www/mirror/ftp.uni-kl.de/debian/dists/lenny /opt/cluster/lib/www/mirror/ftp.uni-kl.de/debian/dists/testing
-
