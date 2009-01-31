@@ -153,7 +153,7 @@ cd var/install
 ./build
 </pre>
 
-<h3>Testing the bootimage</h3>
+<h4>Testing the bootimage</h4>
 Once created you may test it using qemu.
 At first create an empty disk image
 <pre>
@@ -179,6 +179,11 @@ If you specify a partition (i.e. /dev/sdg2) the script will install the stuff in
 on the stick. And if you execute it with a whole disk (i.e. /dev/sdg) it will also create 
 a patition layout on the stick.
 
+<h3>Arbitraty Debian Bootmedium</h3>
+Just wait for the bootprompt and then type
+<pre>
+boot: auto url=corvix.eu
+</pre>
 
 <!--
 <h3>Features of the installer</h3>

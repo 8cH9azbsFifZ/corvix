@@ -19,11 +19,11 @@ LABEL ${d}r${arch}
 
 LABEL ${d}p${arch}
    kernel /boot/${arch}/${dist}/linux
-   append vga=normal initrd=/boot/${arch}/${dist}/debian.gz url=http://corvix.eu/preseed/./${dist}.cfg console-keymaps-at/keymap=de locale=de_DE interface=eth0 hostname=x domain=x netcfg/dhcp_timeout=60 --
+   append vga=normal initrd=/boot/${arch}/${dist}/debian.gz url=http://corvix.eu/d-i/./${dist}.cfg console-keymaps-at/keymap=de locale=de_DE interface=eth0 hostname=x domain=x netcfg/dhcp_timeout=60 --
 
 LABEL ${d}a${arch}
    kernel /boot/${arch}/${dist}/linux
-   append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/initrd.gz --
+   append auto=true priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz --
 eof
 
 done
