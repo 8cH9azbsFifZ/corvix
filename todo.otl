@@ -1,16 +1,10 @@
 Bootimage / Installation procedure			
 ==================================
 	packages
-		create metapackages including the relevant packages
+		CHECK FOR THE CORRECT PATHs NOT ANY MORE UNDER /opt/cluster
 		create torque
 		create maui
-		create queue-meta
-		create rgang
-		create stack
 		create mailserver
-		create mirror (for debian on head)
-		create nis-server
-		create nis-client
 		create typical host colletions
 			head
 			nodes
