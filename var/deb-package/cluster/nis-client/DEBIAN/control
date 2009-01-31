@@ -1,0 +1,11 @@
+Package: nis-client
+Version: 0.0.1
+Depends: nis
+Essential: yes
+Priority: standard
+Section: corvix
+Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
+Homepage: corvix.eu
+Architecture: all
+Description: nis client configuration
+ This script will make the node ready for nis.

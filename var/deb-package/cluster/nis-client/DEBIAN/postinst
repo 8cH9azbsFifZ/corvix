@@ -1,0 +1,29 @@
+#!/bin/sh
+_config_logins() {
+cat << eof >> /etc/group
++:::
+eof
+
+cat << eof >> /etc/passwd
++::::::
+eof
+
+cat << eof >> /etc/shadow
++::::::::
+eof
+
+update-rc.d -f nis remove
+update-rc.d nis defaults 98
+}
+
+_config_service() {
+cat << eof > /etc/default/nis
+NISSERVER=false
+NISCLIENT=yes
+eof
+update-rc.d -f nis remove
+update-rc.d nis defaults 98
+}
+
+_config_logins
+_config_service
