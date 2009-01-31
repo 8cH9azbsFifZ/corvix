@@ -11,21 +11,9 @@ eof
 cat << eof >> /etc/shadow
 +::::::::
 eof
-
-update-rc.d -f nis remove
-update-rc.d nis defaults 98
 }
 
 _config_service() {
-cat << eof > /etc/default/nis
-NISSERVER=master
-NISCLIENT=no
-eof
-cat << eof >> /etc/ypserv.securenets
-#255.255.255.0 192.168.0.0  // line 14: IP range you permit
-# insecure - but who cares?
-0.0.0.0  0.0.0.0 
-eof
 update-rc.d -f nis remove
 update-rc.d nis defaults 98
 }
