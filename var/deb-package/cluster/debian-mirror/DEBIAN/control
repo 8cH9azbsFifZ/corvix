@@ -1,6 +1,7 @@
 Package: debian-mirror
-Version: 0.0.1
-Depends: apt-mirror, apache2
+Version: 0.0.2
+Depends: apache2, apt-mirror
+Replaces: apt-mirror
 Essential: no
 Priority: standard
 Section: corvix
