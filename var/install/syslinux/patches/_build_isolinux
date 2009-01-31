@@ -1,0 +1,27 @@
+#!/bin/zsh
+cat isolinux.core > isolinux.cfg
+for arch in i386 amd64; do
+for dist in etch lenny sid; do
+d=$(echo $dist|cut -c 1)  
+cat << eof >> isolinux.cfg
+# $arch - $dist
+LABEL ${d}i${arch}
+	kernel /boot/${arch}/${dist}/linux
+	append vga=normal initrd=/boot/${arch}/${dist}/debian.gz -- 
+
+LABEL ${d}e${arch}
+	kernel /boot/${arch}/${dist}/linux
+	append priority=low vga=normal initrd=/boot/${arch}/${dist}/debian.gz -- 
+
+LABEL ${d}r${arch}
+	kernel /boot/${arch}/${dist}/linux
+	append vga=normal initrd=/boot/${arch}/${dist}/debian.gz rescue/enable=true -- 
+
+LABEL ${d}p${arch}
+   kernel /boot/${arch}/${dist}/linux
+   append vga=normal initrd=/boot/${arch}/${dist}/debian.gz url=http://corvix.eu/preseed/${dist}.cfg console-keymaps-at/keymap=de locale=de_DE interface=eth0 hostname=x domain=x netcfg/dhcp_timeout=60 --
+eof
+
+done
+done
+
