@@ -218,7 +218,11 @@ chmod -R aog+rx /var/lib/tftpboot
 <h3>Arbitraty Debian Bootmedium</h3>
 Just wait for the bootprompt and then type
 <pre>
-boot: auto url=corvix.eu classes=corvix
+boot: auto url=corvix.eu 
+</pre>
+You may load classes:
+<pre>
+boot: auto url=corvix.eu classes=desktop
 </pre>
 
 <h3>Use existing debian installation</h3>
