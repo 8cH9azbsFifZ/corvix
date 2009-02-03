@@ -12,11 +12,10 @@ Bootimage / Installation procedure
 			nas
 
 	preseeding	
-		test 
-			etch,sid
-			amd64
-		include on image
-		access webserver
+		otto / desktop:
+			timezone question
+		otto:
+			automatic partition creation
 
 	tasksel
 		restructure packages pulled in to tasksel
