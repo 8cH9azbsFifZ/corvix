@@ -9,10 +9,17 @@ _make_partition() {
    echo "Now create the partitions.$none\nWe assume an empty stick! Please clean all partitions yourself."
    echo "This is your stick now"
    sudo fdisk -l $DEV
-   echo "Do you want to me to fire up fdisk now for deletions?"
+   echo "Do you want to me to fire up fdisk now for deletions? (y/n)"
    read -s -k 1 i
    case $i in 
-      y|Y|j) sudo fdisk $DEV; ;;
+      y|Y|j) 
+         echo "This will kill forever the partition table on $DEV!"
+         echo "Are you R E A L L Y sure? If so press +"
+         read -s -k 1 j
+         case $j in
+            +) sudo  dd if=/dev/zero of=$DEV count=64; ;;
+            *) exit 0; ;;
+         esac
       *) exit 0; ;;
    esac
    echo "Now creating new partitions. Ok?"
