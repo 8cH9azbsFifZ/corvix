@@ -29,6 +29,10 @@ LABEL ${d}d${arch}
    kernel /boot/${arch}/${dist}/linux
    append auto=true url=corvix.eu priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=desktop; --
 
+LABEL ${d}o${arch}
+   kernel /boot/${arch}/${dist}/linux
+   append auto=true url=corvix.eu priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=otto; --
+
 LABEL ${d}m${arch}
    kernel /boot/${arch}/${dist}/linux
    append auto=true url=corvix.eu priority=critical vga=normal initrd=/boot/${arch}/${dist}/debian.gz classes=mediacenter; --
