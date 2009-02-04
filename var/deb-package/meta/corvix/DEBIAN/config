@@ -4,5 +4,5 @@
 set -e
 umask 022
 
-db_input high corvix/banner || true
-db_go
+#db_input high corvix/banner || true
+#db_go
