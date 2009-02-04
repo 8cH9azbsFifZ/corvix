@@ -1,6 +1,6 @@
 Package: corvix-graphics
-Version: 0.0.1
-Depends: python-opengl, unpaper, inkscape, xfig, gimp, imagemagick, gs, gv, pdftk, xpdf, a2ps, acroread, sane-utils, netpbm
+Version: 0.0.2
+Depends: python-opengl, unpaper, inkscape, xfig, gimp, imagemagick, gs, gv, pdftk, xpdf, a2ps, acroread, sane-utils, netpbm, icoutils
 Essential: no
 Priority: standard
 Section: corvix
