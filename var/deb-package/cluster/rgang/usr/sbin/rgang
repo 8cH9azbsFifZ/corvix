@@ -1,3 +1,0 @@
-#!/bin/sh
-exec python /usr/sbin/rgang.py --rcp=scp --rsh=ssh "$@"
-
