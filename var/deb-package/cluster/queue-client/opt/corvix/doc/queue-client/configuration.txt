@@ -1,0 +1,8 @@
+If this is a submit host, you may want to add it to the server:
+
+SSH_TO_SERVER
+qmgr
+set server submit_hosts += nigol1
+
+
+
