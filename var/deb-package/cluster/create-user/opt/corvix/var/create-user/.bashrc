@@ -1,0 +1,2 @@
+. /opt/corvix/etc/profile
+

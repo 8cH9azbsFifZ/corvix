@@ -1,0 +1,19 @@
+#!/bin/bash
+echo "$0 <user> <group> <homedir>"
+user=$1
+group=$2
+homedir=$3
+[[ -z $3 ]] && exit
+
+# add
+useradd --gid $group --home-dir $homedir --shell /bin/bash --skel /opt/corvix/var/userdir-skeleton/ $user 
+
+# homedir
+mkdir -p $homedir
+chown "$user":"$group" $homedir
+
+# ssh
+su $user -c "ssh-keygen -t rsa"
+su $user -c "ssh-keygen -t dsa"
+su $user -c "cat $homedir/.ssh/*pub >> $homedir/.ssh/authorized_keys"
+su $user -c "cd $homedir/.ssh; ln -s authorized_keys authorized_keys2"
