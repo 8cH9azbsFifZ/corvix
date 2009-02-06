@@ -6,7 +6,8 @@ homedir=$3
 [[ -z $3 ]] && exit
 
 # add
-useradd --gid $group --home-dir $homedir --shell /bin/bash --skel /opt/corvix/var/userdir-skeleton/ $user 
+useradd --gid $group --home-dir $homedir --shell /bin/bash $user
+#--skel /opt/corvix/var/userdir-skeleton/ $user 
 
 # homedir
 mkdir -p $homedir
