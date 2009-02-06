@@ -1,17 +1,5 @@
 #!/bin/zsh
 
-# cat /etc/dhcp3/dhcpd.conf | awk '/host/&&/fixed-address/&&!/#/{gsub("host","");gsub("{","");gsub("}","");gsub("hardware","");gsub("ethernet","");gsub(";","");gsub("fixed-address","");host=$1;ip=$3}' 
-
-
-refresh_hosts() {
-   echo "Refresh hosts"
-   cat /etc/dhcp3/dhcpd.conf | awk '
-      /^[[:space:]]*#/{next}
-      /host /{n++;h[n]=$2}
-      /fixed-address/{match($0,/fixed-address[[:space:]]*[[:digit:].]*/,a);split(a[0],b);ip[n]=b[2]}
-      END{for(i=1;i<=n;i++)if(h[i]!~/b$/){print ip[i],h[i]}} '> /etc/hosts
-   echo "127.0.0.1 localhost" >> /etc/hosts
-}
 
 
 refresh_rgang() {
@@ -33,12 +21,3 @@ refresh_torque() {
    rgang all /etc/init.d/queue-client restart
 }
 
-refresh_users() {
-   cd /var/yp
-   make
-   /etc/init.d/nis restart
-}
-
-refresh_hosts
-refresh_rgang
-refresh_torque
