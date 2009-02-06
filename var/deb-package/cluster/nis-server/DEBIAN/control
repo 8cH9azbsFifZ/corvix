@@ -1,5 +1,5 @@
 Package: nis-server
-Version: 0.0.2
+Version: 0.0.3
 Depends: nis
 Replaces: nis
 Essential: no

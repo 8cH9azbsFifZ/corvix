@@ -378,6 +378,11 @@ Our dhcp server supports pxeboot and provides hostnames to the known nodes. Beca
 we don't want to have redundant configurations, other configurations can be
 created automatically from the dhcpd.conf.
 <br>
+Install using
+<pre>
+apt-get install dhcp3-server
+</pre>
+and set it up with you custom configuration.
 This is how a configuration could look  alike
 <pre>
 #/etc/dhcp3/dhcpd.conf
@@ -429,6 +434,19 @@ A pragmatic solution is dnsmasq. Using the syntax above the tool
 update-dns
 </pre>
 will provide a new /etc/hosts file and restart the dnsmasq server.
+
+<h4>NIS Server</h4>
+Installed using
+<pre>
+apt-get install nis-server
+</pre>
+The defaultdomain is <i>cluster</i>.
+
+<h4>NIS Clients</h4>
+This will apply to all nodes, login  servers etc. Install it using
+<pre>
+apt-get install nis-client
+</pre>
 
 <h4>Servers with connection to the world</h4>
 You may want to make them a little bit more secure. Usually you want to have one gateway
