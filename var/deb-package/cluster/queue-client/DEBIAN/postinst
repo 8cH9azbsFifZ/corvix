@@ -1,3 +1,0 @@
-#!/bin/sh
-chmod aog+rwx /var/spool/torque/spool
-echo "head" > /var/spool/torque/spool > server_name

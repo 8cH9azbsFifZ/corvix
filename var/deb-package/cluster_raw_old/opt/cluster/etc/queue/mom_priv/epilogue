@@ -1,2 +1,0 @@
-#!/bin/bash
-/opt/cluster/sbin/queue_prune_userprocs -k 9 -a 
