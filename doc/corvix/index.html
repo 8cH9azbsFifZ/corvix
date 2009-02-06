@@ -489,6 +489,13 @@ router internet2home inface eth0 outface eth1
 <h4>Queue system</h4>
 We choose torque and in combination with the maui scheduler. Jobs may have low or high
 qos and there is a standing reservation for quickshots in case of an overloaded queue.
+Install it using
+<pre>
+apt-get install  queue-server
+</pre>
+Add the startup script to your bootprocess /opt/cluster/etc/init.d/queue-server.
+For setup of the queue have a look in the /opt/cluster/doc/queue-server.
+
 
 <h4>SSH server</h4>
 We use hostbased authentification inside the cluster and public key authentification
