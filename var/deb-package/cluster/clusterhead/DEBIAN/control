@@ -1,6 +1,6 @@
-Package: corvix-clusterhead
+Package: clusterhead
 Version: 0.0.1
-#Depends: 
+Depends: update-dns
 Essential: no
 Priority: standard
 Section: corvix
