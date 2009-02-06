@@ -1,0 +1,9 @@
+#!/bin/zsh
+cd /var/yp
+make
+/etc/init.d/nis restart
+
+# big changes
+#/usr/lib/yp/ypinit -m
+
+
