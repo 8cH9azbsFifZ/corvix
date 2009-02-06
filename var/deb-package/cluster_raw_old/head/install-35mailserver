@@ -1,6 +1,0 @@
-#!/bin/zsh
-
-apt-get -y --force-yes exim4 exim4-config
-echo "root: wap@physik.uni-kl.de ">> /etc/email-addresses
-echo "smarthost, no local mail; physik.uni-kl.de; 127.0.0.1 (default); physik.uni-kl.de; physik.uni-kl.de; smtp.uni-kl.de; bla-bla"
-dpkg-reconfigure exim4-config
