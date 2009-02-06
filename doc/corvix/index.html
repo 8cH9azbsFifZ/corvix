@@ -377,6 +377,48 @@ cluster much stuff is done hardware specifically we can only provide the importa
 Our dhcp server supports pxeboot and provides hostnames to the known nodes. Because
 we don't want to have redundant configurations, other configurations can be
 created automatically from the dhcpd.conf.
+<br>
+This is how a configuration could look  alike
+<pre>
+#/etc/dhcp3/dhcpd.conf
+allow booting;
+allow bootp;
+
+server-identifier earth.physik.uni-kl.de;
+option domain-name "earth.physik.uni-kl.de";
+authoritative;
+
+option ntp-servers ntp.rhrk.uni-kl.de;
+
+subnet 10.1.0.0 netmask 255.255.255.0 {
+        range 10.1.0.200 10.1.0.240;
+        filename "pxelinux.0";
+}
+
+group  {
+        host s1 { hardware ethernet 00:30:1b:47:df:c9; fixed-address 10.1.0.101; }
+        host s2 { hardware ethernet 00:30:1b:47:18:e6; fixed-address 10.1.0.102; }
+        host s3 { hardware ethernet 00:30:1b:47:a6:d5; fixed-address 10.1.0.103; }
+        host s4 { hardware ethernet 00:30:1b:47:f0:4e; fixed-address 10.1.0.104; }
+        host s5 { hardware ethernet 00:30:1b:47:d6:04; fixed-address 10.1.0.105; }
+        host s6 { hardware ethernet 00:30:1b:47:dd:33; fixed-address 10.1.0.106; }
+        host s7 { hardware ethernet 00:30:1b:47:84:18; fixed-address 10.1.0.107; }
+        host s8 { hardware ethernet 00:30:1b:47:16:54; fixed-address 10.1.0.108; }
+        host s9 { hardware ethernet 00:30:1b:47:ef:2e; fixed-address 10.1.0.109; }
+        host s10 { hardware ethernet 00:30:1b:47:17:6a; fixed-address 10.1.0.110; }
+}
+option routers 10.1.0.254;
+option broadcast-address 10.1.0.255;
+
+option domain-name-servers 10.1.0.254, 131.246.1.116, 131.246.9.116;
+
+one-lease-per-client on;
+default-lease-time 31104000;
+max-lease-time 31104000;
+use-host-decl-names on;
+
+option ip-forwarding on;
+</pre>
 
 <h4>Queue system</h4>
 We choose torque and in combination with the maui scheduler. Jobs may have low or high
