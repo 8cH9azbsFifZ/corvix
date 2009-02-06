@@ -430,6 +430,40 @@ update-dns
 </pre>
 will provide a new /etc/hosts file and restart the dnsmasq server.
 
+<h4>Servers with connection to the world</h4>
+You may want to make them a little bit more secure. Usually you want to have one gateway
+which may also do port forwarding for ssh to the actual login nodes. For this we use the
+firehol package. This is a sample configuration:
+<pre>
+#/etc/firehol/firehol.conf
+version 5
+
+#forward ssh connections
+dnat to 10.1.100.1:22 inface eth1 proto tcp dport 1234
+
+# secure world interface
+interface eth0 internet
+   protection strong 10/sec 10
+   client all accept
+   server ssh accept
+   server cups accept src "131.246.236.1/28"
+
+# insecure internal interface
+interface eth1 internal
+   server all accept
+   client all accept
+
+# be a router
+router home2internet inface eth1 outface eth0
+   route all accept
+   masquerade
+
+router internet2home inface eth0 outface eth1
+   masquerade reverse
+   client all  accept
+   server ident   reject with tcp-reset
+</pre>
+
 <h4>Queue system</h4>
 We choose torque and in combination with the maui scheduler. Jobs may have low or high
 qos and there is a standing reservation for quickshots in case of an overloaded queue.

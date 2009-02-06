@@ -2,7 +2,7 @@ Package: nis-client
 Version: 0.0.1
 Depends: nis
 Replaces: nis
-Essential: yes
+Essential: no
 Priority: standard
 Section: corvix
 Maintainer: Gerolf Ziegenhain <gerolf@corvix.eu>
