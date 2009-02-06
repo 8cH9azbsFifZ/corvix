@@ -419,6 +419,16 @@ use-host-decl-names on;
 
 option ip-forwarding on;
 </pre>
+In particular it is important, that the host
+entries look like mentioned above. Anyway else
+the dependent scripts will not work.
+
+<h4>DNS Server</h4>
+A pragmatic solution is dnsmasq. Using the syntax above the tool 
+<pre>
+update-dns
+</pre>
+will provide a new /etc/hosts file and restart the dnsmasq server.
 
 <h4>Queue system</h4>
 We choose torque and in combination with the maui scheduler. Jobs may have low or high
