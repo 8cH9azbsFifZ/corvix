@@ -1,8 +1,18 @@
-If this is a submit host, you may want to add it to the server:
+Computation Node
+================
+If this is a node, then add it to the server
+
+SSH_TO_SERVER
+/var/spool/torque/server_priv/nodes
+
+
+Submit Host
+===========
+If this is a host which may submit jobs:
 
 SSH_TO_SERVER
 qmgr
-set server submit_hosts += nigol1
+-> set server submit_hosts += nigol1
 
 
 
