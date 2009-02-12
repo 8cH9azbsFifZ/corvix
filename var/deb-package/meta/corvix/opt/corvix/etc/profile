@@ -1,10 +1,16 @@
 # corvix specific environment variables
 
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/corvix/lib
-LD_RUN_PATH=$LD_LIBRARY_PATH
+if [[ -e /opt/corvix/lib ]]; then
+   LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/corvix/lib
+   LD_RUN_PATH=$LD_LIBRARY_PATH
+   export LD_LIBRARY_PATH LD_RUN_PATH 
+fi
 
-PYTHONPATH=/opt/corvix/lib/python2.5/site-packages:$PYTHONPATH
-PYTHON_LIB=$PYTHONPATH
+if [[ -e /opt/corvix/lib/python2.5/site-packages ]]; then
+   PYTHONPATH=/opt/corvix/lib/python2.5/site-packages:$PYTHONPATH
+   PYTHON_LIB=$PYTHONPATH
+   export PYTHONPATH PYTHON_LIB
+fi
 
 
 if [ "`id -u`" -eq 0 ]; then
@@ -15,5 +21,4 @@ else
    . /opt/corvix/etc/banner-user
 fi
 
-export LD_LIBRARY_PATH LD_RUN_PATH PATH
-export PYTHONPATH PYTHON_LIB
+export PATH

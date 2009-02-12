@@ -1,6 +1,6 @@
 Package: corvix-edit
-Version: 0.0.3
-Depends: aspell-de-alt, aspell-de, texlive-publishers, vim, lyx, texlive-fonts-extra, texlive-pictures, texlive-math-extra, texlive-latex-recommended, texlive-latex-extra, texlive-generic-extra, texlive-fonts-recommended, texlive-font-utils, lgrind, texlive-latex-extra, ekee, openoffice.org, psutils, envelope, ispell,  ingerman, wngerman
+Version: 0.0.4
+Depends: aspell-de-alt, aspell-de, texlive-publishers, vim, lyx, texlive-fonts-extra, texlive-pictures, texlive-math-extra, texlive-latex-recommended, texlive-latex-extra, texlive-generic-extra, texlive-fonts-recommended, texlive-font-utils, lgrind, texlive-latex-extra, ekee, openoffice.org, psutils, envelope, ispell,  ingerman, wngerman, texlive-science
 Essential: no
 Priority: standard
 Section: corvix
