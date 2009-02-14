@@ -1,0 +1,17 @@
+. /opt/corvix/var/banner/colors
+
+g=$green 
+r=$red
+w=$light_gray
+
+echo -ne $g'               \||/\n'
+echo -ne $g'                 |  '$r'@'$g'___oo  \n'
+echo -ne $g'       /\  /\   / (__'$w',,,,'$g'|      '$yellow'Welcome to '`hostname`' \n'
+echo -ne $g'      ) /^\) ^\/ _)\n'
+echo -ne $g'      )   /^\/   _) \n'
+echo -ne $g'      )   _ /  / _)\n'
+echo -ne $g'  /\  )/\/ ||  | )_)    \n'
+echo -ne $g' <  >      |('$w',,'$g') )__)\n'
+echo -ne $g'  ||      /    \)___)\ \n'
+echo -ne $g'  | \____(      )___) )___\n'
+echo -ne $g'   \______(_______'$w';;;'$g' __'$w';;;'$g'\n'$w

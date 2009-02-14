@@ -1,0 +1,8 @@
+. /opt/corvix/var/banner/colors
+
+echo -ne "  .~.      \n"
+echo -ne "  ${dark_gray}/${brown}V${dark_gray}\\\ ${yellow}Welcome to `hostname`     \n"
+echo -ne " ${dark_gray}/${none}/ \\\\${dark_gray}\\\     \n"
+echo -ne "${dark_gray}/${none}(   )${dark_gray}\\\    \n"
+echo -ne " ${brown}^${none}\`~'${brown}^${none}     \n"
+
