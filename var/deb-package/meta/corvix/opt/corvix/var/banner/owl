@@ -1,0 +1,8 @@
+. /opt/corvix/var/banner/colors
+
+echo -ne "${dark_gray}             (\___/) \n"
+echo -ne "             (${none}o${dark_gray}\ /${none}o${dark_gray})  \n"
+echo -ne "            /|:.${brown}V${dark_gray}.:|\\ \n"
+echo -ne "            \\\\\\\\:::::// \n"
+echo -ne "${blue}#===${green}corvix${blue}===${dark_gray}\`${none}\"\" \"\"${dark_gray}\`${blue}==-->${none}\n"
+

@@ -15,10 +15,10 @@ fi
 
 if [ "`id -u`" -eq 0 ]; then
    PATH=./:$PATH:/opt/corvix/bin:/opt/corvix/sbin
-   . /opt/corvix/etc/banner-root
+   . /opt/corvix/var/banner/raven
 else
    PATH=./:$PATH:/opt/corvix/bin
-   . /opt/corvix/etc/banner-user
+   . /opt/corvix/var/banner/bird
 fi
 
 export PATH

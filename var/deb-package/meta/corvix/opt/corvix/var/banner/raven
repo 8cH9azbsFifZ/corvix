@@ -1,4 +1,4 @@
-. /opt/corvix/var/banner/colors:
+. /opt/corvix/var/banner/colors
 
 echo -ne '      '${dark_gray}'  .---.        .-----------\n'
 echo -ne '       /     \\  '${white}'__'${dark_gray}'  /    ------\n'
