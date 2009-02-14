@@ -1,0 +1,14 @@
+N0=18
+N1=05
+
+H=$(date +%H)
+
+if [[ $H -gt $N0 ]]; then
+   night=0
+elif [[ $H -lt $N1 ]]; then
+   night=0
+else 
+   night=1
+fi
+
+exit $night
