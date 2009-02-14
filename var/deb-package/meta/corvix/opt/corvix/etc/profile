@@ -15,10 +15,18 @@ fi
 
 if [ "`id -u`" -eq 0 ]; then
    PATH=./:$PATH:/opt/corvix/bin:/opt/corvix/sbin
-   . /opt/corvix/var/banner/raven
+   if [ /opt/corvix/sbin/is_night ]; then
+      . /opt/corvix/var/banner/owl
+   else
+      . /opt/corvix/var/banner/raven
+   fi
 else
    PATH=./:$PATH:/opt/corvix/bin
-   . /opt/corvix/var/banner/bird
+   if [ /opt/corvix/sbin/is_night ]; then
+      . /opt/corvix/var/banner/owl
+   else 
+      . /opt/corvix/var/banner/bird
+   fi
 fi
 
 export PATH
