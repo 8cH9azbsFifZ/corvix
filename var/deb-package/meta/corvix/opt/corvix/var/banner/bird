@@ -3,6 +3,6 @@
 echo -ne "        ${dark_gray}     .-.\n"
 echo -ne "            /${none}'${brown}v${none}'${dark_gray}\\ \n"
 echo -ne "           (/   \\)\n"
-echo -ne "${blue}#===${green}corvix${blue}===${none}\"=${none}\"${blue}==-->${dark_gray}\n"
+echo -ne "${blue}#===${green}corvix${blue}===${none}\"${blue}=${none}\"${blue}==-->${dark_gray}\n"
 echo -ne "             |_|${none}\n"
 

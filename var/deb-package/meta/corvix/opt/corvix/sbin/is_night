@@ -1,7 +1,8 @@
+#!/bin/zsh
 N0=18
 N1=05
 
-H=$(date +%H)
+H=$(echo $(($(date +%H)*1)))
 
 if [[ $H -gt $N0 ]]; then
    night=0
