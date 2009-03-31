@@ -1,0 +1,6 @@
+#!/bin/sh
+what=$1
+where=public_html/pool/$2
+
+ssh corvix "[[ -d $where ]] || mkdir -p $where"
+scp $what corvix:$where

@@ -13,11 +13,12 @@ Description: http://corvix.eu
 eof
 apt-ftparchive release dists/$suit >> dists/$suit/Release
 [[ -e dists/$suit/Release.gpg ]] && rm dists/$suit/Release.gpg
-gpg -u corvix.eu -abs -o dists/$suit/Release.gpg dists/$suit/Release
+gpg --passphrase-file ~/.gnupg/passphrase -u "root@corvix.eu" -abs -o dists/$suit/Release.gpg dists/$suit/Release
 }   
 
 _create_arch() {
 apt-ftparchive packages pool/$suit/$comp > $dir/Packages
+cat $dir/Packages | gzip > $dir/Packages.gz
 cat << eof > $dir/Release
 Archive: $suit
 Component: $comp
@@ -42,7 +43,7 @@ _create_release dists/$comp
 _make_corvix_testing() {
 archs="i386 alpha"
 vers=0.1
-comps="meta ware cluster external"
+comps="meta ware cluster external awesome xdmx ekiga"
 suit=testing
 for comp in $(echo $comps); do 
    [[ -d $HOME/src/distro/corvix/var/deb-package/$comp ]] && cp $HOME/src/distro/corvix/var/deb-package/$comp/*deb pool/$suit/$comp
@@ -57,3 +58,4 @@ _create_release dists/$comp
 
 _make_maemo
 _make_corvix_testing
+chmod -R aog+rx *
