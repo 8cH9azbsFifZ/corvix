@@ -7,3 +7,9 @@ Files:
 
 
 (C)opyleft G. Ziegenhain, Y. Rosandi 2008
+
+
+Code Quality
+============
+This is experimental code.
+
